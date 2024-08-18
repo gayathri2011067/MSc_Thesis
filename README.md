@@ -1,3 +1,3 @@
 # M.Sc. Thesis
 
-This repo
+This repository contains the source code and the thesis document for my M.Sc. thesis. 
