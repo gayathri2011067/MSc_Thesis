@@ -4,8 +4,8 @@ from pathlib import Path
 import os, sys
 import subprocess
 
-data_path = "/mnt/Gayathri's Work drive/MSc_thesis_9th_sem/Vishniac-flux-9th-sem/Figure 1 nvf/data_files"
-fig_path = "/mnt/Gayathri's Work drive/MSc_thesis_9th_sem/Vishniac-flux-9th-sem/Figure 1 nvf/figures"
+data_path = "/home/gayathri/MSc_thesis/VIshniac flux/Figure 1 nvf/data_files"
+fig_path = "/home/gayathri/MSc_thesis/VIshniac flux/Figure 1 nvf/figures"
 
 trial_numbers = []
 labels = []
@@ -85,6 +85,7 @@ for i in range(len(trial_numbers)):
 
     plt.plot(z_lists[i], Br_list[-1], label=f'Br: {labels[i]}')
     plt.plot(z_lists[i], Bphi_list[-1], label=f'Bphi: {labels[i]}')
+    plt.xlim(-1,1)
     
 plt.xlabel('z')
 plt.ylabel('Br, Bphi')

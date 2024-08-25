@@ -1,8 +1,7 @@
 module timestepping
+    
     use parameters
-    use eta_profile
     use alpha_profile
-    use omega_profile
     use initial_field
     use time_grid
     use physical_grid
@@ -122,7 +121,7 @@ module timestepping
 
 
 
-            call sharanys_notes_eqxn(B_r, B_phi, alpha_m)
+            call sharanyas_notes_eqxn(B_r, B_phi, alpha_m)
             k1r = dt*dBrdt
             k1phi = dt*dBphidt
             k1alpha = dt*dalpdt
@@ -130,7 +129,7 @@ module timestepping
             B_phi = B_phi+0.5*k1phi
             alpha_m = alpha_m+0.5*k1alpha
 
-            call sharanys_notes_eqxn(B_r, B_phi, alpha_m)
+            call sharanyas_notes_eqxn(B_r, B_phi, alpha_m)
             k2r = dt*dBrdt
             k2phi = dt*dBphidt
             k2alpha = dt*dalpdt
@@ -138,7 +137,7 @@ module timestepping
             B_phi = B_phi+0.5*k2phi
             alpha_m = alpha_m+0.5*k2alpha
 
-            call sharanys_notes_eqxn(B_r, B_phi, alpha_m)
+            call sharanyas_notes_eqxn(B_r, B_phi, alpha_m)
             k3r = dt*dBrdt
             k3phi = dt*dBphidt
             k3alpha = dt*dalpdt
@@ -146,7 +145,7 @@ module timestepping
             B_phi = B_phi+k3phi
             alpha_m = alpha_m+k3alpha
 
-            call sharanys_notes_eqxn(B_r, B_phi, alpha_m)
+            call sharanyas_notes_eqxn(B_r, B_phi, alpha_m)
             k4r = dt*dBrdt
             k4phi = dt*dBphidt
             k4alpha = dt*dalpdt
@@ -163,6 +162,7 @@ module timestepping
         subroutine RK3_implicit
 
             implicit none
+            
             ! character(len=30) :: ghost_zone_type = 'anti-symmetric'
             double precision, dimension(nx) :: Br_g, Bphi_g, alpha_m_g
 
@@ -195,14 +195,14 @@ module timestepping
 
             
             ! call diff_equations_no_split(B_r, B_phi)
-            ! !STEP 1 !CONCERN: have to call spatial derivatives with this new f and g
+            ! !STEP 1 !NOTE: have to call spatial derivatives with this new f and g
             ! k1r = dt * dBrdt
             ! k1phi = dt * dBphidt
             ! Br_f = Br_f + g_1 * k1r
             ! Bphi_f = Bphi_f + g_1 * k1phi
             ! Br_g = Br_f + z_1 * k1r
             ! Bphi_g = Bphi_f + z_1 * k1phi
-            ! B_r=Br_f       !----> !CONCERN: added this step because i wanted f to be carried to next step
+            ! B_r=Br_f       !----> !NOTE: added this step because i wanted f to be carried to next step
             ! B_phi=Bphi_f  ! 
             
             ! call diff_equations_no_split(B_r, B_phi)
@@ -212,7 +212,7 @@ module timestepping
             ! Bphi_f = Bphi_g + g_2 * k2phi
             ! Br_g = Br_f + z_2 * k2r
             ! Bphi_g = Bphi_f + z_2 * k2phi
-            ! B_r=Br_f       !----> !CONCERN: added this step because i wanted f to be carried to next step
+            ! B_r=Br_f       !----> !NOTE: added this step because i wanted f to be carried to next step
             ! B_phi=Bphi_f  ! 
 
             ! ! 3rd step
@@ -222,12 +222,12 @@ module timestepping
             ! Br_f = Br_g + g_3 * k1r
             ! Bphi_f = Bphi_g + g_3 * k3phi
          
-            ! B_r=Br_f       !----> !CONCERN: added this step because i wanted f to be carried to next step
+            ! B_r=Br_f       !----> !NOTE: added this step because i wanted f to be carried to next step
             ! B_phi=Bphi_f  ! 
             ! t = t +  dt
 
-            call sharanys_notes_eqxn(B_r, B_phi, alpha_m)
-            !STEP 1 !CONCERN: have to call spatial derivatives with this new f and g
+            call sharanyas_notes_eqxn(B_r, B_phi, alpha_m)
+            !STEP 1 !NOTE: have to call spatial derivatives with this new f and g
             k1r = dt * dBrdt
             k1phi = dt * dBphidt
             k1alpha = dt * dalpdt
@@ -237,10 +237,10 @@ module timestepping
             Br_g = B_r + z_1 * k1r
             Bphi_g = B_phi + z_1 * k1phi
             alpha_m_g = alpha_m + z_1 * k1alpha
-            ! B_r=Br_f       !----> !CONCERN: added this step because I wanted f to be carried to next step
+            ! B_r=Br_f       !----> !NOTE: added this step because I wanted f to be carried to next step
             ! B_phi=Bphi_f  ! 
             
-            call sharanys_notes_eqxn(B_r, B_phi, alpha_m)
+            call sharanyas_notes_eqxn(B_r, B_phi, alpha_m)
             k2r = dt * dBrdt
             k2phi = dt * dBphidt
             k2alpha = dt * dalpdt
@@ -250,11 +250,11 @@ module timestepping
             Br_g = B_r + z_2 * k2r
             Bphi_g = B_phi + z_2 * k2phi
             alpha_m_g = alpha_m + z_2 * k2alpha
-            ! B_r=Br_f       !----> !CONCERN: added this step because I wanted f to be carried to next step
+            ! B_r=Br_f       !----> !NOTE: added this step because I wanted f to be carried to next step
             ! B_phi=Bphi_f  ! 
 
             ! 3rd step
-            call sharanys_notes_eqxn(B_r, B_phi, alpha_m)
+            call sharanyas_notes_eqxn(B_r, B_phi, alpha_m)
             k3r = dt * dBrdt
             k3phi = dt * dBphidt
             k3alpha = dt * dalpdt
@@ -262,7 +262,7 @@ module timestepping
             B_phi = Bphi_g + g_3 * k3phi
             alpha_m = alpha_m_g + g_3 * k3alpha
         
-            ! B_r=Br_f       !----> !CONCERN: added this step because I wanted f to be carried to next step
+            ! B_r=Br_f       !----> !NOTE: added this step because I wanted f to be carried to next step
             ! B_phi=Bphi_f  ! 
             t = t +  dt
 

@@ -5,9 +5,9 @@ from pathlib import Path
 import os
 import subprocess
 
-data_path = "/mnt/Gayathri's Work drive/MSc_thesis_9th_sem/Vishniac-flux-9th-sem/Figure 1 nvf/run_files"
-fig_path = "/mnt/Gayathri's Work drive/MSc_thesis_9th_sem/Vishniac-flux-9th-sem/Figure 1 nvf/figures"
-data_save_path = "/mnt/Gayathri's Work drive/MSc_thesis_9th_sem/Vishniac-flux-9th-sem/Figure 1 nvf/data_files"
+data_path = "/home/gayathri/MSc_thesis/VIshniac flux/Figure 1 nvf/run_files"
+fig_path = "/home/gayathri/MSc_thesis/VIshniac flux/Figure 1 nvf/figures"
+data_save_path = "/home/gayathri/MSc_thesis/VIshniac flux/Figure 1 nvf/data_files"
 
 passed_args = argparse.ArgumentParser()
 
@@ -172,12 +172,21 @@ try:
     np.savetxt(f'{data_save_path}/time.txt', time_list)
     np.savetxt(f'{data_save_path}/Br_final.txt', Br_list)
     np.savetxt(f'{data_save_path}/B_phi_final.txt', Bphi_list)
-
+    print(Br_list.shape)
     plt.plot(z, Br_list[-1], label='Br')
     plt.plot(z, Bphi_list[-1], label='Bphi')
+    # print(Br_list[1])
+    # print(Bphi_list[1])
+    # plt.plot(z, Br_list[1], label='Br')
+    # plt.plot(z, Bphi_list[1], label='Bphi')
+    # plt.plot(z, Br_list[2], label='Br')
+    # plt.plot(z, Bphi_list[2], label='Bphi')
     plt.xlabel('z')
     plt.ylabel('Br, Bphi')
-    plt.title(f'Br, Bphi vs z at t={time_list[-1]}')
+    plt.title(f'Br, Bphi vs z at t={time_list[0]}')
+    # plt.xlim(-0.25,0.25)
+    plt.axvline(x=1, color='r', linestyle='--')
+    plt.axvline(x=-1, color='r', linestyle='--')
     plt.legend()
     plt.savefig(f'{fig_path}/Br_Bphi_vs_z_final.png')
     plt.close()
@@ -213,3 +222,30 @@ plt.yscale('log')
 # plt.ylim(1e-3,5)
 plt.savefig(f'{fig_path}/B_strength_vs_time.png')
 plt.close()
+
+# plot of alpha_m final vs z
+filename = 'alpha_m.txt'
+file_path = f"{data_path}/{filename}"
+
+try:
+    with open(file_path,'r') as f:
+        lines=f.readlines()
+    # print(lines)
+    alpha_list = []
+    for line in lines:
+        line = line.strip()
+        line = line.split()
+        curr = np.array(line, dtype=float)
+        alpha_list.append(curr)
+    alpha_list = np.array(alpha_list)
+    alpha_m=np.array(lines,dtype=float)
+    np.savetxt(f'{data_save_path}/alpha_m.txt', alpha_m)
+
+    plt.plot(z, alpha_m[-1])
+    plt.xlabel('z')
+    plt.ylabel('alpha_m')
+    plt.title('alpha_m vs z')
+    plt.savefig(f'{fig_path}/alpha_m_vs_z.png')
+    plt.close()
+except:
+    print('alpha_m.txt file not found')

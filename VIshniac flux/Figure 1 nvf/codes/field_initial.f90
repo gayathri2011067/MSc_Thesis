@@ -4,7 +4,6 @@ module initial_field
   use time_grid
   use physical_grid
   use make_a_grid
-  use eta_profile
   use alpha_profile
   use velocity_profile
 !
@@ -24,7 +23,7 @@ contains
         call construct_velocity_profile
         B_r = 0.00001*(1.0-x**2.)*exp(-x**2.)
         B_phi = 0.0
-        B_eq = 0.00001*exp(x**2)
+        B_eq = 0.00001*exp(-x**2)
         ! B_eq = exp(-radius/R - x**2./2.)
         ! alpha_Br = B_r*alpha_cap/(1+(B_r**2+B_phi**2)/B_eq**2)
         ! alpha_Bphi = B_phi*alpha_cap/(1+(B_r**2+B_phi**2)/B_eq**2)

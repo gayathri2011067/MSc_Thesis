@@ -4,7 +4,6 @@ module velocity_profile
   use time_grid
   use physical_grid
   use make_a_grid
-  use omega_profile
   use spatial_derivatives
 !
   implicit none
@@ -17,7 +16,6 @@ module velocity_profile
 ! 
 contains
     subroutine construct_velocity_profile
-        character(len=30) :: ghost_zone_type2 = 'relative anti-symmetric'
         U_z_cap = x
         U_z = R_U*U_z_cap
         d_U_z_cap = 1.

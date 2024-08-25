@@ -3,9 +3,9 @@ module time_grid
   use parameters
   implicit none
   
-  integer, parameter :: Nt= 50000000  !points per diffusion time
-  integer, parameter :: n1= 500  !Number of snapshots
-  double precision, parameter :: total_t= 55. !unit diffusion time
+  integer, parameter :: Nt= 50000d0  !points per diffusion time
+  integer, parameter :: n1= 500d0  !Number of snapshots
+  double precision, parameter :: total_t= 50d0 !unit diffusion time
   integer :: n2 = total_t*Nt/n1!Number of timesteps between snapshots
   double precision, parameter :: dt= 1./Nt !time step
   double precision :: t=0.
@@ -24,9 +24,9 @@ module physical_grid
   use time_grid
   implicit none
 
-  integer, parameter :: nxphys= 51 !Resolution in z
+  integer, parameter :: nxphys= 101 !Resolution in z
   integer, parameter :: nxghost= 3  !Number of ghost cells at each end in z
-  integer, parameter :: nx= nxphys +2*nxghost  !Resolution in z
+  integer, parameter :: nx= nxphys + 2*nxghost  !Resolution in z
   double precision, dimension(nx) :: x
   double precision :: dx, alp, beta
 end module physical_grid
@@ -54,7 +54,7 @@ module make_a_grid
     beta= dt/dx !beta for fin diff 
 
     do i=1,nx
-      x(i)= -(h +nxghost*dx) +(i-1)*dx +0.01 !NOTE:+0.01 to avoid 0
+      x(i)= -(h +nxghost*dx) +(i-1)*dx !+ 0.01 !NOTE:+0.01 to avoid 0
       x(i)= x(i) !dimensionless now
     enddo
   endsubroutine construct_grid
