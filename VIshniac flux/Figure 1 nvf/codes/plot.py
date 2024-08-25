@@ -53,15 +53,15 @@ os.makedirs(data_save_path, exist_ok=True)
 os.makedirs(fig_path, exist_ok=True)
 
 #import txt file 
-filename = 'eta_fz_values.txt'
-file_path = f"{data_path}/{filename}"
+# filename = 'eta_fz_values.txt'
+# file_path = f"{data_path}/{filename}"
 
-with open(file_path,'r') as f:
-    lines=f.readlines()
-# print(lines)
+# with open(file_path,'r') as f:
+#     lines=f.readlines()
+# # print(lines)
 
-eta=np.array(lines,dtype=float)
-#import txt file
+# eta=np.array(lines,dtype=float)
+# #import txt file
 
 filename = 'z_values.txt'
 file_path = f"{data_path}/{filename}"
@@ -72,13 +72,13 @@ with open(file_path,'r') as f:
 
 z=np.array(lines,dtype=float)
 np.savetxt(f'{data_save_path}/z_values.txt', z)
-plt.plot(z,eta)
-plt.xlabel('z')
-plt.ylabel('eta')
-plt.title('eta vs z')
-plt.xlim(-15,15)
-plt.savefig(f'{fig_path}/eta_vs_z.png')
-plt.close()
+# plt.plot(z,eta)
+# plt.xlabel('z')
+# plt.ylabel('eta')
+# plt.title('eta vs z')
+# plt.xlim(-15,15)
+# plt.savefig(f'{fig_path}/eta_vs_z.png')
+# plt.close()
 #import txt file
 filename = 'alpha_values.txt'
 
