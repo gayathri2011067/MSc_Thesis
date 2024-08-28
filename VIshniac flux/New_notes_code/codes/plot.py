@@ -172,7 +172,7 @@ try:
     np.savetxt(f'{data_save_path}/time.txt', time_list)
     np.savetxt(f'{data_save_path}/Br_final.txt', Br_list)
     np.savetxt(f'{data_save_path}/B_phi_final.txt', Bphi_list)
-    print(Br_list.shape)
+    # print(Br_list.shape)
     plt.plot(z, Br_list[-1], label='Br')
     plt.plot(z, Bphi_list[-1], label='Bphi')
     # print(Br_list[1])
@@ -219,32 +219,41 @@ plt.xlabel('time')
 plt.ylabel('B_strength')
 plt.title('B_strength vs time')
 plt.yscale('log')
-# plt.ylim(1e-3,5)
+
 plt.savefig(f'{fig_path}/B_strength_vs_time.png')
 plt.close()
 
 # plot of alpha_m final vs z
-filename = 'alpha_m.txt'
+filename = 'alpham_final.txt'
 file_path = f"{data_path}/{filename}"
 
 try:
     with open(file_path,'r') as f:
         lines=f.readlines()
-    # print(lines)
+
     alpha_list = []
     for line in lines:
         line = line.strip()
         line = line.split()
         curr = np.array(line, dtype=float)
         alpha_list.append(curr)
-    alpha_list = np.array(alpha_list)
-    alpha_m=np.array(lines,dtype=float)
+    alpha_m=np.array(alpha_list,dtype=float)
     np.savetxt(f'{data_save_path}/alpha_m.txt', alpha_m)
 
-    plt.plot(z, alpha_m[-1])
+    n1 = 500
+    Nt = 50000
+    total_t = 50
+    n2 = total_t*Nt/n1
+    t_print = [10, 20, 30, 40, 50]
+    t_print = [int(t_val*n1/total_t) for t_val in t_print]
+
+    for t_val in t_print:
+        plt.plot(z, alpha_m[t_val - 1], label=f't={t_val*total_t/n1:.2f}') # t_val - 1 because the index starts from 0
     plt.xlabel('z')
     plt.ylabel('alpha_m')
     plt.title('alpha_m vs z')
+ 
+    plt.legend()
     plt.savefig(f'{fig_path}/alpha_m_vs_z.png')
     plt.close()
 except:

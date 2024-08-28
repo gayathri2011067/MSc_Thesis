@@ -1,7 +1,8 @@
 module timestepping
-    
     use parameters
+    use eta_profile
     use alpha_profile
+    use omega_profile
     use initial_field
     use time_grid
     use physical_grid
@@ -11,7 +12,8 @@ module timestepping
     implicit none
     
 
-    double precision, dimension(nx) :: k1r,k1phi,k2r,k2phi,k3r,k3phi,k4r,k4phi, k1alpha, k2alpha, k3alpha, k4alpha
+    double precision, dimension(nx) :: k1r,k1phi,k2r,k2phi,k3r,k3phi,k4r,k4phi
+    double precision, dimension(nx) :: k1alpha,k2alpha,k3alpha,k4alpha
     double precision,dimension(nx) :: g_1, g_2, g_3, z_1, z_2
     contains
         
@@ -99,7 +101,6 @@ module timestepping
 
         end subroutine central_difference
 
-
         subroutine RK4_new
             character(len=30) :: ghost_zone_type = 'anti-symmetric'
             ! call impose_boundary_conditions(B_r, ghost_zone_type)
@@ -172,17 +173,16 @@ module timestepping
             z_1 = -17.0 / 60.0      !             Computational aspects of astrophysical MHD and turbulence.  
             z_2 = -5.0 / 12.0       !             https://doi.org/10.48550/arXiv.astro-ph/0109497
             
-         
+
             ! call impose_boundary_conditions(B_r, ghost_zone_type)
             ! call impose_boundary_conditions(B_phi, ghost_zone_type)
 
-           
-            ! alpha_cap2 = alpha_cap / (1.0 + (B_r**2 + B_phi**2) / B_eq**2)
-            ! alpha_Bphi = alpha_cap2 * B_phi
-            ! alpha_Br = alpha_cap2 * B_r
-            ! Uz_Br = B_r * U_z_cap
-            ! Uz_Bphi = B_phi * U_z_cap
-  
+            ! ! alpha_cap2 = alpha_cap / (1.0 + (B_r**2 + B_phi**2) / B_eq**2)
+            ! ! alpha_Bphi = alpha_cap2 * B_phi
+            ! ! alpha_Br = alpha_cap2 * B_r
+            ! ! Uz_Br = B_r * U_z_cap
+            ! ! Uz_Bphi = B_phi * U_z_cap
+
             ! call spatial_derivative(B_r, 2, dBr, d2Br)
             ! call spatial_derivative(B_phi, 2, dBphi, d2Bphi)
             ! call spatial_derivative(alpha_Br, 2, d_alpha_Br, d2_alpha_Br)
@@ -221,7 +221,7 @@ module timestepping
             ! k3phi = dt * dBphidt
             ! Br_f = Br_g + g_3 * k1r
             ! Bphi_f = Bphi_g + g_3 * k3phi
-         
+
             ! B_r=Br_f       !----> !NOTE: added this step because i wanted f to be carried to next step
             ! B_phi=Bphi_f  ! 
             ! t = t +  dt
@@ -267,10 +267,7 @@ module timestepping
             t = t +  dt
 
 
-
         end subroutine RK3_implicit
-
-
          
 
 
