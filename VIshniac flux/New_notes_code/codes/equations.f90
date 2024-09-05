@@ -10,7 +10,7 @@ module equations
     use make_a_grid
 
     implicit none
-    double precision, dimension(nx) :: dBrdt, dBphidt, dalpdt !,d_alpha_Bphi, d_alpha_Br, d_Uz_Bphi, d2_Uz_Br
+    double precision, dimension(nx) :: dBrdt, dBphidt, dalpdt,dTdt,dphi_dt,d_alpha_m_dt !,d_alpha_Bphi, d_alpha_Br, d_Uz_Bphi, d2_Uz_Br
     !   NOTE: Assumed to be predefined: B_r, B_phi,dBr, d2Br, dBphi, d2Bphi, d_alpha
     contains
     ! subroutine diff_equations_split(B_r_dummy, B_phi_dummy, dBr_dummy, d2Br_dummy, dBphi_dummy, d2Bphi_dummy)
@@ -21,7 +21,7 @@ module equations
     !   + d2Bphi_dummy - R_U*U_z_cap*dBphi_dummy - R_U*B_phi_dummy*d_U_z_cap
 
     ! end subroutine diff_equations_split
-   
+  
     subroutine diff_equations_no_split(B_r_dummy, B_phi_dummy)
       double precision, intent(inout), dimension(nx) :: B_r_dummy, B_phi_dummy
       double precision,  dimension(nx) :: d_alpha_Bphi, d_alpha_Br
@@ -175,14 +175,62 @@ module equations
 
     end subroutine sharanyas_notes_eqxn
 
- 
 
-     
+!NOTE:phi dummy is dphi/dz and dphi_term_dz is second derivative of phi
+    
+    subroutine potential_equations(Phi_dummy, T_dummy, alpha_m_dummy)
+      double precision,intent(inout), dimension(nx) :: Phi_dummy,T_dummy, alpha_m_dummy
+      double precision, dimension(nx) :: dphi_dz,dT_dz,d_alpha_m_dz
+      double precision, dimension(nx) :: d2phi_dz,d2T_dz,d2_alpha_m_dz,alpha_total
+      double precision, dimension(nx) :: U_z_T, U_z_Phi,U_z_alm
+      double precision, dimension(nx) :: d_U_z_T, d_U_z_Phi,d_U_z_alm 
+      double precision, dimension(nx) :: d2_U_z_T, d2_U_z_Phi,d2_U_z_alm 
+      double precision, dimension(nx) :: dalp_dz, d2alp_dz  
+      
+      character(len=30) :: ghost_zone_type = 'anti-symmetric'
+      character(len=30) :: ghost_zone_type2 = 'relative anti-symmetric'
+
+      call impose_boundary_conditions(Phi_dummy, ghost_zone_type)
+      call impose_boundary_conditions(T_dummy, ghost_zone_type)
+      call impose_boundary_conditions(alpha_m_dummy, ghost_zone_type2)
+      alpha_total = alpha_m_dummy
+      U_z_T = T_dummy * U_z_cap
+      U_z_alm = alpha_m_dummy * U_z_cap
+
+      ! TODO: alpha update???
+      ! TODO: Check q_omega term, and confirm that it is R-omega
+      ! TODO: Check (h**2/l**2) and confirm
+      ! TODO: derive the potential equations from the equations we actaully used before
+      ! TODO: convert to Br and B phi before plotting
 
 
- 
+
+
+      call spatial_derivative(Phi_dummy, 6, dphi_dz, d2phi_dz)
+      call spatial_derivative(T_dummy, 6, dT_dz, d2T_dz)
+      call spatial_derivative(alpha_m_dummy, 6, d_alpha_m_dz, d2_alpha_m_dz)
+      call spatial_derivative(U_z_T, 6, d_U_z_T, d2_U_z_T)
+      call spatial_derivative(U_z_Phi, 6, d_U_z_Phi, d2_U_z_Phi)
+      call spatial_derivative(U_z_alm, 6,dalp_dz, d2alp_dz)
+
+      dTdt = - R_U*d_U_z_T + R_omega*dphi_dz - alpha_total*d2phi_dz -dalp_dz*dphi_dz + d2T_dz 
+
+      dphi_dt = - R_U*U_z_cap*dphi_dz + alpha_total*T_dummy + d2phi_dz
+
+      d_alpha_m_dt = -2d0*(h**2/l**2) * (alpha_total*((T_dummy**2)+(dphi_dz**2)) &
+      - (-T_dummy*d2phi_dz + dphi_dz*dT_dz)) &
+      - R_U*d_U_z_alm + R_k*d2_alpha_m_dz 
+
+
+    end subroutine potential_equations
+
+
+
 
 
 
 
 end module equations
+!NOTE: look at ss21 and see profiles of tau,Uz,rho,u,eta.
+!REFER: 2020 chamandy,shukurov 
+!tue10

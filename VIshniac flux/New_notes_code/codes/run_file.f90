@@ -16,8 +16,10 @@ program run_all
     implicit none
 
     integer :: kk, j
+    double precision, dimension(nx) :: Br_pot, B_phi_pot,derr_phi,no
     character(len=30) :: data_path, filename, xfile, omegafile, alphafile, Br_ini_file,&
-    B_r_final_file, B_phi_ini_file, B_phi_final_file, time_file, alpham_final_file
+    B_r_final_file, B_phi_ini_file, B_phi_final_file, time_file, alpham_final_file,&
+    Phi_final_file, T_final_file
 
     ! Call subroutine to construct the physical grid
     call construct_grid
@@ -27,7 +29,7 @@ program run_all
     call construct_omega_profile
     call construct_alpha_profile
     call field_initialization
-
+    print*,'radius',radius
 
     ! Define the output file name
     data_path = '../run_files/'
@@ -39,6 +41,8 @@ program run_all
     B_phi_ini_file=  'B_phi_ini.txt'
     B_r_final_file=  'Br_final.txt'
     B_phi_final_file=  'B_phi_final.txt'
+    Phi_final_file=  'Phi_final.txt'
+    T_final_file=  'T_final.txt'
     time_file=  'time.txt'
     alpham_final_file=  'alpham_final.txt'
 
@@ -48,10 +52,12 @@ program run_all
     open(unit=19, file=trim(data_path) // alphafile)
     open(unit=20, file=trim(data_path) // Br_ini_file)
     open(unit=21, file=trim(data_path) // B_phi_ini_file)
-    open(unit=22, file=trim(data_path) // B_r_final_file)
-    open(unit=23, file=trim(data_path) // B_phi_final_file)
+    open(unit=22, file=trim(data_path) // Phi_final_file)
+    open(unit=23, file=trim(data_path) // T_final_file)
     open(unit=24, file=trim(data_path) // time_file)
     open(unit=25, file=trim(data_path) // alpham_final_file)
+    open(unit=26, file=trim(data_path) // B_r_final_file)
+    open(unit=27, file=trim(data_path) // B_phi_final_file)
     ! open(unit=10, file=filename)
     ! open(unit=17, file=xfile)
     ! open(unit=19, file=alphafile)
@@ -158,8 +164,14 @@ program run_all
 
     end do
     ! print*, 'B_r=', B_r
-    write (22, *) B_r
-    write (23, *) B_phi
+    call spatial_derivative(phi,6, derr_phi,no)
+    Br_pot=radius*T_torr
+    B_phi_pot=-radius*derr_phi
+
+    write (22, *) phi
+    write (23, *) T_torr
+    write(26,*) Br_pot
+    write(27,*) B_phi_pot
     write (24, *) t
     write (25, *) alpha_m
   end do
@@ -171,6 +183,8 @@ program run_all
     close(23)
     close(24)
     close(25)
+    close(26)
+    close(27)
   ! print*, 'n2=', n2
   ! print*, 'dt=', dt
   ! print*, 'Nt=', Nt
@@ -179,5 +193,5 @@ program run_all
   ! print*, 't=', t
   ! print*, 'first=', first
     print *, 'File sucessfully run'
-
+print*,radius
 end program run_all

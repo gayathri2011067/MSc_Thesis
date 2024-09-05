@@ -3,9 +3,9 @@ module time_grid
   use parameters
   implicit none
   
-  integer, parameter :: Nt= 50000.  !points per diffusion time
+  integer, parameter :: Nt= 500000.  !points per diffusion time
   integer, parameter :: n1= 500  !Number of snapshots
-  double precision, parameter :: total_t= 50. !unit diffusion time
+  double precision, parameter :: total_t= 25. !unit diffusion time
   integer :: n2 = total_t*Nt/n1!Number of timesteps between snapshots
   double precision, parameter :: dt= 1./Nt !time step
   double precision :: t=0.
@@ -48,7 +48,7 @@ module make_a_grid
     ! integer :: i
 
     double precision, parameter :: len= 2.*h  
-    double precision, dimension(nx) :: spac
+    ! double precision, dimension(nx) :: space
 
     dx=len/(nxphys-1)  !x corresponds to z
     alp=dt/dx**2  !alpha for finite difference scheme

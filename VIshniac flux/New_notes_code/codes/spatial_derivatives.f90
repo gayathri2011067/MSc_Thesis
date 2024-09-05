@@ -25,6 +25,7 @@ contains
         do i = 1, nxghost
             fun(i)= -fun(2*(nxghost+1)-i)  !Antisymmetric about z=-h    Dirichlet BC on Br, Bp
             fun(nx+1-i)= -fun(nx+1-2*(nxghost+1)+i)
+            !setting left boundary to zero
         end do
       case ('relative anti-symmetric')
         do i = 1, nxghost

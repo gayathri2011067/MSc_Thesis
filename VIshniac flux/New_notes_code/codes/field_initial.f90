@@ -1,5 +1,6 @@
 module initial_field
 
+
   use parameters
   use time_grid
   use physical_grid
@@ -7,6 +8,7 @@ module initial_field
   use eta_profile
   use alpha_profile
   use velocity_profile
+  use spatial_derivatives
 !
   implicit none
 !
@@ -14,6 +16,7 @@ module initial_field
   double precision, dimension(nx) :: alpha_Br, alpha_Bphi, Uz_Br, Uz_Bphi,d_alpha_Br
   double precision, dimension(nx) :: d2_alpha_Br,d_alpha_Bphi,d2_alpha_Bphi,d_Uz_Br
   double precision, dimension(nx) :: d2_Uz_Br,d_Uz_Bphi,d2_Uz_Bphi, old_Br, old_Bphi
+  double precision, dimension(nx) :: T_torr,phi
 
 
 
@@ -29,6 +32,13 @@ contains
         alpha_Bphi = B_phi*alpha_cap/(1+(B_r**2+B_phi**2)/B_eq**2)
         Uz_Br = B_r*U_z_cap
         Uz_Bphi = B_phi*U_z_cap
+        T_torr=0.0001*(radius/R)**2.*(1.-radius/R)*exp(-radius/R)*(cos(pi*x))**2*exp(-x**2.)
+        phi=0.0001*(radius/R)**2.*(1.-radius/R)*exp(-radius/R)*(cos(pi*x))**2*exp(-x**2.)
+
+
+        
+
+
 
 
     end subroutine field_initialization

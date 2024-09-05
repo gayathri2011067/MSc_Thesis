@@ -4,8 +4,8 @@ from pathlib import Path
 import os, sys
 import subprocess
 
-data_path = "/home/gayathri/MSc_thesis/VIshniac flux/Figure 1 nvf/data_files"
-fig_path = "/home/gayathri/MSc_thesis/VIshniac flux/Figure 1 nvf/figures"
+data_path = "/home/gayathri/MSc_thesis/VIshniac flux/New_notes_code/data_files"
+fig_path = "/home/gayathri/MSc_thesis/VIshniac flux/New_notes_code/figures"
 
 trial_numbers = []
 labels = []

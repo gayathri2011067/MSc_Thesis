@@ -5,9 +5,9 @@ from pathlib import Path
 import os
 import subprocess
 
-data_path = "/home/gayathri/MSc_thesis/VIshniac flux/Figure 1 nvf/run_files"
-fig_path = "/home/gayathri/MSc_thesis/VIshniac flux/Figure 1 nvf/figures"
-data_save_path = "/home/gayathri/MSc_thesis/VIshniac flux/Figure 1 nvf/data_files"
+data_path = "/home/gayathri/MSc_thesis/VIshniac flux/New_notes_code/run_files"
+fig_path = "/home/gayathri/MSc_thesis/VIshniac flux/New_notes_code/figures"
+data_save_path = "/home/gayathri/MSc_thesis/VIshniac flux/New_notes_code/data_files"
 
 passed_args = argparse.ArgumentParser()
 
@@ -183,7 +183,7 @@ try:
     # plt.plot(z, Bphi_list[2], label='Bphi')
     plt.xlabel('z')
     plt.ylabel('Br, Bphi')
-    plt.title(f'Br, Bphi vs z at t={time_list[0]}')
+    plt.title(f'Br, Bphi vs z at t={time_list[-1]}')
     # plt.xlim(-0.25,0.25)
     plt.axvline(x=1, color='r', linestyle='--')
     plt.axvline(x=-1, color='r', linestyle='--')
@@ -222,6 +222,106 @@ plt.yscale('log')
 
 plt.savefig(f'{fig_path}/B_strength_vs_time.png')
 plt.close()
+
+
+
+#import txt file
+filename1 = 'Phi_final.txt'
+filename2 = 'T_final.txt'
+filename3 = 'time.txt'
+file_path1 = f"{data_path}/{filename1}"
+file_path2 = f"{data_path}/{filename2}"
+file_path3 = f"{data_path}/{filename3}"
+
+
+try:
+    with open(file_path1,'r') as f:
+        lines1=f.readlines()
+    # print(lines1)
+    with open(file_path2,'r') as f:
+        lines2=f.readlines()
+    # print(lines2)
+    with open(file_path3,'r') as f:
+        lines3=f.readlines()
+    # print(lines3)
+
+    Phi_list = []
+    for line in lines1:
+        line = line.strip()
+        line = line.split()
+        curr = np.array(line, dtype=float)
+        Phi_list.append(curr)
+    Phi_list = np.array(Phi_list)
+
+    T_list = []
+    for line in lines2:
+        line = line.strip()
+        line = line.split()
+        curr = np.array(line, dtype=float)
+        T_list.append(curr)
+    T_list = np.array(T_list)
+
+    
+    # Phi_list=np.array(lines1,dtype=float)
+    # T_list=np.array(lines2,dtype=float)
+    time_list=np.array(lines3,dtype=float)
+    
+    np.savetxt(f'{data_save_path}/time.txt', time_list)
+    np.savetxt(f'{data_save_path}/Phi_final.txt', Phi_list)
+    np.savetxt(f'{data_save_path}/T_final.txt', T_list)
+    # print(Phi_list.shape)
+    plt.plot(z, Phi_list[-1], label='Phi')
+    plt.plot(z, T_list[-1], label='T')
+    # print(Phi_list[1])
+    # print(T_list[1])
+    # plt.plot(z, Phi_list[1], label='Phi')
+    # plt.plot(z, T_list[1], label='T')
+    # plt.plot(z, Phi_list[2], label='Phi')
+    # plt.plot(z, T_list[2], label='T')
+    plt.xlabel('z')
+    plt.ylabel('Phi, T')
+    plt.title(f'Phi, T vs z at t={time_list[-1]}')
+    # plt.xlim(-0.25,0.25)
+    plt.axvline(x=1, color='r', linestyle='--')
+    plt.axvline(x=-1, color='r', linestyle='--')
+    plt.legend()
+    plt.savefig(f'{fig_path}/Phi-T_vs_z_final.png')
+    plt.close()
+except:
+    print('Phi_final.txt or T_final.txt or time.txt file not found')
+print(T_list)
+
+#plot of Phi and T at against time
+plt.plot(time_list, Phi_list[:,25], label='Phi')
+plt.plot(time_list, T_list[:,25], label='T')
+plt.xlabel('time')
+plt.ylabel('Phi, T')
+plt.title('Phi, T vs time')
+plt.legend()
+plt.savefig(f'{fig_path}/Phi-T_vs_time.png')
+plt.close()
+
+# plt.plot(time_list,alpha)
+# plt.xlabel('time')
+# plt.ylabel('alpha')
+# plt.title('alpha vs time')
+# plt.xlim(-15,15)
+# plt.savefig(f'{fig_path}/alpha_vs_time.png')
+# plt.close()
+B_strength = np.sqrt(Phi_list**2 + T_list**2)
+np.savetxt(f'{data_save_path}/B_strength.txt', B_strength)
+
+plt.plot(time_list, B_strength[:,-1])
+plt.xlabel('time')
+plt.ylabel('B_strength')
+plt.title('B_strength vs time')
+plt.yscale('log')
+
+plt.savefig(f'{fig_path}/B_strength_vs_time.png')
+plt.close()
+
+
+
 
 # plot of alpha_m final vs z
 filename = 'alpham_final.txt'

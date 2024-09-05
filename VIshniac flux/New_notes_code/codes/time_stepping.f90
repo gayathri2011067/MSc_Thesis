@@ -165,7 +165,7 @@ module timestepping
             implicit none
             
             ! character(len=30) :: ghost_zone_type = 'anti-symmetric'
-            double precision, dimension(nx) :: Br_g, Bphi_g, alpha_m_g
+            double precision, dimension(nx) :: Br_g, Bphi_g, alpha_m_g, phi_g, T_torr_g
 
             g_1 = 8.0 / 15.0        !
             g_2 = 5.0 / 12.0        !
@@ -189,7 +189,7 @@ module timestepping
             ! call spatial_derivative(alpha_Bphi, 2, d_alpha_Bphi, d2_alpha_Bphi)
             ! call spatial_derivative(Uz_Br, 2, d_Uz_Br, d2_Uz_Br)
             ! call spatial_derivative(Uz_Bphi, 2, d_Uz_Bphi, d2_Uz_Bphi)
-
+            
 
 
 
@@ -226,44 +226,44 @@ module timestepping
             ! B_phi=Bphi_f  ! 
             ! t = t +  dt
 
-            call sharanyas_notes_eqxn(B_r, B_phi, alpha_m)
+            call potential_equations(Phi,T_torr, alpha_m)
             !STEP 1 !NOTE: have to call spatial derivatives with this new f and g
-            k1r = dt * dBrdt
-            k1phi = dt * dBphidt
-            k1alpha = dt * dalpdt
-            B_r = B_r + g_1 * k1r
-            B_phi = B_phi + g_1 * k1phi
+            k1r = dt * dphi_dt
+            k1phi = dt * dTdt
+            k1alpha = dt * d_alpha_m_dt
+            Phi = Phi + g_1 * k1r
+            T_torr = T_torr + g_1 * k1phi
             alpha_m = alpha_m + g_1 * k1alpha
-            Br_g = B_r + z_1 * k1r
-            Bphi_g = B_phi + z_1 * k1phi
+            phi_g = Phi + z_1 * k1r
+            T_torr_g = T_torr + z_1 * k1phi
             alpha_m_g = alpha_m + z_1 * k1alpha
-            ! B_r=Br_f       !----> !NOTE: added this step because I wanted f to be carried to next step
-            ! B_phi=Bphi_f  ! 
+            ! Phi=phi_f       !----> !NOTE: added this step because I wanted f to be carried to next step
+            ! T_torr=T_torr_f  ! 
             
-            call sharanyas_notes_eqxn(B_r, B_phi, alpha_m)
-            k2r = dt * dBrdt
-            k2phi = dt * dBphidt
-            k2alpha = dt * dalpdt
-            B_r = Br_g + g_2 * k2r
-            B_phi = Bphi_g + g_2 * k2phi
+            call potential_equations(Phi,T_torr, alpha_m)
+            k2r = dt * dphi_dt
+            k2phi = dt * dTdt
+            k2alpha = dt * d_alpha_m_dt
+            Phi = phi_g + g_2 * k2r
+            T_torr = T_torr_g + g_2 * k2phi
             alpha_m = alpha_m_g + g_2 * k2alpha
-            Br_g = B_r + z_2 * k2r
-            Bphi_g = B_phi + z_2 * k2phi
+            phi_g = Phi + z_2 * k2r
+            T_torr_g = T_torr + z_2 * k2phi
             alpha_m_g = alpha_m + z_2 * k2alpha
-            ! B_r=Br_f       !----> !NOTE: added this step because I wanted f to be carried to next step
-            ! B_phi=Bphi_f  ! 
+            ! Phi=phi_f       !----> !NOTE: added this step because I wanted f to be carried to next step
+            ! T_torr=T_torr_f  ! 
 
             ! 3rd step
-            call sharanyas_notes_eqxn(B_r, B_phi, alpha_m)
-            k3r = dt * dBrdt
-            k3phi = dt * dBphidt
-            k3alpha = dt * dalpdt
-            B_r = Br_g + g_3 * k3r
-            B_phi = Bphi_g + g_3 * k3phi
+            call potential_equations(Phi,T_torr, alpha_m)
+            k3r = dt * dphi_dt
+            k3phi = dt * dTdt
+            k3alpha = dt * d_alpha_m_dt
+            Phi = phi_g + g_3 * k3r
+            T_torr = T_torr_g + g_3 * k3phi
             alpha_m = alpha_m_g + g_3 * k3alpha
         
-            ! B_r=Br_f       !----> !NOTE: added this step because I wanted f to be carried to next step
-            ! B_phi=Bphi_f  ! 
+            ! Phi=phi_f       !----> !NOTE: added this step because I wanted f to be carried to next step
+            ! T_torr=T_torr_f  ! 
             t = t +  dt
 
 
