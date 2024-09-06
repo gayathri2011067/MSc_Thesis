@@ -165,8 +165,8 @@ program run_all
     end do
     ! print*, 'B_r=', B_r
     call spatial_derivative(phi,6, derr_phi,no)
-    Br_pot=radius*T_torr
-    B_phi_pot=-radius*derr_phi
+    B_phi_pot=T_torr/radius
+    Br_pot=-derr_phi/radius
 
     write (22, *) phi
     write (23, *) T_torr

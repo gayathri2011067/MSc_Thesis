@@ -189,19 +189,15 @@ module equations
       
       character(len=30) :: ghost_zone_type = 'anti-symmetric'
       character(len=30) :: ghost_zone_type2 = 'relative anti-symmetric'
+      character(len=30) :: ghost_zone_type3 = 'symmetric'
 
-      call impose_boundary_conditions(Phi_dummy, ghost_zone_type)
       call impose_boundary_conditions(T_dummy, ghost_zone_type)
+      call impose_boundary_conditions(Phi_dummy, ghost_zone_type3)
       call impose_boundary_conditions(alpha_m_dummy, ghost_zone_type2)
+
       alpha_total = alpha_m_dummy
       U_z_T = T_dummy * U_z_cap
       U_z_alm = alpha_m_dummy * U_z_cap
-
-      ! TODO: alpha update???
-      ! TODO: Check q_omega term, and confirm that it is R-omega
-      ! TODO: Check (h**2/l**2) and confirm
-      ! TODO: derive the potential equations from the equations we actaully used before
-      ! TODO: convert to Br and B phi before plotting
 
 
 

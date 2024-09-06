@@ -308,17 +308,17 @@ plt.close()
 # plt.xlim(-15,15)
 # plt.savefig(f'{fig_path}/alpha_vs_time.png')
 # plt.close()
-B_strength = np.sqrt(Phi_list**2 + T_list**2)
-np.savetxt(f'{data_save_path}/B_strength.txt', B_strength)
+# B_strength = np.sqrt(Phi_list**2 + T_list**2)
+# np.savetxt(f'{data_save_path}/B_strength.txt', B_strength)
 
-plt.plot(time_list, B_strength[:,-1])
-plt.xlabel('time')
-plt.ylabel('B_strength')
-plt.title('B_strength vs time')
-plt.yscale('log')
+# plt.plot(time_list, B_strength[:,-1])
+# plt.xlabel('time')
+# plt.ylabel('B_strength')
+# plt.title('B_strength vs time')
+# plt.yscale('log')
 
-plt.savefig(f'{fig_path}/B_strength_vs_time.png')
-plt.close()
+# plt.savefig(f'{fig_path}/B_strength_vs_time.png')
+# plt.close()
 
 
 
