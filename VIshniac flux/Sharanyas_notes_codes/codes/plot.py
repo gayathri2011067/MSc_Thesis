@@ -5,9 +5,9 @@ from pathlib import Path
 import os
 import subprocess
 
-data_path = "/home/gayathri/MSc_thesis/VIshniac flux/Figure 1 nvf/run_files"
-fig_path = "/home/gayathri/MSc_thesis/VIshniac flux/Figure 1 nvf/figures"
-data_save_path = "/home/gayathri/MSc_thesis/VIshniac flux/Figure 1 nvf/data_files"
+data_path = "/home/gayathri/MSc_thesis/VIshniac flux/Sharanyas_notes_codes/run_files"
+fig_path = "/home/gayathri/MSc_thesis/VIshniac flux/Sharanyas_notes_codes/figures"
+data_save_path = "/home/gayathri/MSc_thesis/VIshniac flux/Sharanyas_notes_codes/data_files"
 
 passed_args = argparse.ArgumentParser()
 
@@ -127,7 +127,7 @@ try:
     plt.close()
 except:
     print('Br_ini.txt or B_phi_ini.txt file not found')
-
+U=1.1631817616985978
 #import txt file
 filename1 = 'Br_final.txt'
 filename2 = 'B_phi_final.txt'
@@ -173,8 +173,8 @@ try:
     np.savetxt(f'{data_save_path}/Br_final.txt', Br_list)
     np.savetxt(f'{data_save_path}/B_phi_final.txt', Bphi_list)
     # print(Br_list.shape)
-    plt.plot(z, Br_list[-1], label='Br')
-    plt.plot(z, Bphi_list[-1], label='Bphi')
+    plt.plot(z, Br_list[270], label='Br')
+    plt.plot(z, Bphi_list[270], label='Bphi')
     # print(Br_list[1])
     # print(Bphi_list[1])
     # plt.plot(z, Br_list[1], label='Br')
@@ -183,10 +183,11 @@ try:
     # plt.plot(z, Bphi_list[2], label='Bphi')
     plt.xlabel('z')
     plt.ylabel('Br, Bphi')
-    plt.title(f'Br, Bphi vs z at t={time_list[0]}')
+    plt.title(f'Br, Bphi vs z at t={time_list[-1]}')
     # plt.xlim(-0.25,0.25)
     plt.axvline(x=1, color='r', linestyle='--')
     plt.axvline(x=-1, color='r', linestyle='--')
+    plt.axhline(y=0, color='g', linestyle='--')
     plt.legend()
     plt.savefig(f'{fig_path}/Br_Bphi_vs_z_final.png')
     plt.close()
@@ -216,10 +217,13 @@ np.savetxt(f'{data_save_path}/B_strength.txt', B_strength)
 
 plt.plot(time_list, B_strength[:,-1])
 plt.xlabel('time')
-plt.ylabel('B_strength')
+plt.ylabel('B_strength/B0')
 plt.title('B_strength vs time')
 plt.yscale('log')
+plt.xlim(0,7)
 
+# plt.axhline(y=0.001, color='g', linestyle='--')
+# plt.axvline(x=2.5, color='r', linestyle='--')
 plt.savefig(f'{fig_path}/B_strength_vs_time.png')
 plt.close()
 

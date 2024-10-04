@@ -30,6 +30,7 @@ program run_all
     call construct_alpha_profile
     call field_initialization
     print*,'radius',radius
+    print*,'t gyr',t_d_dim*total_t
 
     ! Define the output file name
     data_path = '../run_files/'

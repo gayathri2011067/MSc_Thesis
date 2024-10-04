@@ -3,6 +3,7 @@ program run_all
     use alpha_profile
     use velocity_profile
     use initial_field
+    use seed
     use parameters
     use time_grid
     use physical_grid
@@ -41,7 +42,8 @@ program run_all
     B_phi_final_file=  'B_phi_final.txt'
     time_file=  'time.txt'
     alpham_final_file=  'alpham_final.txt'
-
+    print *, "Computational time in Gyr = ", total_t * t_d_dim
+    print*, "u",U_0
     ! Open the file for writing
     open(unit=10, file=trim(data_path) // filename)
     open(unit=17, file=trim(data_path) // xfile)
@@ -160,7 +162,7 @@ program run_all
     ! print*, 'B_r=', B_r
     write (22, *) B_r
     write (23, *) B_phi
-    write (24, *) t
+    write (24, *) t*t_d_dim
     write (25, *) alpha_m
   end do
   ! ************************************************************************

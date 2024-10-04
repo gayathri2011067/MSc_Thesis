@@ -4,15 +4,16 @@ module time_grid
   implicit none
   
   integer, parameter :: Nt= 50000.  !points per diffusion time
-  integer, parameter :: n1= 500  !Number of snapshots
-  double precision, parameter :: total_t= 50. !unit diffusion time
+  integer, parameter :: n1= 5000.  !Number of snapshots
+  double precision, parameter :: total_t= 35. !unit diffusion time
   integer :: n2 = total_t*Nt/n1!Number of timesteps between snapshots
   double precision, parameter :: dt= 1./Nt !time step
   double precision :: t=0.
   double precision :: first=0.  !for Runge-Kutta routine
-
+  
 
 end module time_grid
+
 
 
 !**************************************************************************************************************************************************

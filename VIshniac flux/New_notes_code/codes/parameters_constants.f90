@@ -11,6 +11,7 @@ module parameters
       double precision, parameter :: km_kpc= 3.08567758d16
       double precision, parameter :: cm_km=  1.d5
       double precision, parameter :: s_Gyr=  1.d9*365.25d0*24*3600
+      double precision, parameter :: s_Myr=  1.d6*365.25d0*24*3600
       double precision, parameter :: G_muG= 1.d6
   
   !***************************************************************************************************************
@@ -21,8 +22,8 @@ module parameters
       double precision, parameter :: r_d_dim = 10.d0 ! kpc
       double precision, parameter :: h_d_dim = 0.35d0 ! kpc
       double precision, parameter :: eta_dim = 0.1d27*s_Gyr/(cm_kpc**2.) ! cm2/s --> kpc2/Gyr
-      double precision, parameter :: h_dim = h_d_dim*(sqrt(1+(radius_dim/r_d_dim)**2)) !kpc !disc flaring
-      double precision, parameter :: t_d_dim = h_dim**2./eta_dim ! Gyr
+      double precision, parameter :: h_dim = 0.5!h_d_dim*(sqrt(1+(radius_dim/r_d_dim)**2)) !kpc !disc flaring
+      double precision, parameter :: t_d_dim = 0.73!h_dim**2./eta_dim ! Gyr
       double precision, parameter :: omega_0_dim = 127.*s_Gyr/km_kpc   ! km/s.kpc --> 1/Gyr
       double precision, parameter :: r__omega_dim = 2. ! kpc
       double precision, parameter :: l_dim = 0.1 ! kpc
@@ -30,11 +31,13 @@ module parameters
       ! double precision, parameter :: G_dim= -omega_dim ! 1/Gyr !NOTE: from paper!
       double precision, parameter :: G_dim = -45.6*s_Gyr/km_kpc   ! km/s.kpc --> 1/Gyr!REVIEW: why not use the above line
       double precision, parameter :: alpha_0_dim = (l_dim**2.)*omega_dim/(h_dim) ! kpc/Gyr
-      double precision, parameter :: U_0_dim = 1.*s_Gyr/km_kpc ! km/s --> kpc/Gyr
+      double precision, parameter :: U_0_dim = 10.*s_Gyr/km_kpc ! km/s --> kpc/Gyr
       double precision, parameter :: k_dim = 0.1*s_Gyr/km_kpc !km.kpc/s --> kpc**2/Gyr
       double precision, parameter :: R_dim = 20.!kpc
       double precision, parameter :: z_i_dim = -h_dim!kpc
       double precision, parameter :: z_f_dim = +h_dim !kpc
+      double precision, parameter :: tau_c_dim =10.*s_Myr ! in gyr
+   
   
   !***************************************************************************************************************
   
@@ -58,6 +61,9 @@ module parameters
       double precision, parameter :: z_i = z_i_dim/h_dim
       double precision, parameter :: z_f = z_f_dim/h_dim
       double precision, parameter :: R_m_inv = 0. ! TODO_LATER: Find correct value
+      double precision, parameter :: tau_c = t_d/75.
+
+
       
       
       
@@ -206,11 +212,11 @@ module parameters
       ! double precision, parameter :: f_para = 0.1
       ! ********************************************************************************************************************************
       !TRIAL: 24: using sharanya's equations, vishniac term, paper values
-      double precision, parameter :: R_alpha = 1.  !alpha_0
-      double precision, parameter :: R_omega = -40.     !-G
-      double precision, parameter :: R_k = 0
-      double precision, parameter :: R_U = 0
-      double precision, parameter :: f_para = 0.1
+      ! double precision, parameter :: R_alpha = 1.  !alpha_0
+      ! double precision, parameter :: R_omega = -40.     !-G
+      ! double precision, parameter :: R_k = 0
+      ! double precision, parameter :: R_U = 0
+      ! double precision, parameter :: f_para = 0.1
       ! ********************************************************************************************************************************
       !TRIAL: 25: using sharanya's equations, vishniac term, paper values
       ! double precision, parameter :: R_alpha = 1.  !alpha_0
@@ -254,13 +260,21 @@ module parameters
       ! ********************************************************************************************************************************
       !TRIAL: 4- repeat trial 19 
       ! ********************************************************************************************************************************
-      !TRIAL: 5- repeat trial 20
+      !TRIAL: trial 20
+      double precision, parameter :: R_alpha = 0.  !alpha_0
+      double precision, parameter :: R_omega = -20.     !-G
+      double precision, parameter :: R_k = 0.
+      double precision, parameter :: R_U = 0.45
+      double precision, parameter :: f_para = 1.
       ! ********************************************************************************************************************************
       !TRIAL: 6- repeat trial 21
       ! ********************************************************************************************************************************
-      !TRIAL: 7- repeat trial 22
+
+
+
+      !TRIAL: 7- catastrophic quenching test
       ! ********************************************************************************************************************************
-      !TRIAL: 8- repeat trial 23, now with alpha_m,!NOTE: to get the alpha_m plot, rerun:1,2,3
+      !TRIAL: 8- repeat trial 23,alpha_k=0
       ! ********************************************************************************************************************************
       !NOTE: with the above trials, we can now generate all plots in sharanya's notes.
       !REFER: https://github.com/gayathri2011067/MSc_Thesis/blob/main/resources/sharanya_notes.pdf

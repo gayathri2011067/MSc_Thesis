@@ -4,8 +4,8 @@ from pathlib import Path
 import os, sys
 import subprocess
 
-data_path = "/home/gayathri/MSc_thesis/VIshniac flux/Figure 1 nvf/data_files"
-fig_path = "/home/gayathri/MSc_thesis/VIshniac flux/Figure 1 nvf/figures"
+data_path = "/home/gayathri/MSc_thesis/VIshniac flux/Sharanyas_notes_codes/data_files"
+fig_path = "/home/gayathri/MSc_thesis/VIshniac flux/Sharanyas_notes_codes/figures"
 
 trial_numbers = []
 labels = []
@@ -90,6 +90,7 @@ for i in range(len(trial_numbers)):
 plt.xlabel('z')
 plt.ylabel('Br, Bphi')
 plt.title(f"Br, Bphi vs z at t=({','.join([f'trial{trial_numbers[i]}:{times[i][-1]:.2e}' for j in range(len(trial_numbers))])})")
+
 plt.legend()
 plt.savefig(f'{fig_path}/Br_Bphi_vs_z_final.png')
 plt.close()
@@ -109,6 +110,7 @@ for i in range(len(trial_numbers)):
     
 plt.xlabel('time')
 plt.ylabel('Br, Bphi')
+
 plt.title(f"Br, Bphi vs time at z=({','.join([f'trial{trial_numbers[i]}:{int(z_lists[i][space_indices[i]])}' for i in range(len(trial_numbers))])})")
 plt.legend()
 plt.savefig(f'{fig_path}/Br_Bphi_vs_time.png')
@@ -117,17 +119,47 @@ plt.close()
 for i in range(len(trial_numbers)):
 
     lab = labels[i]
-    space_idx = space_indices[i]
+    space_idx = 107//2
 
-    plt.plot(times[i], B_strengths[i][:,space_idx], label=f'{lab}')
+    plt.plot(times[i], B_strengths[i][:,-1], label=f'{lab}')
+plt.xlim(0,7)
+
+plt.yscale('log')
+plt.ylim(10**-3,2)
+# plt.axhline(y=1, color='b', linestyle='--')
 plt.xlabel('time')
 plt.ylabel('B_strength')
+
 plt.title(f"B_strength vs time at z=({','.join([f'trial{trial_numbers[i]}:{int(z_lists[i][space_indices[i]])}' for i in range(len(trial_numbers))])})")
-plt.yscale('log')
+
+
 plt.legend()
 plt.savefig(f'{fig_path}/B_strength_vs_time.png')
 plt.close()
 
+#plot alpha_m vs z similarly
+filename = 'alpha_m.txt'
+
+alpha_m_values = []
+for i in range(len(trial_numbers)):
+    
+    trial_num = trial_numbers[i]
+
+    file_path = f"{data_path}/trial_{trial_num}/{filename}"
+    
+    alpha_m_list = np.loadtxt(file_path)
+    
+    alpha_m_values.append(np.copy(alpha_m_list))
+    
+    plt.plot(z_lists[i], alpha_m_list[-1], label=f'alpha_m: {labels[i]}')
+    plt.xlim(-1,1)
+    
+plt.xlabel('z')
+plt.ylabel('alpha_m')
+plt.title(f"alpha_m vs z at t=({','.join([f'trial{trial_numbers[i]}:{times[i][-1]:.2e}' for i in range(len(trial_numbers))])})")
+plt.legend()
+plt.savefig(f'{fig_path}/alpha_m_vs_z_final.png')
+plt.close()
 
 
 

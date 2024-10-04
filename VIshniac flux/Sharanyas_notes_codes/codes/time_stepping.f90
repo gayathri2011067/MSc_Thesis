@@ -122,7 +122,7 @@ module timestepping
 
 
 
-            call sharanyas_notes_eqxn(B_r, B_phi, alpha_m)
+            call nvf_pdf_equations(B_r, B_phi, alpha_m)
             k1r = dt*dBrdt
             k1phi = dt*dBphidt
             k1alpha = dt*dalpdt
@@ -130,7 +130,7 @@ module timestepping
             B_phi = B_phi+0.5*k1phi
             alpha_m = alpha_m+0.5*k1alpha
 
-            call sharanyas_notes_eqxn(B_r, B_phi, alpha_m)
+            call nvf_pdf_equations(B_r, B_phi, alpha_m)
             k2r = dt*dBrdt
             k2phi = dt*dBphidt
             k2alpha = dt*dalpdt
@@ -138,7 +138,7 @@ module timestepping
             B_phi = B_phi+0.5*k2phi
             alpha_m = alpha_m+0.5*k2alpha
 
-            call sharanyas_notes_eqxn(B_r, B_phi, alpha_m)
+            call nvf_pdf_equations(B_r, B_phi, alpha_m)
             k3r = dt*dBrdt
             k3phi = dt*dBphidt
             k3alpha = dt*dalpdt
@@ -146,7 +146,7 @@ module timestepping
             B_phi = B_phi+k3phi
             alpha_m = alpha_m+k3alpha
 
-            call sharanyas_notes_eqxn(B_r, B_phi, alpha_m)
+            call nvf_pdf_equations(B_r, B_phi, alpha_m)
             k4r = dt*dBrdt
             k4phi = dt*dBphidt
             k4alpha = dt*dalpdt
@@ -226,7 +226,7 @@ module timestepping
             ! B_phi=Bphi_f  ! 
             ! t = t +  dt
 
-            call sharanyas_notes_eqxn(B_r, B_phi, alpha_m)
+            call nvf_pdf_equations(B_r, B_phi, alpha_m)
             !STEP 1 !NOTE: have to call spatial derivatives with this new f and g
             k1r = dt * dBrdt
             k1phi = dt * dBphidt
@@ -240,7 +240,7 @@ module timestepping
             ! B_r=Br_f       !----> !NOTE: added this step because I wanted f to be carried to next step
             ! B_phi=Bphi_f  ! 
             
-            call sharanyas_notes_eqxn(B_r, B_phi, alpha_m)
+            call nvf_pdf_equations(B_r, B_phi, alpha_m)
             k2r = dt * dBrdt
             k2phi = dt * dBphidt
             k2alpha = dt * dalpdt
@@ -254,7 +254,7 @@ module timestepping
             ! B_phi=Bphi_f  ! 
 
             ! 3rd step
-            call sharanyas_notes_eqxn(B_r, B_phi, alpha_m)
+            call nvf_pdf_equations(B_r, B_phi, alpha_m)
             k3r = dt * dBrdt
             k3phi = dt * dBphidt
             k3alpha = dt * dalpdt

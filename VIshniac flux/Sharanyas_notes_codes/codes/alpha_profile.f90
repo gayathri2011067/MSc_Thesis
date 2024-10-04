@@ -21,10 +21,11 @@ contains
         character(len=30) :: ghost_zone_type2 = 'relative anti-symmetric'
         alpha_cap = sin(pi*x)
         d_alpha_cap = cos(pi*x)
-        alpha_k =0!alpha_0*alpha_cap  !NOTE: kinetic helicity set to 0 now
+        alpha_k = R_alpha*alpha_cap  !NOTE: kinetic helicity set to 0 now
         alpha_m = 0d0
-        alpha = alpha_m !+alpha_k
+        alpha = alpha_m +alpha_k
   
+
 
     end subroutine construct_alpha_profile
 !
