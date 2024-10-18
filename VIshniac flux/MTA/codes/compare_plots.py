@@ -122,11 +122,12 @@ for i in range(len(trial_numbers)):
     lab = labels[i]
     space_idx = 107//2
 
-    plt.plot(times[i], B_strengths[i][:,-1], label=f'{lab}')
-plt.xlim(0,7)
+    plt.plot(times[i], B_strengths[i][:,space_idx], label=f'{lab}')
+plt.xlim(0,14)
+plt.ylim(0,0.6)
 
-plt.yscale('log')
-plt.ylim(10**-3,2)
+# plt.yscale('log')
+
 # plt.axhline(y=1, color='b', linestyle='--')
 plt.xlabel('time')
 plt.ylabel('B_strength')
@@ -153,7 +154,8 @@ for i in range(len(trial_numbers)):
     alpha_m_values.append(np.copy(alpha_m_list))
     
     plt.plot(z_lists[i], alpha_m_list[-1], label=f'alpha_m: {labels[i]}')
-    plt.xlim(-1,1)
+    plt.xlim(-0.5,0.5)
+    # plt.ylim(-10,10)
     
 plt.xlabel('z')
 plt.ylabel('alpha_m')

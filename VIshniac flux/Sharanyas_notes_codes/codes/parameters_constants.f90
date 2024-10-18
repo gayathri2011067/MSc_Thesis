@@ -21,8 +21,8 @@ module parameters
       double precision, parameter :: r_d_dim = 10.d0 ! kpc
       double precision, parameter :: h_d_dim = 0.35d0 ! kpc
       double precision, parameter :: eta_dim = 0.1d27*s_Gyr/(cm_kpc**2.) ! cm2/s --> kpc2/Gyr
-      double precision, parameter :: h_dim = 0.381!h_d_dim*(sqrt(1+(radius_dim/r_d_dim)**2)) !kpc !disc flaring
-      double precision, parameter :: t_d_dim = 0.425 ! Gyr
+      double precision, parameter :: h_dim = 0.5!h_d_dim*(sqrt(1+(radius_dim/r_d_dim)**2)) !kpc !disc flaring
+      double precision, parameter :: t_d_dim = 0.73 ! Gyr
       double precision, parameter :: omega_0_dim = 127.*s_Gyr/km_kpc   ! km/s.kpc --> 1/Gyr
       double precision, parameter :: r__omega_dim = 2. ! kpc
       double precision, parameter :: l_dim = 0.1 ! kpc
@@ -30,7 +30,7 @@ module parameters
       ! double precision, parameter :: G_dim= -omega_dim ! 1/Gyr !NOTE: from paper!
       double precision, parameter :: G_dim = -45.6*s_Gyr/km_kpc   ! km/s.kpc --> 1/Gyr!REVIEW: why not use the above line
       double precision, parameter :: alpha_0_dim = 1.50 ! kpc/Gyr
-      double precision, parameter :: U_0_dim = 1.*s_Gyr/km_kpc ! km/s --> kpc/Gyr
+      double precision, parameter :: U_0_dim = 10.*s_Gyr/km_kpc ! km/s --> kpc/Gyr
       double precision, parameter :: k_dim = 0.1*s_Gyr/km_kpc !km.kpc/s --> kpc**2/Gyr
       double precision, parameter :: R_dim = 20.!kpc
       double precision, parameter :: z_i_dim = -h_dim!kpc
@@ -310,10 +310,10 @@ module parameters
       ! double precision, parameter :: f_para = 0.
 ! ********************************************************************************************************************************
       !TRIAL:2 
-      double precision, parameter :: R_alpha = 1.71  !alpha_0
-      double precision, parameter :: R_omega = -19.8     !-G
-      double precision, parameter :: R_k = 0.3
-      double precision, parameter :: R_U = 1.14
+      double precision, parameter :: R_alpha = 0  !alpha_0
+      double precision, parameter :: R_omega = -20.     !-G
+      double precision, parameter :: R_k = 0.
+      double precision, parameter :: R_U = 0.45
       double precision, parameter :: f_para = 0.
 ! ********************************************************************************************************************************
       !TRIAL:3

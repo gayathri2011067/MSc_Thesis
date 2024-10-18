@@ -14,7 +14,7 @@ implicit none
 
 double precision, dimension(nx) :: B_r, B_phi, dBr, d2Br, dBphi, d2Bphi, B_eq, rho, rho_0
 double precision, dimension(nx) :: Fr, Fphi, Er, Ephi
-double precision, dimension(nx) :: alpha_Br, alpha_Bphi, Uz_Br, Uz_Bphi,d_alpha_Br, B_0
+double precision, dimension(nx) :: alpha_Br, alpha_Bphi, Uz_Br, Uz_Bphi,d_alpha_Br!, B_0
 double precision, dimension(nx) :: d2_alpha_Br,d_alpha_Bphi,d2_alpha_Bphi,d_Uz_Br
 double precision, dimension(nx) :: d2_Uz_Br,d_Uz_Bphi,d2_Uz_Bphi, old_Br, old_Bphi
 double precision :: Bseed
@@ -35,20 +35,21 @@ contains
         call init_random_seed
         !print xseed
         ! print*, "xseed=",xseed
-        B_0=1.0
-        rho_0=B_0**2/(4.0*pi*small_u**2)
+        ! B_0=1.0
+        rho_0=B_0**2/(4.0*pi*(small_u**2))
         Bseed=0.01
        
         rho = rho_0*exp(-x**2)
      
         B_eq = sqrt(4.0*pi*rho)*small_u
-        ! call init_random_seed
-        ! B_r = Bseed*exp(-x**2)*(1.-x**2)*B_0
-        ! B_phi =  Bseed*exp(-x**2)*(1.-x**2)*B_0
-        ! B_r = - Bseed*exp(-x**2)*(1.-x**2)*B_0
-        ! B_phi =xseed*exp(-x**2)*(1.-x**2)
-        B_phi =  xseed*exp(-x**2)*(1.-x**2)*Bseed
-        B_r = - xseed*exp(-x**2)*(1.-x**2)*Bseed
+
+
+        ! B_r = xseed*exp(-x**2)*(1.-x**2)*Bseed
+        ! B_phi = xseed*exp(-x**2)*(1.-x**2)*Bseed
+
+        B_r = xseed*exp((-x**2)/2)*(1./sqrt(2*pi))*Bseed
+        B_phi = -xseed*exp((-x**2)/2)*(1./sqrt(2*pi))*Bseed
+
         Fr=0.0
         Fphi=0.0
         Er=0.0

@@ -48,7 +48,7 @@ module make_a_grid
 
     ! integer :: i
 
-    double precision, parameter :: len= 2.*h  
+    double precision, parameter :: len= 2.*h
     double precision, dimension(nx) :: spac
 
     dx=len/(nxphys-1)  !x corresponds to z
@@ -56,7 +56,7 @@ module make_a_grid
     beta= dt/dx !beta for fin diff 
 
     do i=1,nx
-      x(i)= -(h +nxghost*dx) +(i-1)*dx !+0.01 !NOTE:+0.01 to avoid 0
+      x(i)= -(h+nxghost*dx) +(i-1)*dx !+0.01 !NOTE:+0.01 to avoid 0
       x(i)= x(i) !dimensionless now
     enddo
   endsubroutine construct_grid

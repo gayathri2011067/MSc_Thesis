@@ -30,11 +30,13 @@ module parameters
       ! double precision, parameter :: G_dim= -omega_dim ! 1/Gyr !NOTE: from paper!
       double precision, parameter :: G_dim = -45.6*s_Gyr/km_kpc   ! km/s.kpc --> 1/Gyr!REVIEW: why not use the above line
       double precision, parameter :: alpha_0_dim = 1.50 ! kpc/Gyr
-      double precision, parameter :: small_u_dim = 1.14 ! km/s
+      double precision, parameter :: small_u_dim = 10*s_Gyr/km_kpc ! km/s
       double precision, parameter :: k_dim = 0.1*s_Gyr/km_kpc !km.kpc/s --> kpc**2/Gyr
       double precision, parameter :: R_dim = 20.!kpc
       double precision, parameter :: z_i_dim = -h_dim!kpc
       double precision, parameter :: z_f_dim = +h_dim !kpc
+      double precision, parameter :: tau_c_dim = 10.*0.001 !Gyr ! TODO_LATER: Find correct value
+      double precision, parameter :: B_0_dim = 8.2/G_muG
       !B_0_dim=8.2e-6*u.G,B_0=1
   !***************************************************************************************************************
   
@@ -58,288 +60,107 @@ module parameters
       double precision, parameter :: z_i = z_i_dim/h_dim
       double precision, parameter :: z_f = z_f_dim/h_dim
       double precision, parameter :: R_m_inv = 0. ! TODO_LATER: Find correct value
-      double precision, parameter :: tau = (l/h)**(2./3.)!(1./3.)*l*U_0
-      
-      
-      !For the rest of the parameters, different trials were run, details as given below:    
-      !********************************************************************************************************************************
-      ! !TRIAL: 1
-      ! double precision, parameter :: R_alpha = 0
-      ! double precision, parameter :: R_omega = -20
-      ! double precision, parameter :: R_k = 0
-      ! double precision, parameter :: R_U = 0.45
-      ! double precision, parameter :: f_para=1.
-      !********************************************************************************************************************************
-      ! !TRIAL: 2
-      ! double precision, parameter :: R_alpha = alpha_0
-      ! double precision, parameter :: R_omega = -G
-      ! double precision, parameter :: R_k = 0
-      ! double precision, parameter :: R_U = 0
-      ! double precision, parameter :: f_para=0.
-      !********************************************************************************************************************************
-      ! !TRIAL: 3
-      ! double precision, parameter :: R_alpha = alpha_0
-      ! double precision, parameter :: R_omega = -20
-      ! double precision, parameter :: R_k = 0
-      ! double precision, parameter :: R_U = U_0
-      ! double precision, parameter :: f_para=0.
-      !********************************************************************************************************************************
-      ! !TRIAL: 4
-      ! double precision, parameter :: R_alpha = alpha_0
-      ! double precision, parameter :: R_omega = -G
-      ! double precision, parameter :: R_k = 0
-      ! double precision, parameter :: R_U = U_0
-      ! double precision, parameter :: f_para=1.
-      !********************************************************************************************************************************
-      ! !TRIAL: 5
-      ! double precision, parameter :: R_alpha = 4
-      ! double precision, parameter :: R_omega = -20
-      ! double precision, parameter :: R_k = 0
-      ! double precision, parameter :: R_U = 0.45
-      ! double precision, parameter :: f_para=1.
-      !********************************************************************************************************************************
-      ! !TRIAL: 6
-      ! double precision, parameter :: R_alpha = 4
-      ! double precision, parameter :: R_omega = -20
-      ! double precision, parameter :: R_k = 0
-      ! double precision, parameter :: R_U = 0.45
-      ! double precision, parameter :: f_para=-1.
-      !********************************************************************************************************************************
-      ! !TRIAL: 7
-      ! double precision, parameter :: R_alpha = alpha_0
-      ! double precision, parameter :: R_omega = -G
-      ! double precision, parameter :: R_k = 0
-      ! double precision, parameter :: R_U = U_0
-      ! double precision, parameter :: f_para=1.
-      !********************************************************************************************************************************
-      ! !TRIAL: 8,9,10: different equations
-      !********************************************************************************************************************************
-      ! !TRIAL: 11 1A
-      ! double precision, parameter :: R_alpha = 0
-      ! double precision, parameter :: R_omega = -20
-      ! double precision, parameter :: R_k = 0
-      ! double precision, parameter :: R_U = 0.45
-      ! double precision, parameter :: f_para=1.
-      !********************************************************************************************************************************
-      ! !TRIAL: 12 1B
-      ! double precision, parameter :: R_alpha = 0
-      ! double precision, parameter :: R_omega = -20
-      ! double precision, parameter :: R_k = 0
-      ! double precision, parameter :: R_U = 1.16
-      ! double precision, parameter :: f_para=1.
-      !********************************************************************************************************************************
-      ! !TRIAL: 13 1D
-      ! double precision, parameter :: R_alpha = 4.
-      ! double precision, parameter :: R_omega = -20.
-      ! double precision, parameter :: R_k = 0
-      ! double precision, parameter :: R_U = 0.45
-      ! double precision, parameter :: f_para=1.
-      !********************************************************************************************************************************
-      ! !TRIAL: 14: using sharanya's equations, no vishniac term
-      ! double precision, parameter :: R_alpha = alpha_0
-      ! double precision, parameter :: R_omega = -G
-      ! double precision, parameter :: R_k = 0
-      ! double precision, parameter :: R_U = 0
-      ! double precision, parameter :: f_para=0
-      !********************************************************************************************************************************
-      !TRIAL: 15: using sharanya's equations, vishniac term, added term in dBrdt
-      ! double precision, parameter :: R_alpha = alpha_0
-      ! double precision, parameter :: R_omega = -G
-      ! double precision, parameter :: R_k = 0
-      ! double precision, parameter :: R_U = 0
-      ! double precision, parameter :: f_para = 1.
-      ! ********************************************************************************************************************************
-      !TRIAL: 16: using sharanya's equations, vishniac term, added term in dBrdt
-      ! double precision, parameter :: R_alpha = alpha_0
-      ! double precision, parameter :: R_omega = -G
-      ! double precision, parameter :: R_k = 0
-      ! double precision, parameter :: R_U = 0
-      ! double precision, parameter :: f_para = -1.
-      ! ********************************************************************************************************************************
-      !TRIAL: 17: using sharanya's equations, vishniac term, added term in dBrdt, added 3rd eqn to RK3 implicit, b0 1e-5
-      ! double precision, parameter :: R_alpha = alpha_0
-      ! double precision, parameter :: R_omega = -G
-      ! double precision, parameter :: R_k = 0
-      ! double precision, parameter :: R_U = 0
-      ! double precision, parameter :: f_para = -1.
-      ! ********************************************************************************************************************************
-      !TRIAL: 18: using sharanya's equations, vishniac term, paper values, corrected alpha_k = 0
-      ! double precision, parameter :: R_alpha = alpha_0  !alpha_0
-      ! double precision, parameter :: R_omega = -20.     !-G
-      ! double precision, parameter :: R_k = 0
-      ! double precision, parameter :: R_U = 0
-      ! double precision, parameter :: f_para = -0.1
-      ! ********************************************************************************************************************************
-      !TRIAL: 19: using sharanya's equations, vishniac term, paper values, corrected Beq = 0.00001*exp(x**2), R_alpha = 1
-      ! double precision, parameter :: R_alpha = 1.  !alpha_0
-      ! double precision, parameter :: R_omega = -20.     !-G
-      ! double precision, parameter :: R_k = 0
-      ! double precision, parameter :: R_U = 0
-      ! double precision, parameter :: f_para = -0.1
-      ! ********************************************************************************************************************************
-      !TRIAL: 20: using sharanya's equations, vishniac term, paper values
-      ! double precision, parameter :: R_alpha = 1.  !alpha_0
-      ! double precision, parameter :: R_omega = -50.     !-G
-      ! double precision, parameter :: R_k = 0
-      ! double precision, parameter :: R_U = 0
-      ! double precision, parameter :: f_para = -0.1
-      ! ********************************************************************************************************************************
-      !TRIAL: 21: using sharanya's equations, vishniac term, paper values
-      ! double precision, parameter :: R_alpha = 1.  !alpha_0
-      ! double precision, parameter :: R_omega = -30.     !-G
-      ! double precision, parameter :: R_k = 0
-      ! double precision, parameter :: R_U = 0
-      ! double precision, parameter :: f_para = -0.1
-      ! ********************************************************************************************************************************
-      !TRIAL: 22: using sharanya's equations, vishniac term, paper values
-      ! double precision, parameter :: R_alpha = 1.  !alpha_0
-      ! double precision, parameter :: R_omega = -40.     !-G
-      ! double precision, parameter :: R_k = 0
-      ! double precision, parameter :: R_U = 0
-      ! double precision, parameter :: f_para = -0.1
-      ! ********************************************************************************************************************************
-      ! !TRIAL: 23: using sharanya's equations, vishniac term, paper values
-      ! double precision, parameter :: R_alpha = 1.  !alpha_0
-      ! double precision, parameter :: R_omega = -30.     !-G
-      ! double precision, parameter :: R_k = 0
-      ! double precision, parameter :: R_U = 0
-      ! double precision, parameter :: f_para = 0.1
-      ! ********************************************************************************************************************************
-      !TRIAL: 24: using sharanya's equations, vishniac term, paper values
-      ! double precision, parameter :: R_alpha = 1.  !alpha_0
-      ! double precision, parameter :: R_omega = -40.     !-G
-      ! double precision, parameter :: R_k = 0
-      ! double precision, parameter :: R_U = 0
-      ! double precision, parameter :: f_para = 0.1
-      ! ********************************************************************************************************************************
-      !TRIAL: 25: using sharanya's equations, vishniac term, paper values
-      ! double precision, parameter :: R_alpha = 1.  !alpha_0
-      ! double precision, parameter :: R_omega = -50.     !-G
-      ! double precision, parameter :: R_k = 0
-      ! double precision, parameter :: R_U = 0
-      ! double precision, parameter :: f_para = 0.1
-      ! ********************************************************************************************************************************
-      !TRIAL: 26: using sharanya's equations, vishniac term, paper values
-      ! double precision, parameter :: R_alpha = 1.  !alpha_0
-      ! double precision, parameter :: R_omega = -20.     !-G
-      ! double precision, parameter :: R_k = 0
-      ! double precision, parameter :: R_U = 0
-      ! double precision, parameter :: f_para = -0.1
-      ! ********************************************************************************************************************************  
-      !unist,dongsu ryu
-      !takuya akahori,naoj
-      ! ********************************************************************************************************************************
-      !TRIAL: 27: using sharanya's equations, vishniac term, paper values
-      ! double precision, parameter :: R_alpha = 1d0  !alpha_0
-      ! double precision, parameter :: R_omega = -30d0     !-G
-      ! double precision, parameter :: R_k = 0
-      ! double precision, parameter :: R_U = 0
-      ! double precision, parameter :: f_para = 0.1
-      ! ********************************************************************************************************************************
-      !TRIAL: 28-46
-      !same as above, trials to find out the small discrepancy
-      !removed the 0.01 factor added to avoid zero errors.
-      ! ********************************************************************************************************************************
-      !TRIAL: 28-46
-      !same as above, trials to find out the small discrepancy
-      !removed the 0.01 factor added to avoid zero errors.
-      ! ********************************************************************************************************************************
-      !CONCERN: due to some unfortunate reason, I did a git reset, thus lost all coded trials, starting again from trial 1.
-      ! ********************************************************************************************************************************
-      !TRIAL: 1- repeat trial 23 with Nt= 50000d0,nxphys= 101
-      ! ********************************************************************************************************************************
-      !TRIAL: 2- repeat trial 24
-      ! ********************************************************************************************************************************
-      !TRIAL: 3- repeat trial 25
-      ! ********************************************************************************************************************************
-      !TRIAL: 4- repeat trial 19 
-      ! ********************************************************************************************************************************
-      !TRIAL: 5- repeat trial 20
-      ! ********************************************************************************************************************************
-      !TRIAL: 6- repeat trial 21
-      ! ********************************************************************************************************************************
-      !TRIAL: 7- repeat trial 22
-      ! ********************************************************************************************************************************
-      !TRIAL: 8- repeat trial 23, now with alpha_m,!NOTE: to get the alpha_m plot, rerun:1,2,3
-      ! ********************************************************************************************************************************
-      !NOTE: with the above trials, we can now generate all plots in sharanya's notes.
-      !REFER: https://github.com/gayathri2011067/MSc_Thesis/blob/main/resources/sharanya_notes.pdf
-      ! ********************************************************************************************************************************
-      ! !TRIAL:12
-      ! double precision, parameter :: R_alpha = 1.  !alpha_0
-      ! double precision, parameter :: R_omega = -20.     !-G
-      ! double precision, parameter :: R_k = 0
-      ! double precision, parameter :: R_U = 0
-      ! double precision, parameter :: f_para = -1.
-      ! ********************************************************************************************************************************
-      !TRIAL:21
-      ! double precision, parameter :: R_alpha = 1.5  !alpha_0
-      ! double precision, parameter :: R_omega = -20.     !-G
-      ! double precision, parameter :: R_k = 0
-      ! double precision, parameter :: R_U = 0.45
-      ! double precision, parameter :: f_para = 0.
-      
-        ! ********************************************************************************************************************************
-      !TRIAL:22
-      ! double precision, parameter :: R_alpha = 0.  !alpha_0
-      ! double precision, parameter :: R_omega = -20.     !-G
-      ! double precision, parameter :: R_k = 0
-      ! double precision, parameter :: R_U = 1.16
-      ! double precision, parameter :: f_para = -1.
-            ! ********************************************************************************************************************************
-      ! TRIAL:23
-      ! double precision, parameter :: R_alpha = 0.  !alpha_0
-      ! double precision, parameter :: R_omega = -30.     !-G
-      ! double precision, parameter :: R_k = 0
-      ! double precision, parameter :: R_U = 0.45
-      ! double precision, parameter :: f_para = 1.
-! ********************************************************************************************************************************
+      double precision, parameter :: tau_c = tau_c_dim/(h_dim**2./eta_dim)
+      double precision, parameter :: B_0 = B_0_dim/(B_0_dim)
+ 
 
-            !TRIAL:23
-      ! double precision, parameter :: R_alpha = 4.  !alpha_0
-      ! double precision, parameter :: R_omega = -20.     !-G
-      ! double precision, parameter :: R_k = 0
-      ! double precision, parameter :: R_U = 0.45
-      ! double precision, parameter :: f_para = 1.
-! ********************************************************************************************************************************
-      !TRIAL:1 1G-trying without the vishniac term
-      ! double precision, parameter :: R_alpha = 1.5  !alpha_0
-      ! double precision, parameter :: R_omega = -20.     !-G
-      ! double precision, parameter :: R_k = 0
-      ! double precision, parameter :: R_U = 0.45
-      ! double precision, parameter :: f_para = 0.
-! ********************************************************************************************************************************
-      !TRIAL:2 
-      double precision, parameter :: R_alpha = 0.  !alpha_0
-      double precision, parameter :: R_omega = -20.    !-G
+! double precision, parameter :: B_0 = 1.0
+
+
+!For the rest of the parameters, different trials were run, details as given below:    
+!********************************************************************************************************************************
+!MTA! figures>old folder
+      
+      !TRIAL:1--->High resolution,1A
+      !TRIAL:2--->Low resolution,1A
+      !TRIAL:3--->f=0,1G
+      !TRIAL:4--->2
+      !TRIAL:5--->1D
+      !TRIAL:6--->1A
+!********************************************************************************************************************************
+!MTA!figures
+
+!TRIAL:1____1A
+      double precision, parameter :: R_alpha = 1.5  
+      double precision, parameter :: R_omega = -20.
       double precision, parameter :: R_k = 0.
       double precision, parameter :: R_U = 0.45
       double precision, parameter :: f_para = 1.
       double precision, parameter :: c_tau = 1.
-! ********************************************************************************************************************************
-      !TRIAL:3
-      ! double precision, parameter :: R_alpha = 1.71  !alpha_0
-      ! double precision, parameter :: R_omega = -19.8     !-G
-      ! double precision, parameter :: R_k = 0.0
-      ! double precision, parameter :: R_U = 1.14
-      ! double precision, parameter :: f_para = 0.
-! ********************************************************************************************************************************
-      !TRIAL:4
-      ! double precision, parameter :: R_alpha = 1.71  !alpha_0
-      ! double precision, parameter :: R_omega = -19.8     !-G
+!********************************************************************************************************************************
+!TRIAL:2____1B
+      ! double precision, parameter :: R_alpha = 0.  
+      ! double precision, parameter :: R_omega = -20.
+      ! double precision, parameter :: R_k = 0.
+      ! double precision, parameter :: R_U = 1.16
+      ! double precision, parameter :: f_para = 1.
+      ! double precision, parameter :: c_tau = 1.
+!********************************************************************************************************************************
+!TRIAL:3____1C
+      ! double precision, parameter :: R_alpha = 0.  
+      ! double precision, parameter :: R_omega = -30.
+      ! double precision, parameter :: R_k = 0.
+      ! double precision, parameter :: R_U = 0.45
+      ! double precision, parameter :: f_para = 1.
+      ! double precision, parameter :: c_tau = 1.
+!********************************************************************************************************************************
+!TRIAL:4____1D
+      ! double precision, parameter :: R_alpha = 4.  
+      ! double precision, parameter :: R_omega = -20.
+      ! double precision, parameter :: R_k = 0.
+      ! double precision, parameter :: R_U = 0.45
+      ! double precision, parameter :: f_para = 1.
+      ! double precision, parameter :: c_tau = 1.
+!********************************************************************************************************************************
+!TRIAL:5____1E
+      ! double precision, parameter :: R_alpha = 0.  
+      ! double precision, parameter :: R_omega = -20.
+      ! double precision, parameter :: R_k = 0.
+      ! double precision, parameter :: R_U = 0.45
+      ! double precision, parameter :: f_para = 1.
+      ! double precision, parameter :: c_tau = 2.
+!********************************************************************************************************************************
+!TRIAL:6____1F
+      ! double precision, parameter :: R_alpha = 0.  
+      ! double precision, parameter :: R_omega = -20.
       ! double precision, parameter :: R_k = 0.3
-      ! double precision, parameter :: R_U = 0.0
+      ! double precision, parameter :: R_U = 0.
+      ! double precision, parameter :: f_para = 1.
+      ! double precision, parameter :: c_tau = 1.
+!********************************************************************************************************************************
+!TRIAL:7____1G
+      ! double precision, parameter :: R_alpha = 1.5  
+      ! double precision, parameter :: R_omega = -20.
+      ! double precision, parameter :: R_k = 0.
+      ! double precision, parameter :: R_U = 0.45
       ! double precision, parameter :: f_para = 0.
-! ********************************************************************************************************************************
-      !TRIAL:5
-      ! double precision, parameter :: R_alpha = 1.71  !alpha_0
-      ! double precision, parameter :: R_omega = -19.8     !-G
-      ! double precision, parameter :: R_k = 0.0
-      ! double precision, parameter :: R_U = 0.0
-      ! double precision, parameter :: f_para = 0.
-      
+      ! double precision, parameter :: c_tau = 1.
+!********************************************************************************************************************************
+!TRIAL:8____1H
+      ! double precision, parameter :: R_alpha = 0.
+      ! double precision, parameter :: R_omega = -20.
+      ! double precision, parameter :: R_k = 0.
+      ! double precision, parameter :: R_U = 0.45
+      ! double precision, parameter :: f_para = 0.34
+      ! double precision, parameter :: c_tau = 1.
+!********************************************************************************************************************************
+
+!python3 codes/compare_plots.py 1 "1A" 2 "1B" 3 "1C" 4 "1D" 5 "1E" 6 "1F" 7 "1G" 8 "1H" 
 
 
-      
+
+
+
+
+
+
+
+
+
+
+
+!********************************************************************************************************************************
+      double precision, parameter :: tau = c_tau*tau_c
       double precision, parameter :: Dynamo_number = R_alpha * R_omega
+
     end module parameters

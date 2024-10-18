@@ -34,15 +34,15 @@ contains
         !print xseed
         ! print*, "xseed=",xseed
         Bseed=0.001
-        rho_0 = 10.0
+        rho_0 = 1.0
         rho = rho_0*exp(-x**2)
         B_0 = sqrt(4.0*pi*rho_0)*U_0
         B_eq = B_0*0.82
         ! call init_random_seed
-        B_r = Bseed*exp(-x**2)*(1.-x**2)*B_0
-        B_phi =0.0!xseed*exp(-x**2)*(1.-x**2)
-        ! B_r = xseed*exp(-x**2)*(1.-x**2)
-        ! B_phi =xseed*exp(-x**2)*(1.-x**2)
+        ! B_r = Bseed*exp(-x**2)*(1.-x**2)*B_0
+        ! B_phi =0.0!xseed*exp(-x**2)*(1.-x**2)
+        B_r = xseed*exp(-x**2)*(1.-x**2)
+        B_phi =xseed*exp(-x**2)*(1.-x**2)
         
         
         ! B_r=10**(-3)*B_0*exp(-x**2)*(1.-x**2)

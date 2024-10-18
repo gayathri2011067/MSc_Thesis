@@ -72,7 +72,6 @@ with open(file_path,'r') as f:
 
 z=np.array(lines,dtype=float)
 np.savetxt(f'{data_save_path}/z_values.txt', z)
-
 # plt.plot(z,eta)
 # plt.xlabel('z')
 # plt.ylabel('eta')
@@ -97,7 +96,7 @@ try:
     plt.xlabel('z')
     plt.ylabel('alpha')
     plt.title('alpha vs z')
-
+    # plt.xlim(-15,15)
     plt.savefig(f'{fig_path}/alpha_vs_z.png')
     plt.close()
 except:
@@ -128,7 +127,7 @@ try:
     plt.close()
 except:
     print('Br_ini.txt or B_phi_ini.txt file not found')
-U=1.1631817616985978
+
 #import txt file
 filename1 = 'Br_final.txt'
 filename2 = 'B_phi_final.txt'
@@ -169,13 +168,13 @@ try:
     # Br_list=np.array(lines1,dtype=float)
     # Bphi_list=np.array(lines2,dtype=float)
     time_list=np.array(lines3,dtype=float)
-    
+    # print(time_list)
     np.savetxt(f'{data_save_path}/time.txt', time_list)
     np.savetxt(f'{data_save_path}/Br_final.txt', Br_list)
     np.savetxt(f'{data_save_path}/B_phi_final.txt', Bphi_list)
     # print(Br_list.shape)
-    plt.plot(z, Br_list[25], label='Br')
-    plt.plot(z, Bphi_list[25], label='Bphi')
+    plt.plot(z, Br_list[-1], label='Br')
+    plt.plot(z, Bphi_list[-1], label='Bphi')
     # print(Br_list[1])
     # print(Bphi_list[1])
     # plt.plot(z, Br_list[1], label='Br')
@@ -195,9 +194,10 @@ try:
 except:
     print('Br_final.txt or B_phi_final.txt or time.txt file not found')
 
-print(time_list)
+
 #plot of Br and Bphi at against time
 plt.plot(time_list, Br_list[:,25], label='Br')
+# print(time_list)
 plt.plot(time_list, Bphi_list[:,25], label='Bphi')
 plt.xlabel('time')
 plt.ylabel('Br, Bphi')
@@ -216,12 +216,13 @@ plt.close()
 B_strength = np.sqrt(Br_list**2 + Bphi_list**2)
 np.savetxt(f'{data_save_path}/B_strength.txt', B_strength)
 
-plt.plot(time_list, B_strength[:,25])
+plt.plot(time_list, B_strength[:,-1])
 plt.xlabel('time')
+plt.xlim(0,14)
 plt.ylabel('B_strength/B0')
 plt.title('B_strength vs time')
-plt.yscale('log')
-
+# plt.yscale('log')
+# plt.xlim(0,7)
 
 # plt.axhline(y=0.001, color='g', linestyle='--')
 # plt.axvline(x=2.5, color='r', linestyle='--')
@@ -244,22 +245,148 @@ try:
         alpha_list.append(curr)
     alpha_m=np.array(alpha_list,dtype=float)
     np.savetxt(f'{data_save_path}/alpha_m.txt', alpha_m)
+    n1= 5000
+    total_t= 25
+    t_val = 8.8
+    t_index = int(t_val * n1 / total_t)
 
-    n1 = 500
-    Nt = 50000
-    total_t = 50
-    n2 = total_t*Nt/n1
-    t_print = [10, 20, 30, 40, 50]
-    t_print = [int(t_val*n1/total_t) for t_val in t_print]
-
-    for t_val in t_print:
-        plt.plot(z, alpha_m[t_val - 1], label=f't={t_val*total_t/n1:.2f}') # t_val - 1 because the index starts from 0
+    plt.plot(z, alpha_m[t_index - 1], label=f't={t_val:.2f}')  # t_index - 1 because the index starts from 0
     plt.xlabel('z')
     plt.ylabel('alpha_m')
-    plt.title('alpha_m vs z')
- 
+    plt.title(f'alpha_m vs z at t={t_val:.2f}')
     plt.legend()
-    plt.savefig(f'{fig_path}/alpha_m_vs_z.png')
+    plt.savefig(f'{fig_path}/alpha_m_vs_z_t_{t_val:.2f}.png')
     plt.close()
 except:
     print('alpha_m.txt file not found')
+    #i have br_final in (t,z) array. want to plot a 2d heat map with z as y axis and time as x axis.
+    # Plot 2D heatmap of Br_final with time on x-axis and z on y-axis
+import plotly.io as pio
+pio.kaleido.scope.plotlyjs = "https://cdn.plot.ly/plotly-latest.min.js"
+
+import plotly.graph_objects as go
+
+fig = go.Figure()
+
+# # Add heatmap
+# fig.add_trace(go.Heatmap(
+#     z=Br_list.T,
+#     x=time_list,
+#     y=z,
+#     colorscale='Inferno',
+#     colorbar=dict(title='Br')
+# ))
+
+# Add contour lines
+fig.add_trace(go.Contour(
+    z=Br_list.T,
+    x=time_list,
+    y=z,
+    colorscale='inferno', # 'viridis', 'electric', 'inferno'
+    showscale=True,
+    contours=dict(
+        start=Br_list.min(),
+        end=Br_list.max(),
+        size=(Br_list.max() - Br_list.min()) / 40,
+        # coloring='lines',  # This avoids the color fills in the contour
+        # line=dict(color='black')  # This sets the contour lines to black
+        
+    )
+))
+
+fig.update_layout(
+    title='2D Heatmap of Br_final with Contour Lines',
+    xaxis_title='Time',
+    yaxis_title='z',
+    xaxis=dict(range=[9, 10]),
+    yaxis=dict(range=[-0.5, 0.5])
+)
+
+fig.write_image(f'{fig_path}/Br_final_heatmap_with_contours.png')
+
+
+
+
+
+
+
+
+
+fig = go.Figure()
+
+# # Add heatmap
+# fig.add_trace(go.Heatmap(
+#     z=Br_list.T,
+#     x=time_list,
+#     y=z,
+#     colorscale='Inferno',
+#     colorbar=dict(title='Br')
+# ))
+
+# Add contour lines
+fig.add_trace(go.Contour(
+    z=Bphi_list.T,
+    x=time_list,
+    y=z,
+    colorscale='inferno', # 'viridis', 'electric', 'inferno'
+    showscale=True,
+    contours=dict(
+        start=Bphi_list.min(),
+        end=Bphi_list.max(),
+        size=(Bphi_list.max() - Bphi_list.min()) / 40,
+        # coloring='lines',  # This avoids the color fills in the contour
+        # line=dict(color='black')  # This sets the contour lines to black
+        
+    )
+))
+
+fig.update_layout(
+    title='2D Heatmap of Br_final with Contour Lines',
+    xaxis_title='Time',
+    yaxis_title='z',
+    xaxis=dict(range=[9, 10]),
+    yaxis=dict(range=[-0.5, 0.5])
+)
+
+fig.write_image(f'{fig_path}/Bphi_final_heatmap_with_contours.png')
+
+
+
+
+fig = go.Figure()
+
+# # Add heatmap
+# fig.add_trace(go.Heatmap(
+#     z=Br_list.T,
+#     x=time_list,
+#     y=z,
+#     colorscale='Inferno',
+#     colorbar=dict(title='Br')
+# ))
+
+# Add contour lines
+fig.add_trace(go.Contour(
+    z=B_strength.T,
+    x=time_list,
+    y=z,
+    colorscale='inferno', # 'viridis', 'electric', 'inferno'
+    showscale=True,
+    contours=dict(
+        start=B_strength.min(),
+        end=B_strength.max(),
+        size=(B_strength.max() - B_strength.min()) / 40,
+        # coloring='lines',  # This avoids the color fills in the contour
+        # line=dict(color='black')  # This sets the contour lines to black
+        
+    )
+))
+
+fig.update_layout(
+    title='2D Heatmap of B with Contour Lines',
+    xaxis_title='Time',
+    yaxis_title='z',
+    xaxis=dict(range=[9, 10]),
+    yaxis=dict(range=[-0.5, 0.5])
+)
+
+fig.write_image(f'{fig_path}/B_heatmap_with_contours.png')

@@ -22,88 +22,88 @@ module timestepping
     contains
         
 
-        subroutine forward_difference
-            double precision, dimension(nx) :: temp_Br, temp_Bphi
+        ! subroutine forward_difference
+        !     double precision, dimension(nx) :: temp_Br, temp_Bphi
 
 
-            do i = nxghost+1,nxphys+nxghost
-                temp_Br(i) = B_r(i) - (beta/2)*(alpha_Bphi(i+1)-alpha_Bphi(i-1)) &
-                +alp*(B_r(i+1)-2*B_r(i)+B_r(i-1)) - (beta/2)*(Uz_Br(i+1) - Uz_Br(i-1))
-                temp_Bphi(i) = B_phi(i) - (beta/2)*(alpha_Br(i+1)-alpha_Br(i-1)) &
-                +alp*(B_phi(i+1)-2*B_phi(i)+B_phi(i-1)) - (beta/2)*(Uz_Bphi(i+1) - Uz_Bphi(i-1))&
-                +G*B_r(i)
+        !     do i = nxghost+1,nxphys+nxghost
+        !         temp_Br(i) = B_r(i) - (beta/2)*(alpha_Bphi(i+1)-alpha_Bphi(i-1)) &
+        !         +alp*(B_r(i+1)-2*B_r(i)+B_r(i-1)) - (beta/2)*(Uz_Br(i+1) - Uz_Br(i-1))
+        !         temp_Bphi(i) = B_phi(i) - (beta/2)*(alpha_Br(i+1)-alpha_Br(i-1)) &
+        !         +alp*(B_phi(i+1)-2*B_phi(i)+B_phi(i-1)) - (beta/2)*(Uz_Bphi(i+1) - Uz_Bphi(i-1))&
+        !         +G*B_r(i)
 
                 
-            end do
-            B_r = temp_Br
-            B_phi = temp_Bphi
-            t = t + dt
-        end subroutine forward_difference
+        !     end do
+        !     B_r = temp_Br
+        !     B_phi = temp_Bphi
+        !     t = t + dt
+        ! end subroutine forward_difference
 
-        subroutine backward_difference
-            ! character(len=30) :: ghost_zone_type = 'anti-symmetric'
+        ! subroutine backward_difference
+        !     ! character(len=30) :: ghost_zone_type = 'anti-symmetric'
 
-            double precision, dimension(nx) :: temp_Br, temp_Bphi
-            ! call impose_boundary_conditions(B_r, ghost_zone_type)
-            ! call impose_boundary_conditions(B_phi, ghost_zone_type)
-            ! call construct_grid
-            ! alpha_cap2 = alpha_cap/(1+(B_r**2+B_phi**2)/B_eq**2)
-            ! alpha_Bphi = alpha_cap2*B_phi
-            ! alpha_Br = alpha_cap2*B_r
-            ! Uz_Br = B_r*U_z_cap
-            ! Uz_Bphi = B_phi*U_z_cap
+        !     double precision, dimension(nx) :: temp_Br, temp_Bphi
+        !     ! call impose_boundary_conditions(B_r, ghost_zone_type)
+        !     ! call impose_boundary_conditions(B_phi, ghost_zone_type)
+        !     ! call construct_grid
+        !     ! alpha_cap2 = alpha_cap/(1+(B_r**2+B_phi**2)/B_eq**2)
+        !     ! alpha_Bphi = alpha_cap2*B_phi
+        !     ! alpha_Br = alpha_cap2*B_r
+        !     ! Uz_Br = B_r*U_z_cap
+        !     ! Uz_Bphi = B_phi*U_z_cap
 
-            ! call spatial_derivative(B_r,2,dBr,d2Br)
-            ! call spatial_derivative(B_phi,2,dBphi,d2Bphi)
-            ! call spatial_derivative(alpha_Br,2,d_alpha_Br,d2_alpha_Br)
-            ! call spatial_derivative(alpha_Bphi,2,d_alpha_Bphi,d2_alpha_Bphi)
-            ! call spatial_derivative(Uz_Br,2,d_Uz_Br,d2_Uz_Br)
-            ! call spatial_derivative(Uz_Bphi,2,d_Uz_Bphi,d2_Uz_Bphi)
+        !     ! call spatial_derivative(B_r,2,dBr,d2Br)
+        !     ! call spatial_derivative(B_phi,2,dBphi,d2Bphi)
+        !     ! call spatial_derivative(alpha_Br,2,d_alpha_Br,d2_alpha_Br)
+        !     ! call spatial_derivative(alpha_Bphi,2,d_alpha_Bphi,d2_alpha_Bphi)
+        !     ! call spatial_derivative(Uz_Br,2,d_Uz_Br,d2_Uz_Br)
+        !     ! call spatial_derivative(Uz_Bphi,2,d_Uz_Bphi,d2_Uz_Bphi)
 
-            do i = nxghost+1,nxphys+nxghost
-                temp_Br(i) = B_r(i) + (beta/2)*(alpha_Bphi(i)-alpha_Bphi(i-2)) &
-                -alp*(B_r(i+1)-2*B_r(i)+B_r(i-1)) + (beta/2)*(Uz_Br(i) - Uz_Br(i-2))
-                temp_Bphi(i) = B_phi(i) - (beta/2)*(alpha_Br(i)-alpha_Br(i-2)) &
-                -alp*(B_phi(i+1)-2*B_phi(i)+B_phi(i-1)) + (beta/2)*(Uz_Bphi(i) - Uz_Bphi(i-2))&
-                -G*B_r(i)
+        !     do i = nxghost+1,nxphys+nxghost
+        !         temp_Br(i) = B_r(i) + (beta/2)*(alpha_Bphi(i)-alpha_Bphi(i-2)) &
+        !         -alp*(B_r(i+1)-2*B_r(i)+B_r(i-1)) + (beta/2)*(Uz_Br(i) - Uz_Br(i-2))
+        !         temp_Bphi(i) = B_phi(i) - (beta/2)*(alpha_Br(i)-alpha_Br(i-2)) &
+        !         -alp*(B_phi(i+1)-2*B_phi(i)+B_phi(i-1)) + (beta/2)*(Uz_Bphi(i) - Uz_Bphi(i-2))&
+        !         -G*B_r(i)
 
-            end do
-            B_r = temp_Br
-            B_phi = temp_Bphi
-            t = t + dt
+        !     end do
+        !     B_r = temp_Br
+        !     B_phi = temp_Bphi
+        !     t = t + dt
 
-        end subroutine backward_difference
+        ! end subroutine backward_difference
 
-        subroutine central_difference
-            double precision, dimension(nx) :: temp_Br, temp_Bphi
-            ! character(len=30) :: ghost_zone_type = 'anti-symmetric'
+        ! subroutine central_difference
+        !     double precision, dimension(nx) :: temp_Br, temp_Bphi
+        !     ! character(len=30) :: ghost_zone_type = 'anti-symmetric'
 
-            ! call impose_boundary_conditions(B_r, ghost_zone_type)
-            ! call impose_boundary_conditions(B_phi, ghost_zone_type)
-            ! call impose_boundary_conditions(old_Br, ghost_zone_type)
-            ! call impose_boundary_conditions(old_Bphi, ghost_zone_type)
-            ! call construct_grid
-            ! alpha_cap2 = alpha_cap/(1+(B_r**2+B_phi**2)/B_eq**2)
-            ! alpha_Bphi = alpha_cap2*B_phi
-            ! alpha_Br = alpha_cap2*B_r
-            ! Uz_Br = B_r*U_z_cap
-            ! Uz_Bphi = B_phi*U_z_cap
+        !     ! call impose_boundary_conditions(B_r, ghost_zone_type)
+        !     ! call impose_boundary_conditions(B_phi, ghost_zone_type)
+        !     ! call impose_boundary_conditions(old_Br, ghost_zone_type)
+        !     ! call impose_boundary_conditions(old_Bphi, ghost_zone_type)
+        !     ! call construct_grid
+        !     ! alpha_cap2 = alpha_cap/(1+(B_r**2+B_phi**2)/B_eq**2)
+        !     ! alpha_Bphi = alpha_cap2*B_phi
+        !     ! alpha_Br = alpha_cap2*B_r
+        !     ! Uz_Br = B_r*U_z_cap
+        !     ! Uz_Bphi = B_phi*U_z_cap
 
 
-            do i = nxghost+1,nxphys+nxghost
-                temp_Br(i) = (1+2*alp)*((beta)*(alpha_Bphi(i+1)-alpha_Bphi(i-1)) &
-                +2*alp*(B_r(i+1)+B_r(i-1)) - (beta)*(Uz_Br(i+1) - Uz_Br(i-1)))+old_Br(i)
+        !     do i = nxghost+1,nxphys+nxghost
+        !         temp_Br(i) = (1+2*alp)*((beta)*(alpha_Bphi(i+1)-alpha_Bphi(i-1)) &
+        !         +2*alp*(B_r(i+1)+B_r(i-1)) - (beta)*(Uz_Br(i+1) - Uz_Br(i-1)))+old_Br(i)
 
-                temp_Bphi(i) = (1+2*alp+G)*((beta)*(alpha_Br(i+1)-alpha_Br(i-1)) &
-                +2*alp*(B_phi(i+1)+B_phi(i-1)) - (beta)*(Uz_Bphi(i+1) - Uz_Bphi(i-1)))+old_Bphi(i) !NOT_SURE
+        !         temp_Bphi(i) = (1+2*alp+G)*((beta)*(alpha_Br(i+1)-alpha_Br(i-1)) &
+        !         +2*alp*(B_phi(i+1)+B_phi(i-1)) - (beta)*(Uz_Bphi(i+1) - Uz_Bphi(i-1)))+old_Bphi(i) !NOT_SURE
                 
 
-            end do
-            B_r = temp_Br
-            B_phi = temp_Bphi
-            t = t + dt
+        !     end do
+        !     B_r = temp_Br
+        !     B_phi = temp_Bphi
+        !     t = t + dt
 
-        end subroutine central_difference
+        ! end subroutine central_difference
 
         ! subroutine RK4_new
         !     character(len=30) :: ghost_zone_type = 'anti-symmetric'
@@ -231,73 +231,80 @@ module timestepping
             ! B_phi=Bphi_f  ! 
             ! t = t +  dt
 
-            call MTA_nvf(B_r, B_phi, Fr, Fphi,alpha_m, Er, Ephi)
+            call MTA_nvf(B_r, B_phi, Fr, Fphi, Er, Ephi, alpha_m)
             !STEP 1 !NOTE: have to call spatial derivatives with this new f and g
             k1r = dt * dBrdt
             k1phi = dt * dBphidt
             k1Fr = dt * dFrdt
             k1Fphi = dt * dFphidt
-            k1alpha = dt * dalpdt
             k1Er = dt * dErdt
             k1Ephi = dt * dEphidt
+            k1alpha = dt * dalpdt
+
             B_r = B_r + g_1 * k1r
             B_phi = B_phi + g_1 * k1phi
             Fr = Fr + g_1 * k1Fr
             Fphi = Fphi + g_1 * k1Fphi
-            alpha_m = alpha_m + g_1 * k1alpha
             Er = Er + g_1 * k1Er
             Ephi = Ephi + g_1 * k1Ephi
+            alpha_m = alpha_m + g_1 * k1alpha
+
             Br_g = B_r + z_1 * k1r
             Bphi_g = B_phi + z_1 * k1phi
             Fr_g = Fr + z_1 * k1Fr
             Fphi_g = Fphi + z_1 * k1Fphi
-            alpha_m_g = alpha_m + z_1 * k1alpha
             Er_g = Er + z_1 * k1Er
             Ephi_g = Ephi + z_1 * k1Ephi
+            alpha_m_g = alpha_m + z_1 * k1alpha
+
             ! B_r=Br_f       !----> !NOTE: added this step because I wanted f to be carried to next step
             ! B_phi=Bphi_f  ! 
             
-            call MTA_nvf(B_r, B_phi, Fr, Fphi,alpha_m, Er, Ephi)
+            call MTA_nvf(B_r, B_phi, Fr, Fphi,Er, Ephi, alpha_m)
+
             k2r = dt * dBrdt
             k2phi = dt * dBphidt
             k2Fr = dt * dFrdt
             k2Fphi = dt * dFphidt
-            k2alpha = dt * dalpdt
             k2Er = dt * dErdt
             k2Ephi = dt * dEphidt
-            B_r = B_r + g_2 * k2r
-            B_phi = B_phi + g_2 * k2phi
-            Fr = Fr + g_2 * k2Fr
-            Fphi = Fphi + g_2 * k2Fphi
-            alpha_m = alpha_m + g_2 * k2alpha
-            Er = Er + g_2 * k2Er
-            Ephi = Ephi + g_2 * k2Ephi
+            k2alpha = dt * dalpdt
+
+            B_r = Br_g + g_2 * k2r
+            B_phi = Bphi_g + g_2 * k2phi
+            Fr = Fr_g + g_2 * k2Fr
+            Fphi = Fphi_g + g_2 * k2Fphi
+            Er = Er_g + g_2 * k2Er
+            Ephi = Ephi_g + g_2 * k2Ephi
+            alpha_m = alpha_m_g + g_2 * k2alpha
+
             Br_g = B_r + z_2 * k2r
             Bphi_g = B_phi + z_2 * k2phi
             Fr_g = Fr + z_2 * k2Fr
             Fphi_g = Fphi + z_2 * k2Fphi
-            alpha_m_g = alpha_m + z_2 * k2alpha
             Er_g = Er + z_2 * k2Er
             Ephi_g = Ephi + z_2 * k2Ephi
+            alpha_m_g = alpha_m + z_2 * k2alpha
             ! B_r=Br_f       !----> !NOTE: added this step because I wanted f to be carried to next step
             ! B_phi=Bphi_f  !
 
             ! 3rd step
-            call MTA_nvf(B_r, B_phi, Fr, Fphi,alpha_m, Er, Ephi)
+            call MTA_nvf(B_r, B_phi, Fr, Fphi,Er, Ephi, alpha_m)
             k3r = dt * dBrdt
             k3phi = dt * dBphidt
             k3Fr = dt * dFrdt
             k3Fphi = dt * dFphidt
-            k3alpha = dt * dalpdt
             k3Er = dt * dErdt
             k3Ephi = dt * dEphidt
-            B_r = B_r + g_3 * k3r
-            B_phi = B_phi + g_3 * k3phi
-            Fr = Fr + g_3 * k3Fr
-            Fphi = Fphi + g_3 * k3Fphi
-            alpha_m = alpha_m + g_3 * k3alpha
-            Er = Er + g_3 * k3Er
-            Ephi = Ephi + g_3 * k3Ephi
+            k3alpha = dt * dalpdt
+
+            B_r = Br_g + g_3 * k3r
+            B_phi = Bphi_g + g_3 * k3phi
+            Fr = Fr_g + g_3 * k3Fr
+            Fphi = Fphi_g + g_3 * k3Fphi
+            Er = Er_g + g_3 * k3Er
+            Ephi = Ephi_g + g_3 * k3Ephi
+            alpha_m = alpha_m_g + g_3 * k3alpha
             ! B_r=Br_f       !----> !NOTE: added this step because I wanted f to be carried to next step
             ! B_phi=Bphi_f  !
             t = t +  dt

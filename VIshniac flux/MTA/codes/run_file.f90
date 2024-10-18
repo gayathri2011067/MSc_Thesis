@@ -65,7 +65,7 @@ program run_all
     ! Write the values to the file
     do i = 1, nx
         write(10, '(F12.8)') eta_fz(i)
-        write(17, '(F12.8)') x(i)
+        write(17, '(F12.8)') x(i) * h_dim
         write(19, '(F12.8)') alpha_k(i)
         write(20, '(F12.8)') B_r(i)
         write(21, '(F12.8)') B_phi(i)
@@ -162,7 +162,7 @@ program run_all
     ! print*, 'B_r=', B_r
     write (22, *) B_r
     write (23, *) B_phi
-    write (24, *) t
+    write (24, *) t*(h_dim**2./eta_dim)
     write (25, *) alpha_m
   end do
   ! ************************************************************************
@@ -178,7 +178,7 @@ program run_all
   ! print*, 'Nt=', Nt
   ! print*, 'n1=', n1
   ! print*, 'total_t=', total_t
-  ! print*, 't=', t
+  print*, 't=', t
   ! print*, 'first=', first
     print *, 'File sucessfully run'
 
