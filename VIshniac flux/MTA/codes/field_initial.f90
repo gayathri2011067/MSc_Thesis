@@ -9,11 +9,12 @@ module initial_field
   use alpha_profile
   use velocity_profile
   use seed
+  use spatial_derivatives
 implicit none
 
 
 double precision, dimension(nx) :: B_r, B_phi, dBr, d2Br, dBphi, d2Bphi, B_eq, rho, rho_0
-double precision, dimension(nx) :: Fr, Fphi, Er, Ephi
+double precision, dimension(nx) :: Fr, Fphi, Er, Ephi, Tee, Phii, dphii, d2phii
 double precision, dimension(nx) :: alpha_Br, alpha_Bphi, Uz_Br, Uz_Bphi,d_alpha_Br!, B_0
 double precision, dimension(nx) :: d2_alpha_Br,d_alpha_Bphi,d2_alpha_Bphi,d_Uz_Br
 double precision, dimension(nx) :: d2_Uz_Br,d_Uz_Bphi,d2_Uz_Bphi, old_Br, old_Bphi
@@ -33,6 +34,7 @@ contains
         call construct_alpha_profile
         call construct_velocity_profile
         call init_random_seed
+        call spatial_derivative(phii, 6, dphii, d2phii)
         !print xseed
         ! print*, "xseed=",xseed
         ! B_0=1.0
@@ -44,11 +46,14 @@ contains
         B_eq = sqrt(4.0*pi*rho)*small_u
 
 
-        ! B_r = xseed*exp(-x**2)*(1.-x**2)*Bseed
-        ! B_phi = xseed*exp(-x**2)*(1.-x**2)*Bseed
+        B_r = xseed*exp(-x**2)*(1.-x**2)*Bseed
+       B_phi = -xseed*exp(-x**2)*(1.-x**2)*Bseed
 
-        B_r = xseed*exp((-x**2)/2)*(1./sqrt(2*pi))*Bseed
-        B_phi = -xseed*exp((-x**2)/2)*(1./sqrt(2*pi))*Bseed
+        ! phii = xseed*exp((-x**2)/2)*(1./sqrt(2*pi))*Bseed
+        ! Tee = xseed*exp((-x**2)/2)*(1./sqrt(2*pi))*Bseed
+
+        ! B_phi = Tee/(x+0.01)
+        ! B_r = -dphii/(x+0.01)
 
         Fr=0.0
         Fphi=0.0

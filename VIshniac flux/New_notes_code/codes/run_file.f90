@@ -3,6 +3,7 @@ program run_all
     use alpha_profile
     use velocity_profile
     use initial_field
+    use seed
     use parameters
     use time_grid
     use physical_grid
@@ -16,10 +17,8 @@ program run_all
     implicit none
 
     integer :: kk, j
-    double precision, dimension(nx) :: Br_pot, B_phi_pot,derr_phi,no
     character(len=30) :: data_path, filename, xfile, omegafile, alphafile, Br_ini_file,&
-    B_r_final_file, B_phi_ini_file, B_phi_final_file, time_file, alpham_final_file,&
-    Phi_final_file, T_final_file
+    B_r_final_file, B_phi_ini_file, B_phi_final_file, time_file, alpham_final_file
 
     ! Call subroutine to construct the physical grid
     call construct_grid
@@ -29,12 +28,11 @@ program run_all
     call construct_omega_profile
     call construct_alpha_profile
     call field_initialization
-    print*,'radius',radius
-    print*,'t gyr',t_d_dim*total_t
+
 
     ! Define the output file name
     data_path = '../run_files/'
-    filename =  'eta_fz_values.txt'
+    filename =  'eta_dyn_values.txt'
     xfile=  'z_values.txt'
     omegafile=  'omega_values.txt'
     alphafile=  'alpha_values.txt'
@@ -42,10 +40,9 @@ program run_all
     B_phi_ini_file=  'B_phi_ini.txt'
     B_r_final_file=  'Br_final.txt'
     B_phi_final_file=  'B_phi_final.txt'
-    Phi_final_file=  'Phi_final.txt'
-    T_final_file=  'T_final.txt'
     time_file=  'time.txt'
     alpham_final_file=  'alpham_final.txt'
+    print *, "Computational time in Gyr = ", total_t * t_d_dim
 
     ! Open the file for writing
     open(unit=10, file=trim(data_path) // filename)
@@ -53,12 +50,10 @@ program run_all
     open(unit=19, file=trim(data_path) // alphafile)
     open(unit=20, file=trim(data_path) // Br_ini_file)
     open(unit=21, file=trim(data_path) // B_phi_ini_file)
-    open(unit=22, file=trim(data_path) // Phi_final_file)
-    open(unit=23, file=trim(data_path) // T_final_file)
+    open(unit=22, file=trim(data_path) // B_r_final_file)
+    open(unit=23, file=trim(data_path) // B_phi_final_file)
     open(unit=24, file=trim(data_path) // time_file)
     open(unit=25, file=trim(data_path) // alpham_final_file)
-    open(unit=26, file=trim(data_path) // B_r_final_file)
-    open(unit=27, file=trim(data_path) // B_phi_final_file)
     ! open(unit=10, file=filename)
     ! open(unit=17, file=xfile)
     ! open(unit=19, file=alphafile)
@@ -69,10 +64,11 @@ program run_all
     ! open(unit=24, file=time_file)
     ! Write the values to the file
     do i = 1, nx
-        write(10, '(F12.8)') eta_fz(i)
-        write(17, '(F12.8)') x(i)
+        write(10, '(F12.8)') eta_dyn(i)
+        write(17, '(F12.8)') x(i)! * h_dim
         write(19, '(F12.8)') alpha_k(i)
         write(20, '(F12.8)') B_r(i)
+
         write(21, '(F12.8)') B_phi(i)
     end do
 
@@ -165,15 +161,9 @@ program run_all
 
     end do
     ! print*, 'B_r=', B_r
-    call spatial_derivative(phi,6, derr_phi,no)
-    B_phi_pot=T_torr/radius
-    Br_pot=-derr_phi/radius
-
-    write (22, *) phi
-    write (23, *) T_torr
-    write(26,*) Br_pot
-    write(27,*) B_phi_pot
-    write (24, *) t
+    write (22, *) B_r/B_0
+    write (23, *) B_phi/B_0
+    write (24, *) t!*(h_dim**2./(h_dim**2./t_d_dim))
     write (25, *) alpha_m
   end do
   ! ************************************************************************
@@ -184,15 +174,13 @@ program run_all
     close(23)
     close(24)
     close(25)
-    close(26)
-    close(27)
   ! print*, 'n2=', n2
   ! print*, 'dt=', dt
   ! print*, 'Nt=', Nt
   ! print*, 'n1=', n1
   ! print*, 'total_t=', total_t
-  ! print*, 't=', t
+  print*, 't=', t
   ! print*, 'first=', first
     print *, 'File sucessfully run'
-print*,radius
+
 end program run_all

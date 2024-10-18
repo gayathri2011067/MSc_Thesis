@@ -31,7 +31,7 @@ module parameters
       double precision, parameter :: G_dim = -45.6*s_Gyr/km_kpc   ! km/s.kpc --> 1/Gyr!REVIEW: why not use the above line
       double precision, parameter :: alpha_0_dim = 1.50 ! kpc/Gyr
       double precision, parameter :: small_u_dim = 10*s_Gyr/km_kpc ! km/s
-      double precision, parameter :: k_dim = 0.1*s_Gyr/km_kpc !km.kpc/s --> kpc**2/Gyr
+      double precision, parameter :: k_dim = 0.3*s_Gyr/km_kpc !km.kpc/s --> kpc**2/Gyr
       double precision, parameter :: R_dim = 20.!kpc
       double precision, parameter :: z_i_dim = -h_dim!kpc
       double precision, parameter :: z_f_dim = +h_dim !kpc
@@ -71,6 +71,7 @@ module parameters
 !********************************************************************************************************************************
 !MTA! figures>old folder
       
+
       !TRIAL:1--->High resolution,1A
       !TRIAL:2--->Low resolution,1A
       !TRIAL:3--->f=0,1G
@@ -80,13 +81,13 @@ module parameters
 !********************************************************************************************************************************
 !MTA!figures
 
-!TRIAL:1____1A
-      double precision, parameter :: R_alpha = 1.5  
-      double precision, parameter :: R_omega = -20.
-      double precision, parameter :: R_k = 0.
-      double precision, parameter :: R_U = 0.45
-      double precision, parameter :: f_para = 1.
-      double precision, parameter :: c_tau = 1.
+! TRIAL:1____1A
+      ! double precision, parameter :: R_alpha = 1.5  
+      ! double precision, parameter :: R_omega = -20.
+      ! double precision, parameter :: R_k = 0.
+      ! double precision, parameter :: R_U = 0.45
+      ! double precision, parameter :: f_para = 1.
+      ! double precision, parameter :: c_tau = 1.
 !********************************************************************************************************************************
 !TRIAL:2____1B
       ! double precision, parameter :: R_alpha = 0.  
@@ -97,12 +98,12 @@ module parameters
       ! double precision, parameter :: c_tau = 1.
 !********************************************************************************************************************************
 !TRIAL:3____1C
-      ! double precision, parameter :: R_alpha = 0.  
-      ! double precision, parameter :: R_omega = -30.
-      ! double precision, parameter :: R_k = 0.
-      ! double precision, parameter :: R_U = 0.45
-      ! double precision, parameter :: f_para = 1.
-      ! double precision, parameter :: c_tau = 1.
+      double precision, parameter :: R_alpha = 0.  
+      double precision, parameter :: R_omega = -20.
+      double precision, parameter :: R_k = 0.
+      double precision, parameter :: R_U = 0.45
+      double precision, parameter :: f_para = 1.
+      double precision, parameter :: c_tau = 1.
 !********************************************************************************************************************************
 !TRIAL:4____1D
       ! double precision, parameter :: R_alpha = 4.  

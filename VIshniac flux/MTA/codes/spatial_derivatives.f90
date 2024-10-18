@@ -30,7 +30,15 @@ contains
         do i = 1, nxghost
             fun(i) = 2.*fun(nxghost+1) -fun(2*(nxghost+1)-i)  !Relative antisymmetric   (Specify alpha_m in ghost zones)
             fun(nx+1-i) = 2.*fun(nx+1-(nxghost+1)) - fun(nx+1-2*(nxghost+1)+i)
+            !make value=0 at the boundary
+
+
+
         end do
+        !make value 0 at boundary cells ONLY for Rk neq 0
+        ! fun(nxghost+1)=0.
+        ! fun(nx+1-nxghost)=0.
+
       case ('none')
         do i=1,nxghost
           fun(i) = fun(i)

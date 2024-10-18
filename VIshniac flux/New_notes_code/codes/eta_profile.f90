@@ -7,16 +7,19 @@ module eta_profile
 !
   implicit none
 !
-  double precision, dimension(nx) :: eta_fz 
-  double precision, parameter :: eta_0 = 1 ! dimensionless
-  double precision, parameter :: eta_1 = 0.95
+  double precision, dimension(nx) :: eta_dyn_dim, eta_dyn
+
   
 
 ! 
 contains
     subroutine construct_eta_profile
 
-        eta_fz=eta_0*(1-eta_1*exp(-(x)**2))
+    ! eta_dyn_dim=(1.0/3.0 * tau_dim )*u_zero_dim**2 *exp((x*h_dim)**2)
+    ! eta_dyn=eta_dyn_dim/(h_dim**2/t_d_dim)
+      eta_dyn=(1.0/3.0 * tau )*u_zero**2 *exp(x**2)
+      
+
 
     end subroutine construct_eta_profile
 !

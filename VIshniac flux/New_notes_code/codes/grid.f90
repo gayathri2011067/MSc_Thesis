@@ -3,16 +3,17 @@ module time_grid
   use parameters
   implicit none
   
-  integer, parameter :: Nt= 500000.  !points per diffusion time
-  integer, parameter :: n1= 500.  !Number of snapshots
-  double precision, parameter :: total_t= 21. !unit diffusion time
+  integer, parameter :: Nt= 50000.  !points per diffusion time
+  integer, parameter :: n1= 5000.  !Number of snapshots
+  double precision, parameter :: total_t= 25. !unit diffusion time
   integer :: n2 = total_t*Nt/n1!Number of timesteps between snapshots
   double precision, parameter :: dt= 1./Nt !time step
   double precision :: t=0.
   double precision :: first=0.  !for Runge-Kutta routine
-
+  
 
 end module time_grid
+
 
 
 !**************************************************************************************************************************************************
@@ -47,15 +48,14 @@ module make_a_grid
 
     ! integer :: i
 
-    double precision, parameter :: len= 2.*h  
-    ! double precision, dimension(nx) :: space
+    double precision, parameter :: len= 2.*h
 
     dx=len/(nxphys-1)  !x corresponds to z
     alp=dt/dx**2  !alpha for finite difference scheme
     beta= dt/dx !beta for fin diff 
 
     do i=1,nx
-      x(i)= -(h +nxghost*dx) +(i-1)*dx !+0.01 !NOTE:+0.01 to avoid 0
+      x(i)= -(h+nxghost*dx) +(i-1)*dx !+0.01 !NOTE:+0.01 to avoid 0
       x(i)= x(i) !dimensionless now
     enddo
   endsubroutine construct_grid

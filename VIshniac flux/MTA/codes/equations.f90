@@ -190,8 +190,8 @@ module equations
       dEphidt = (1./tau) * ((alpha_total*B_phi_dummy) - (dBr) - Ephi_dummy)
 
       dalpdt = (-2./(tau_c*3.)) * ((Er_dummy*B_r_dummy + Ephi_dummy*B_phi_dummy)/(B_eq**2) +&
-      alpha_m_dummy*R_m_inv + vishniac_term) - alpha_m_dummy*der_u - U_z*d_alpha_m +&
-      R_k*d2_alpha_m
+      alpha_m_dummy*R_m_inv + vishniac_term) - alpha_m_dummy*der_u - U_z*d_alpha_m + R_k*d2_alpha_m
+      
 
 
 
