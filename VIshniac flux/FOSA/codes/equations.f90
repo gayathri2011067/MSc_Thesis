@@ -240,17 +240,16 @@ module equations
       call spatial_derivative(U_z, 6, der_u, d_sq_u)
 
 
-      vishniac_term = (((2.*l)/(3.))**2) * f_para * R_omega * x*exp(x**2)!(((2.*l)/(3.))**2) * f_para * R_omega * x!(-2d0/3d0*tau_c)*((2d0*l)/(3d0*h))**2*
-       
+        vishniac_term = (((2.*l)/(3.))**2) * f_para * R_omega * x*exp(x**2)!(((2.*l)/(3.))**2) * f_para * R_omega * x!(-2d0/3d0*tau_c)*((2d0*l)/(3d0*h))**2*
 
-      dBrdt = -d_alpha_Bphi +eta*d2Br - d_Uz_Br
+        dBrdt = -d_alpha_Bphi +eta*d2Br - d_Uz_Br
 
-      dBphidt = R_omega*B_r_dummy+eta*d2Bphi-d_Uz_Bphi +d_alpha_Br
+        dBphidt = R_omega*B_r_dummy+eta*d2Bphi-d_Uz_Bphi +d_alpha_Br
 
 
-      dalpdt =    (-2./(3.*tau))*((alpha_total)*(B_r_dummy**2+B_phi_dummy**2)/B_eq**2&
-      - eta*(B_phi_dummy*dbr-B_r_dummy*dBphi)/B_eq**2+ R_m_inv*alpha_m + vishniac_term)&
-     - alpha_m_dummy*der_u-U_z*d_alpha_m + eta*R_k*d2_alpha_m
+        dalpdt =    (-2./(3.*tau))*((alpha_total)*(B_r_dummy**2+B_phi_dummy**2)/B_eq**2&
+        - eta*(B_phi_dummy*dbr-B_r_dummy*dBphi)/B_eq**2+ R_m_inv*alpha_m + vishniac_term)&
+        - alpha_m_dummy*der_u-U_z*d_alpha_m + eta*R_k*d2_alpha_m
 
 
 

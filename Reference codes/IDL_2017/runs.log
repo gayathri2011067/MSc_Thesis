@@ -1,0 +1,687 @@
+NewVishniacFlux_001
+  f=+0.1
+  R_alpha=0.
+
+NewVishniacFlux_002
+  f=-0.001
+  R_alpha=1.
+  up to t=20
+
+NewVishniacFlux_003
+  f=-0.001
+  R_alpha=1.
+  up to t=50
+  B0=3.e-5
+
+NewVishniacFlux_004
+  f=-0.001
+  R_alpha=1.
+  up to t=50
+  B0=1.e-5
+
+NewVishniacFlux_005
+  f=17./45
+  R_omega=-20.
+  R_alpha=0.
+  U0=0.
+  up to t=30
+  B0=1.e-2
+  tau=0.
+
+NewVishniacFlux_006
+  f=17./45
+  R_omega=-20.
+  R_alpha=0.
+  U0=0.
+  up to t=30
+  B0=1.e-2
+  tau=0.
+  with time double precision
+
+NewVishniacFlux_007
+  f=17./45
+  R_omega=-20.
+  R_alpha=1.5
+  U0=0.
+  up to t=30
+  B0=1.e-2
+  tau=0.
+  with time double precision
+
+NewVishniacFlux_008
+  f=17./45
+  R_omega=-20.
+  R_alpha=1.5
+  U0=0.45
+  up to t=30
+  B0=1.e-2
+  tau=0.
+  with time double precision
+
+NewVishniacFlux_009
+  f=17./45
+  R_omega=-20.
+  R_alpha=1.5
+  U0=0.
+  up to t=30
+  B0=1.e-2
+  tau=l0/u0
+  with time double precision
+
+NewVishniacFlux_010
+  f=0.
+  R_omega=-20.
+  R_alpha=1.5
+  U0=0.45
+  up to t=30
+  B0=1.e-2
+  tau=0.
+  with time double precision
+
+NewVishniacFlux_011
+  f=17./45
+  R_omega=-20.
+  R_alpha=1.5
+  U0=0.
+  up to t=30
+  B0=1.e-2
+  tau=0.
+  with time double precision
+  with new changes to code, as a check (compare with NewVishniacFlux_007)
+
+NewVishniacFlux_012
+  f=N/A
+  R_omega=-20.
+  R_alpha=1.5
+  U0=0.
+  up to t=30
+  B0=1.e-2
+  tau=0.
+  with time double precision
+  now with new expression for Vishniac flux taking rho to vary with z instead of u
+
+NewVishniacFlux_013
+  f=N/A
+  R_omega=-20.
+  R_alpha=1.5
+  U0=0.45
+  up to t=30
+  B0=1.e-2
+  tau=0.
+  with time double precision
+  now with new expression for Vishniac flux taking rho to vary with z instead of u
+
+NewVishniacFlux_014
+  f=0.
+  R_omega=-20.
+  R_alpha=1.5
+  U0=0.45
+  up to t=30
+  B0=1.e-2
+  tau=0.
+  with time double precision
+  now with new expression for Vishniac flux taking rho to vary with z instead of u
+
+NewVishniacFlux_015
+  f=1.
+  R_omega=-20.
+  R_alpha=1.5
+  U0=0.
+  up to t=30
+  B0=1.e-2
+  tau=0.
+  kappa=0.3
+  with time double precision
+  now with new expression for Vishniac flux taking rho to vary with z instead of u
+
+NewVishniacFlux_016
+  f=1.
+  R_omega=-20.
+  R_alpha=1.5
+  U0=0.45
+  up to t=30
+  B0=1.e-2
+  tau=0.
+  kappa=0.3
+  with time double precision
+  now with new expression for Vishniac flux taking rho to vary with z instead of u
+
+NewVishniacFlux_017
+  f=1.
+  R_omega=-20.
+  R_alpha=1.5
+  U0=0.05
+  up to t=30
+  B0=1.e-2
+  tau=0.
+  kappa=0.
+  with time double precision
+  now with new expression for Vishniac flux taking rho to vary with z instead of u
+
+NewVishniacFlux_018
+  f=1.
+  R_omega=-20.
+  R_alpha=1.5
+  U0=0.1
+  up to t=30
+  B0=1.e-2
+  tau=0.
+  kappa=0.
+  with time double precision
+  now with new expression for Vishniac flux taking rho to vary with z instead of u
+
+NewVishniacFlux_019
+  f=1.
+  R_omega=-20.
+  R_alpha=1.5
+  U0=0.1
+  up to t=30
+  B0=1.e-2
+  tau=0.
+  kappa=0.
+  Alp_squared=1
+  with time double precision
+  now with new expression for Vishniac flux taking rho to vary with z instead of u
+
+NewVishniacFlux_20
+  f=1.
+  R_omega=-20.
+  R_alpha=1.5
+  U0=0
+  up to t=30
+  B0=1.e-2
+  tau=0.
+  kappa=0
+  Alp_squared=1
+  with time double precision
+  now with new expression for Vishniac flux taking rho to vary with z instead of u
+
+NewVishniacFlux_21
+  f=1.
+  R_omega=-20.
+  R_alpha=1.5
+  U0=0.45
+  up to t=30
+  B0=1.e-2
+  tau=0.
+  kappa=0
+  Alp_squared=1
+  with time double precision
+  now with new expression for Vishniac flux taking rho to vary with z instead of u
+
+NewVishniacFlux_22
+  f=1.
+  R_omega=-20.
+  R_alpha=1.5
+  U0=0
+  up to t=30
+  B0=1.e-2
+  tau=0.
+  kappa=0.3
+  Alp_squared=1
+  with time double precision
+  now with new expression for Vishniac flux taking rho to vary with z instead of u
+
+NewVishniacFlux_23
+  f=1.
+  R_omega=-20.
+  R_alpha=1.5
+  U0=1.
+  up to t=30
+  B0=1.e-2
+  tau=0.
+  kappa=0
+  Alp_squared=1
+  with time double precision
+  now with new expression for Vishniac flux taking rho to vary with z instead of u
+
+NewVishniacFlux_24
+  f=1.
+  R_omega=-20.
+  R_alpha=1.5
+  U0=0.45
+  up to t=30
+  B0=1.e-5
+  tau=0.
+  kappa=0
+  Alp_squared=1
+  with time double precision
+  now with new expression for Vishniac flux taking rho to vary with z instead of u
+
+NewVishniacFlux_25
+  f=1.
+  R_omega=-20.
+  R_alpha=1.5
+  U0=0.45
+  up to t=30
+  Bseed=1.e-2
+  kappa=0.3
+  Alp_squared=1
+  nz=201
+  dt=2.d-5
+  Now with gridpoints at z=0,+/-h
+  with time double precision
+  now with new expression for Vishniac flux taking rho to vary with z instead of u
+
+NewVishniacFlux_26
+  f=1.
+  R_omega=-20.
+  R_alpha=1.5
+  U0=0.45
+  up to t=30
+  Bseed=1.e-2
+  tau=0.
+  Alp_squared=1
+  nz=201
+  dt=2.d-5
+  Damp=0
+  Now with gridpoints at z=0,+/-h
+  with time double precision
+  now with new expression for Vishniac flux taking rho to vary with z instead of u
+
+NewVishniacFlux_27
+  f=1.
+  R_omega=-20.
+  R_alpha=1.5
+  U0=0.45
+  up to t=30
+  Bseed=1.e-2
+  kappa=0.
+  Alp_squared=1
+  nz=201
+  dt=5.d-5
+  Damp=1
+  factau=1
+  Now with gridpoints at z=0,+/-h
+  with time double precision
+
+NewVishniacFlux_28
+  f=1.
+  R_omega=-20.
+  R_alpha=1.5
+  U0=1.
+  up to t=30
+  Bseed=1.e-2
+  kappa=0.
+  Alp_squared=1
+  nz=201
+  dt=2.d-5
+  Damp=0
+  Now with gridpoints at z=0,+/-h
+  with time double precision
+
+NewVishniacFlux_29
+  f=1.
+  R_omega=-20.
+  R_alpha=1.5
+  U0=0.45
+  up to t=30
+  Bseed=1.e-2
+  kappa=0.
+  Alp_squared=1
+  nz=201
+  dt=1.d-4
+  Damp=1
+  factau=2
+  Now with gridpoints at z=0,+/-h
+  with time double precision
+
+NewVishniacFlux_30
+  f=1.
+  R_omega=-20.
+  R_alpha=0.
+  U0=0.45
+  up to t=30
+  Bseed=1.e-2
+  kappa=0.
+  Alp_squared=1
+  nz=201
+  dt=2.d-5
+  Damp=0
+  Now with gridpoints at z=0,+/-h
+  with time double precision
+  now with new expression for Vishniac flux taking rho to vary with z instead of u
+
+NewVishniacFlux_31
+  f=1.
+  R_omega=-20.
+  R_alpha=0.
+  U0=0.45
+  up to t=30
+  Bseed=1.e-2
+  kappa=0.
+  Alp_squared=1
+  nz=201
+  dt=5.d-4
+  Damp=1
+  factau=4
+  Now with gridpoints at z=0,+/-h
+  with time double precision
+  now with new expression for Vishniac flux taking rho to vary with z instead of u
+
+
+NewVishniacFlux_32
+  f=1.
+  R_omega=-20.
+  R_alpha=5.
+  U0=0.45
+  up to t=30
+  Bseed=1.e-2
+  tau=0.
+  Alp_squared=1
+  nz=201
+  dt=2.d-5
+  Damp=0
+  Now with gridpoints at z=0,+/-h
+  with time double precision
+  now with new expression for Vishniac flux taking rho to vary with z instead of u
+
+NewVishniacFlux_33
+  f=1.
+  R_omega=-40.
+  R_alpha=1.5
+  U0=0.45
+  up to t=30
+  Bseed=1.e-2
+  tau=0.
+  Alp_squared=1
+  nz=201
+  dt=2.d-5
+  Damp=0
+  Now with gridpoints at z=0,+/-h
+  with time double precision
+  now with new expression for Vishniac flux taking rho to vary with z instead of u
+
+NewVishniacFlux_34
+  f=1.
+  R_omega=-10.
+  R_alpha=1.5
+  U0=0.45
+  up to t=30
+  Bseed=1.e-2
+  tau=0.
+  Alp_squared=1
+  nz=201
+  dt=2.d-5
+  Damp=0
+  Now with gridpoints at z=0,+/-h
+  with time double precision
+  now with new expression for Vishniac flux taking rho to vary with z instead of u
+
+NewVishniacFlux_35
+  f=1.
+  R_omega=-20.
+  R_alpha=1.5
+  U0=0
+  up to t=30
+  Bseed=1.e-2
+  tau=0.
+  Alp_squared=1
+  nz=201
+  dt=2.d-5
+  Damp=0
+  Now with gridpoints at z=0,+/-h
+  with time double precision
+  now with new expression for Vishniac flux taking rho to vary with z instead of u
+
+NewVishniacFlux_36
+  f=1.
+  R_omega=-20.
+  R_alpha=1.5
+  U0=0.1
+  up to t=30
+  Bseed=1.e-2
+  tau=0.
+  Alp_squared=1
+  nz=201
+  dt=2.d-5
+  Damp=0
+  Now with gridpoints at z=0,+/-h
+  with time double precision
+  now with new expression for Vishniac flux taking rho to vary with z instead of u
+
+NewVishniacFlux_37
+  f=1.
+  R_omega=-20.
+  R_alpha=1.5
+  U0=0.3
+  up to t=30
+  Bseed=1.e-2
+  tau=0.
+  Alp_squared=1
+  nz=201
+  dt=2.d-5
+  Damp=0
+  Now with gridpoints at z=0,+/-h
+  with time double precision
+  now with new expression for Vishniac flux taking rho to vary with z instead of u
+
+NewVishniacFlux_38
+  f=0.
+  R_omega=-20.
+  R_alpha=1.5
+  U0=0.45
+  up to t=30
+  Bseed=1.e-2
+  tau=0.
+  Alp_squared=1
+  nz=201
+  dt=2.d-5
+  Damp=0
+  Now with gridpoints at z=0,+/-h
+  with time double precision
+  now with new expression for Vishniac flux taking rho to vary with z instead of u
+
+NewVishniacFlux_39
+  f=1.
+  R_omega=-20.
+  R_alpha=0
+  U0=0
+  up to t=30
+  Bseed=1.e-2
+  tau=0.
+  Alp_squared=1
+  nz=201
+  dt=2.d-5
+  Damp=0
+  Now with gridpoints at z=0,+/-h
+  with time double precision
+  now with new expression for Vishniac flux taking rho to vary with z instead of u
+
+NewVishniacFlux_40
+  f=1.
+  R_omega=-30.
+  R_alpha=0
+  U0=0.45
+  up to t=30
+  Bseed=1.e-2
+  tau=0.
+  Alp_squared=1
+  nz=201
+  dt=2.d-5
+  Damp=0
+  Now with gridpoints at z=0,+/-h
+  with time double precision
+  now with new expression for Vishniac flux taking rho to vary with z instead of u
+
+NewVishniacFlux_41
+  f=1.
+  R_omega=-40.
+  R_alpha=0
+  U0=0.45
+  up to t=30
+  Bseed=1.e-2
+  tau=0.
+  Alp_squared=1
+  nz=201
+  dt=2.d-5
+  Damp=0
+  Now with gridpoints at z=0,+/-h
+  with time double precision
+  now with new expression for Vishniac flux taking rho to vary with z instead of u
+
+NewVishniacFlux_42
+  f=1.
+  R_omega=-15.
+  R_alpha=0
+  U0=0.45
+  up to t=30
+  Bseed=1.e-2
+  tau=0.
+  Alp_squared=1
+  nz=201
+  dt=2.d-5
+  Damp=0
+  Now with gridpoints at z=0,+/-h
+  with time double precision
+  now with new expression for Vishniac flux taking rho to vary with z instead of u
+
+NewVishniacFlux_43
+  f=1.
+  R_omega=-10.
+  R_alpha=0
+  U0=0.45
+  up to t=30
+  Bseed=1.e-2
+  tau=0.
+  Alp_squared=1
+  nz=201
+  dt=2.d-5
+  Damp=0
+  Now with gridpoints at z=0,+/-h
+  with time double precision
+  now with new expression for Vishniac flux taking rho to vary with z instead of u
+
+NewVishniacFlux_44
+  f=1.
+  R_omega=-50.
+  R_alpha=0
+  U0=0.45
+  up to t=30
+  Bseed=1.e-2
+  tau=0.
+  Alp_squared=1
+  nz=201
+  dt=2.d-5
+  Damp=0
+  Now with gridpoints at z=0,+/-h
+  with time double precision
+  now with new expression for Vishniac flux taking rho to vary with z instead of u
+
+NewVishniacFlux_45
+  f=1.
+  R_omega=-20.
+  R_alpha=10.
+  U0=0.45
+  up to t=30
+  Bseed=1.e-2
+  tau=0.
+  Alp_squared=1
+  nz=201
+  dt=2.d-5
+  Damp=0
+  Now with gridpoints at z=0,+/-h
+  with time double precision
+  now with new expression for Vishniac flux taking rho to vary with z instead of u
+
+Aug 8, 2017
+NewVishniacFlux_113 (copied from NewVishniacFlux_044) 
+  f=1.
+  R_omega=-20.
+  R_alpha=0.
+  U0=0.
+  up to t=30
+  Bseed=1.e-2
+  tau=0.
+  Alp_squared=1
+  nz=201
+  dt=2.d-5
+  Damp=0
+  Now with gridpoints at z=0,+/-h
+  with time double precision
+  now with new expression for Vishniac flux taking u as a Gaussian with minimum at z=0
+  so Beq expression was also modified
+
+NewVishniacFlux_114 (copied from NewVishniacFlux_113) Improved version of 113
+  R_omega=-20.
+  R_alpha=0.
+  U0=0.
+  up to t=30
+  Bseed=1.e-2
+  tau=0.
+  Alp_squared=1
+  nz=201
+  dt=1.d-5	was forced to reduce timestep
+  Damp=0
+  Now with gridpoints at z=0,+/-h
+  with time double precision
+  now with new expression for Vishniac flux taking u as a Gaussian with minimum at z=0
+  rho=const so that Beq propto u^2 also Gaussian
+
+NewVishniacFlux_115 (copied from NewVishniacFlux_114) Like 114 but includes outflow
+  R_omega=-20.
+  R_alpha=0.
+  U0=0.45	Make U0 finite to avoid boundary effects
+  up to t=10	running up to t=30 not necessary as reaches a steady state much earlier
+  Bseed=1.e-2
+  tau=0.
+  Alp_squared=1
+  nz=201
+  dt=1.d-5	tried 2d-5 but too high
+  Damp=0
+  Now with gridpoints at z=0,+/-h
+  with time double precision
+  now with new expression for Vishniac flux taking u as a Gaussian with minimum at z=0
+  rho=const so that Beq propto u^2 also Gaussian
+
+NewVishniacFlux_116 (copied from NewVishniacFlux_115) Like 115 but flip sign of stratification (which flips sign of divergence of flux)
+  R_omega=-20.
+  R_alpha=0.
+  U0=0.45	
+  up to t=10	
+  Bseed=1.e-2
+  tau=0.
+  Alp_squared=1
+  nz=201
+  dt=1.d-5	
+  Damp=0
+  Now with gridpoints at z=0,+/-h
+  with time double precision
+  Now take u propto exp[-z^2/(2h^2)] so flip the sign (expect oscillations)
+  rho=const so that Beq propto u^2 also Gaussian
+
+NewVishniacFlux_117 (copied from NewVishniacFlux_115) Like 115 but make Beq=const instead of rho=const
+  R_omega=-20.
+  R_alpha=0.
+  U0=0.45	
+  up to t=10	
+  Bseed=1.e-2
+  tau=0.
+  Alp_squared=1
+  nz=201
+  dt=1.d-5	
+  Damp=0
+  Now with gridpoints at z=0,+/-h
+  with time double precision
+  now with new expression for Vishniac flux taking u as a Gaussian with minimum at z=0
+  rho\propto u^{-2} so that Beq=const
+
+NewVishniacFlux_118 (copied from NewVishniacFlux_117) Like 114 but make Beq=const instead of rho=const
+  R_omega=-20.
+  R_alpha=0.
+  U0=0	
+  up to t=10	
+  Bseed=1.e-2
+  tau=0.
+  Alp_squared=1
+  nz=201
+  dt=1.d-5	
+  Damp=0
+  Now with gridpoints at z=0,+/-h
+  with time double precision
+  now with new expression for Vishniac flux taking u as a Gaussian with minimum at z=0
+  rho\propto u^{-2} so that Beq=const
+
+NewVishniacFlux_119 (copied from NewVishniacFlux_117) Like 115 but use fac=0.1 instead of 1
+
+NewVishniacFlux_120 (copied from NewVishniacFlux_119)
