@@ -99,7 +99,7 @@ module parameters
 !********************************************************************************************************************************
 !TRIAL:3____1C
       double precision, parameter :: R_alpha = 0.  
-      double precision, parameter :: R_omega = -20.
+      double precision, parameter :: R_omega = -30.
       double precision, parameter :: R_k = 0.
       double precision, parameter :: R_U = 0.45
       double precision, parameter :: f_para = 1.

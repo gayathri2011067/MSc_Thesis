@@ -4,7 +4,7 @@ import argparse
 from pathlib import Path
 import os
 import subprocess
-from plotly.subplots import make_subplots
+
 
 data_path = "/home/gayathri/MSc_thesis/VIshniac flux/FOSA/run_files"
 fig_path = "/home/gayathri/MSc_thesis/VIshniac flux/FOSA/figures"
@@ -230,12 +230,13 @@ np.savetxt(f'{data_save_path}/B_strength.txt', B_strength)
 # Plot B_strength at a specific z index
 plt.plot(time_list, B_strength[:,51])
 plt.xlabel('time')
-plt.xlim(0,14)
-plt.yscale('log')
+plt.xlim(0,10)
+
+# plt.yscale('log')
 plt.ylabel('B_strength/B0')
 plt.title('B_strength vs time')
-# plt.yscale('log')
-# plt.xlim(0,7)
+plt.yscale('log')
+plt.xlim(0,7)
 
 # plt.axhline(y=0.001, color='g', linestyle='--')
 # plt.axvline(x=2.5, color='r', linestyle='--')
@@ -248,7 +249,8 @@ np.savetxt(f'{data_save_path}/B_strength_avg.txt', B_strength_avg)
 plt.plot(time_list, B_strength_avg, color='red')
 plt.xlabel('time')
 plt.yscale('log')
-plt.xlim(0,14)
+# plt.xlim(4,5)
+# plt.ylim(1,10)
 plt.ylabel('Average B_strength/B0')
 plt.title('Average B_strength vs time')
 plt.tick_params(axis='both', which='both', direction='in', top=True, right=True)
@@ -272,8 +274,8 @@ try:
     alpha_m=np.array(alpha_list,dtype=float)
     np.savetxt(f'{data_save_path}/alpha_m.txt', alpha_m)
     n1 = 5000
-    total_t = 30
-    t_values = [2.75,5,10]
+    total_t = 10
+    t_values = [2.5, 5,10]  # List of t values to plot
 
     # Initialize an empty list to store the t indices
     t_indices = []
@@ -305,10 +307,7 @@ try:
     plt.close()
 except:
     print('alpha_m.txt file not found')
-import plotly.io as pio
-pio.kaleido.scope.plotlyjs = "https://cdn.plot.ly/plotly-latest.min.js"
 
-import plotly.graph_objects as go
 
 
 
@@ -490,3 +489,8 @@ import plotly.graph_objects as go
 #      - averaging over z
 #      - alpha_m vs z at a specific time
 #      - dimensions
+
+
+
+
+

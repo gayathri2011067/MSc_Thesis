@@ -239,10 +239,16 @@ module equations
       call spatial_derivative(alpha_m_dummy, 6, d_alpha_m, d2_alpha_m)
       call spatial_derivative(U_z, 6, der_u, d_sq_u)
 
+!factor of 2 difference
+        ! vishniac_term = (8./9.)*l**2 * f_para * R_omega * x*exp(x**2)!(((2.*l)/(3.))**2) * f_para * R_omega * x!(-2d0/3d0*tau_c)*((2d0*l)/(3d0*h))**2*
+        ! vishniac_term = (4./27.)*l**2 * f_para * R_omega * small_u_0**2!tau=l/u
+        vishniac_term = (8./81.)*tau**2 * f_para*x * R_omega * small_u_0**4!l=tau*u
 
-        vishniac_term = (((2.*l)/(3.))**2) * f_para * R_omega * x*exp(x**2)!(((2.*l)/(3.))**2) * f_para * R_omega * x!(-2d0/3d0*tau_c)*((2d0*l)/(3d0*h))**2*
 
-        dBrdt = -d_alpha_Bphi +eta*d2Br - d_Uz_Br
+
+!new term with new u expression:
+        ! vishniac_term = -(4./18.)**2*f_para*R_omega*l**2*small_u_0**2!-(8.*1.16/(9.*9.))*l**2 * f_para * R_omega * x**(1.32)!(((2.*l)/(3.))**2) * f_para * R_omega * x!(-2d0/3d0*tau_c)*((2d0*l)/(3d0*h))**2*
+      dBrdt = -d_alpha_Bphi +eta*d2Br - d_Uz_Br
 
         dBphidt = R_omega*B_r_dummy+eta*d2Bphi-d_Uz_Bphi +d_alpha_Br
 

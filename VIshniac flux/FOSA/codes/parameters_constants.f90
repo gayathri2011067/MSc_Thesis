@@ -18,6 +18,8 @@ module parameters
   !WITH DIMENSION ♥
 
       double precision, parameter :: small_u_0_dim = 10.*km_kpc/s_Gyr ! km/s.kpc --> 1/Gyr
+      ! double precision, parameter :: small_u_0_dim = 45.*km_kpc/s_Gyr ! km/s.kpc --> 1/Gyr
+!above expression for new u from ss21
       double precision, parameter :: radius_dim = 4.d0 ! kpc
       double precision, parameter :: r_d_dim = 10.d0 ! kpc
       double precision, parameter :: h_d_dim = 0.5d0 ! kpc
@@ -50,17 +52,17 @@ module parameters
       double precision, parameter :: t_d = t_d_dim/(t_d_dim)
       double precision, parameter :: omega_0 = omega_0_dim*h_dim/(h_dim**2/t_d_dim) 
       double precision, parameter :: r__omega = r__omega_dim/h_dim
-      double precision, parameter :: l = l_dim/h_dim
+      ! double precision, parameter :: l = l_dim/h_dim
       double precision, parameter :: omega = omega_dim*h_dim/(h_dim**2/t_d_dim)
       double precision, parameter :: G = G_dim*(h_dim**2/(h_dim**2/t_d_dim))
       double precision, parameter :: alpha_0 = alpha_0_dim*h_dim/(h_dim**2/t_d_dim)
-      double precision, parameter :: rho = 1. !NOTE:!uncomment for rho stratified
+      double precision, parameter :: rho = 1. !NOTE:!comment for rho stratified
       double precision, parameter :: k = k_dim/(h_dim**2/t_d_dim) 
       double precision, parameter :: R = R_dim/h_dim
       double precision, parameter :: z_i = z_i_dim/h_dim
       double precision, parameter :: z_f = z_f_dim/h_dim
       double precision, parameter :: R_m_inv = 0. 
-      double precision, parameter :: tau = tau_dim/(t_d_dim)
+      double precision, parameter :: tau = tau_dim/t_d_dim
       double precision, parameter :: small_u_0 = small_u_0_dim*h_dim/(h_dim**2/t_d_dim)
  
 
@@ -93,12 +95,63 @@ module parameters
       ! double precision, parameter :: f_para = 1.
 !********************************************************************************************************************************
 !TRIAL:4____1D
-      double precision, parameter :: R_alpha = 0.  
-      double precision, parameter :: R_omega = -20.
-      double precision, parameter :: R_k = 0.
-      double precision, parameter :: R_U = 0.45
-      double precision, parameter :: f_para = 0.1
+      ! double precision, parameter :: R_alpha = 0.  
+      ! double precision, parameter :: R_omega = -20.
+      ! double precision, parameter :: R_k = 0.
+      ! double precision, parameter :: R_U = 0.45
+      ! double precision, parameter :: f_para = 0.1
 !********************************************************************************************************************************
+!TRIAL:10_____New expression for U with l constant-A
+      ! double precision, parameter :: R_alpha = 0.  
+      ! double precision, parameter :: R_omega = -20.
+      ! double precision, parameter :: R_k = 1.
+      ! double precision, parameter :: R_U = 0.
+      ! double precision, parameter :: f_para = 1.
+!********************************************************************************************************************************
+!TRIAL:11_____New expression for U-B
+      ! double precision, parameter :: R_alpha = 0.  
+      ! double precision, parameter :: R_omega = -20.
+      ! double precision, parameter :: R_k = 0.
+      ! double precision, parameter :: R_U = 0.45
+      ! double precision, parameter :: f_para = 1.
+!********************************************************************************************************************************
+!TRIAL:12_____New expression for U-D
+      ! double precision, parameter :: R_alpha = 0.  
+      ! double precision, parameter :: R_omega = -20.
+      ! double precision, parameter :: R_k = 0.
+      ! double precision, parameter :: R_U = 0.45
+      ! double precision, parameter :: f_para = 0.1
+!********************************************************************************************************************************
+! 13,14,15------>New expressions for U with tau constant, A,B,D
+! ********************************************************************************************************************************
+!TRIAL:21 
+double precision, parameter :: R_alpha = 1.71  !alpha_0
+double precision, parameter :: R_omega = -19.8     !-G
+double precision, parameter :: R_k = 0.0
+double precision, parameter :: R_U = 1.0
+double precision, parameter :: f_para = 0.
+! ********************************************************************************************************************************
+!TRIAL:22
+! double precision, parameter :: R_alpha = 1.71  !alpha_0
+! double precision, parameter :: R_omega = -19.8     !-G
+! double precision, parameter :: R_k = 0.3
+! double precision, parameter :: R_U = 0.0
+! double precision, parameter :: f_para = 0.
+! ********************************************************************************************************************************
+!TRIAL:23
+! double precision, parameter :: R_alpha = 1.71  !alpha_0
+! double precision, parameter :: R_omega = -19.8     !-G
+! double precision, parameter :: R_k = 0.3
+! double precision, parameter :: R_U = 1.0
+! double precision, parameter :: f_para = 0.
+! ********************************************************************************************************************************
+!TRIAL:24
+! double precision, parameter :: R_alpha = 1.71  !alpha_0
+! double precision, parameter :: R_omega = -19.8     !-G
+! double precision, parameter :: R_k = 0.0
+! double precision, parameter :: R_U = 0.0
+! double precision, parameter :: f_para = 0.
+
 
 !python3 codes/compare_plots.py 1 "model A" 2 "model B" 3 "model C" 4 "model D" 
 

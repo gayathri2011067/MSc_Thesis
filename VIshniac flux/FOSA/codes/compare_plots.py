@@ -116,8 +116,9 @@ plt.figure(figsize=(10, 5))  # Set figure size to rectangular
 for i in range(len(trial_numbers)):
     plt.plot(times[i], B_strengths[i][:, space_indices[i]], label=f'{labels[i]}')
 
-plt.xlim(0, 14)
-plt.ylim(0, 0.6)
+plt.xlim(0, 7)
+plt.yscale('log')
+# plt.ylim(0, 0.6)
 plt.xlabel(r'$t$')
 plt.ylabel(r'$\mathrm{B}_{\mathrm{strength}}$')  # Replacing \text with \mathrm
 plt.title(r'$\mathrm{B}_{\mathrm{strength}} \ \mathrm{vs} \ t \ \mathrm{at} \ z=(' +
@@ -231,7 +232,7 @@ for i in range(4):  # Assuming only 4 trials
     
     # Plot B_strength vs time at the specific z location for each trial
     axs[i].plot(times[i], B_strengths[i][:, space_indices[i]], label=f'{labels[i]}')
-    axs[i].set_xlim(0, 14)
+    axs[i].set_xlim(0, 10)
     axs[i].set_yscale('log')
     axs[i].set_xlabel(r'$t$')
     axs[i].set_ylabel(r'$\mathrm{B}_{\mathrm{strength}}$')
@@ -253,7 +254,8 @@ for i in range(4):  # Assuming only 4 trials
     
     # Plot B_strength_avg vs time for each trial
     axs[i].plot(times[i], B_strength_avg[i], label=f'{labels[i]}', color='red')
-    axs[i].set_xlim(0, 14)
+    axs[i].set_xlim(0, 7)
+    axs[i].set_ylim(0.01,1)
     axs[i].set_yscale('log')
     axs[i].set_xlabel(r'$t \ (\mathrm{computational \ units})$')
     axs[i].set_ylabel(r'$\log \ \langle B \rangle / B_0$')
@@ -274,8 +276,8 @@ turb_vel_filename = 'turb_vel.txt'
 alpha_m_values = []
 turb_vel_values = []
 n1 = 5000
-total_t = 30
-t_values = 10  #NOTE: Change this value to plot at different time steps
+total_t = 10
+t_values = 2.5  #NOTE: Change this value to plot at different time steps
 t_index = int(t_values * n1 / total_t)
 # Flatten the 2D array of axes for easier iteration
 axs = axs.flatten()

@@ -4,7 +4,7 @@ gfortran -o run ../codes/parameters_constants.f90 ../codes/grid.f90 ../codes/spa
 ./run
 end=`date +%s`
 echo Execution time was `expr $end - $start` seconds.
-python3 ../codes/plot.py --trial 4
+python3 ../codes/plot.py --trial 21
 cd ..
 # python3 codes/compare_plots.py 1 "label1" 2 "label2"
 #

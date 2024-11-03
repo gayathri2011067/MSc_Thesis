@@ -149,27 +149,60 @@ plt.savefig(f'{fig_path}/B_strength_avg_vs_time.png', bbox_inches='tight')
 plt.close()
 
 # Plot alpha_m versus z for the last time step
-plt.figure(figsize=(10, 5))  # Set figure size to rectangular
+import sciplot as splt
+import numpy as np
+
+# Initialize SciPlot settings
+import sciplot as splt
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Apply a scientific theme if SciPlot is imported as splt
+splt.style("science")  # Use 'science' theme or others like 'grid', 'minimal', etc.
+
+# Define variables
 alpha_m_values = []
 filename = 'alpha_m.txt'
 
+# Set up the plot
+plt.figure(figsize=(10, 5))  # Rectangular figure size
+
+# Loop through trial numbers to load and plot data
 for i in range(len(trial_numbers)):
     trial_num = trial_numbers[i]
     file_path = f"{data_path}/trial_{trial_num}/{filename}"
     alpha_m_list = np.loadtxt(file_path)
     alpha_m_values.append(np.copy(alpha_m_list))
+    
+    # Plot alpha_m versus z for each trial
+    plt.plot(
+        z_lists[i], alpha_m_list[-1],
+        label=f'{labels[i]}',
+        linestyle='-', marker='', linewidth=1.5
+    )
 
-    plt.plot(z_lists[i], alpha_m_list[-1], label=f'alpha_m: {labels[i]}')
-    plt.xlim(-0.5, 0.5)
+# Customize plot aesthetics
+plt.xlim(-0.5, 0.5)
 plt.axhline(y=0, color='grey', linestyle='--')
 plt.axvline(x=0, color='grey', linestyle='--')
-plt.xlabel(r'$z$')
-plt.ylabel(r'$\alpha_m$')
-plt.title(r'$\alpha_m \ \mathrm{vs} \ z$')
-# plt.grid(True)
-plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+plt.xlabel(r'$z \ (kpc)$', fontsize=14, fontweight='bold')
+plt.ylabel(r'$\alpha_m$', fontsize=14, fontweight='bold')
+plt.title(r'$\alpha_m \ \mathrm{vs} \ z$', fontsize=16, fontweight='bold')
+
+# Add tick marks on all four sides
+plt.tick_params(axis='both', which='both', direction='in', top=True, right=True)
+plt.minorticks_on()
+
+# Use a better color theme
+import seaborn as sns
+sns.set_style('darkgrid')
+
+
+# Add legend and save figure
+plt.legend(loc='upper left', bbox_to_anchor=(1.05, 1))
 plt.savefig(f'{fig_path}/alpha_m_vs_z_final.png', bbox_inches='tight')
 plt.close()
+
 
 
 # Bstr_values = []

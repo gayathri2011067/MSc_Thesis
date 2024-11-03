@@ -160,8 +160,8 @@ program run_all
 
     end do
     ! print*, 'B_r=', B_r
-    write (22, *) B_r
-    write (23, *) B_phi
+    write (22, *) B_r/B_0
+    write (23, *) B_phi/B_0
     write (24, *) t*t_d_dim
     write (25, *) alpha_m
   end do

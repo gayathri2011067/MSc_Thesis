@@ -20,6 +20,9 @@ double precision, dimension(nx) :: d2_alpha_Br,d_alpha_Bphi,d2_alpha_Bphi,d_Uz_B
 double precision, dimension(nx) :: d2_Uz_Br,d_Uz_Bphi,d2_Uz_Bphi, old_Br, old_Bphi
 ! double precision, dimension(nx) :: rho,rho_0
 double precision :: Bseed
+! double precision, dimension(nx) :: tau
+double precision, dimension(nx) :: l
+
 
 contains
 
@@ -37,10 +40,19 @@ contains
         ! B_0       = 4.*pi*rho*small_u_0**2
 
   
-        Bseed     = 0.001
+        Bseed     = 10.0
 
         small_u   = small_u_0*exp(x**2/2.)
+        l = tau*small_u
+        ! tau = l/small_u
+
+
         eta       = (1.*tau/(3.))*small_u**2
+        !new expressionfrom ss21
+        ! small_u   = small_u_0*(abs(x**(1./2.)))
+        ! eta       = (1.*tau/(3.))*small_u**2
+
+
         
         B_eq      = 4.*pi*rho*small_u**2
         B_0       = 4.*pi*rho*small_u_0**2

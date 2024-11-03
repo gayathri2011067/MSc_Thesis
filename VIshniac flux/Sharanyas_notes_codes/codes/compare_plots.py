@@ -126,13 +126,13 @@ for i in range(len(trial_numbers)):
 plt.xlim(0,7)
 
 plt.yscale('log')
-plt.ylim(10**-3,2)
+plt.ylim(10**-4,1)
 # plt.axhline(y=1, color='b', linestyle='--')
-plt.xlabel('time')
-plt.ylabel('B_strength')
+plt.xlabel('time(in Gyr)')
+plt.ylabel(r'$B_{\text{strength}} / B_0$')
 
-plt.title(f"B_strength vs time at z=({','.join([f'trial{trial_numbers[i]}:{int(z_lists[i][space_indices[i]])}' for i in range(len(trial_numbers))])})")
-
+plt.title(f"Dynamical quenching")
+plt.text(0.90, 1.05, r'$B_0=0.82\mu G$', transform=plt.gca().transAxes, verticalalignment='top')
 
 plt.legend()
 plt.savefig(f'{fig_path}/B_strength_vs_time.png')

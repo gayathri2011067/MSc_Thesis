@@ -25,7 +25,7 @@ module physical_grid
   use time_grid
   implicit none
 
-  integer, parameter :: nxphys= 101 !Resolution in z
+  integer, parameter :: nxphys= 201 !Resolution in z
   integer, parameter :: nxghost= 3  !Number of ghost cells at each end in z
   integer, parameter :: nx= nxphys +2*nxghost  !Resolution in z
   double precision, dimension(nx) :: x
