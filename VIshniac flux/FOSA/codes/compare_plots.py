@@ -113,12 +113,13 @@ plt.close()
 
 # Plot magnetic field strength versus time at z midpoint
 plt.figure(figsize=(10, 5))  # Set figure size to rectangular
+B_strength_avg = np.mean(B_strengths, axis=2)
 for i in range(len(trial_numbers)):
-    plt.plot(times[i], B_strengths[i][:, space_indices[i]], label=f'{labels[i]}')
+    plt.plot(times[i], B_strength_avg[i], label=f'{labels[i]}')
 
 plt.xlim(0, 7)
 plt.yscale('log')
-# plt.ylim(0, 0.6)
+plt.ylim(0.005, 2)
 plt.xlabel(r'$t$')
 plt.ylabel(r'$\mathrm{B}_{\mathrm{strength}}$')  # Replacing \text with \mathrm
 plt.title(r'$\mathrm{B}_{\mathrm{strength}} \ \mathrm{vs} \ t \ \mathrm{at} \ z=(' +
@@ -127,7 +128,6 @@ plt.title(r'$\mathrm{B}_{\mathrm{strength}} \ \mathrm{vs} \ t \ \mathrm{at} \ z=
 plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
 plt.savefig(f'{fig_path}/B_strength_vs_time.png', bbox_inches='tight')
 plt.close()
-B_strength_avg = np.mean(B_strengths, axis=2)
 
 plt.figure(figsize=(10, 5))  # Set figure size to rectangular
 for i in range(len(trial_numbers)):

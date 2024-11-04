@@ -40,7 +40,7 @@ contains
         ! B_0       = 4.*pi*rho*small_u_0**2
 
   
-        Bseed     = 10.0
+        Bseed     = 100.
 
         small_u   = small_u_0*exp(x**2/2.)
         l = tau*small_u

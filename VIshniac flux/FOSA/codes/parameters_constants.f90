@@ -35,7 +35,7 @@ module parameters
       double precision, parameter :: z_i_dim = -h_dim!kpc
       double precision, parameter :: z_f_dim = +h_dim !kpc
       double precision, parameter :: tau_dim = 10.*0.001 !Gyr ! TODO_LATER: Find correct value
-      double precision, parameter :: B_0_dim = 8.2/G_muG !muG to G 
+      double precision, parameter :: B_0_dim = 0.82/G_muG !muG to G 
       double precision, parameter :: t_d_dim = h_dim**2/((tau_dim*small_u_0_dim**2)/3.)! Gyr
   !***************************************************************************************************************
   
@@ -72,7 +72,7 @@ module parameters
 
 !********************************************************************************************************************************
 !FOSA!figures
-
+!Trials to recreate the figures from the 2017 new notes
 ! TRIAL:1____A
       ! double precision, parameter :: R_alpha = 0.  
       ! double precision, parameter :: R_omega = -20.
@@ -123,20 +123,24 @@ module parameters
       ! double precision, parameter :: f_para = 0.1
 !********************************************************************************************************************************
 ! 13,14,15------>New expressions for U with tau constant, A,B,D
+!********************************************************************************************************************************
+
+
+!NOTE: The following trials are for recreating 2014 toolbox paper results
 ! ********************************************************************************************************************************
 !TRIAL:21 
-double precision, parameter :: R_alpha = 1.71  !alpha_0
-double precision, parameter :: R_omega = -19.8     !-G
-double precision, parameter :: R_k = 0.0
-double precision, parameter :: R_U = 1.0
-double precision, parameter :: f_para = 0.
-! ********************************************************************************************************************************
-!TRIAL:22
 ! double precision, parameter :: R_alpha = 1.71  !alpha_0
 ! double precision, parameter :: R_omega = -19.8     !-G
-! double precision, parameter :: R_k = 0.3
-! double precision, parameter :: R_U = 0.0
+! double precision, parameter :: R_k = 0.0
+! double precision, parameter :: R_U = 1.0
 ! double precision, parameter :: f_para = 0.
+! ********************************************************************************************************************************
+!TRIAL:22
+double precision, parameter :: R_alpha = 1.71  !alpha_0
+double precision, parameter :: R_omega = -19.8     !-G
+double precision, parameter :: R_k = 0.3
+double precision, parameter :: R_U = 0.0
+double precision, parameter :: f_para = 0.
 ! ********************************************************************************************************************************
 !TRIAL:23
 ! double precision, parameter :: R_alpha = 1.71  !alpha_0
