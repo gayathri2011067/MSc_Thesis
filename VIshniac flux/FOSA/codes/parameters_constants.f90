@@ -129,18 +129,18 @@ module parameters
 !NOTE: The following trials are for recreating 2014 toolbox paper results
 ! ********************************************************************************************************************************
 !TRIAL:21 
-! double precision, parameter :: R_alpha = 1.71  !alpha_0
-! double precision, parameter :: R_omega = -19.8     !-G
-! double precision, parameter :: R_k = 0.0
-! double precision, parameter :: R_U = 1.0
-! double precision, parameter :: f_para = 0.
-! ********************************************************************************************************************************
-!TRIAL:22
 double precision, parameter :: R_alpha = 1.71  !alpha_0
 double precision, parameter :: R_omega = -19.8     !-G
-double precision, parameter :: R_k = 0.3
-double precision, parameter :: R_U = 0.0
+double precision, parameter :: R_k = 0.0
+double precision, parameter :: R_U = 1.0
 double precision, parameter :: f_para = 0.
+! ********************************************************************************************************************************
+!TRIAL:22
+! double precision, parameter :: R_alpha = 1.71  !alpha_0
+! double precision, parameter :: R_omega = -19.8     !-G
+! double precision, parameter :: R_k = 0.3
+! double precision, parameter :: R_U = 0.0
+! double precision, parameter :: f_para = 0.
 ! ********************************************************************************************************************************
 !TRIAL:23
 ! double precision, parameter :: R_alpha = 1.71  !alpha_0
