@@ -112,21 +112,26 @@ plt.savefig(f'{fig_path}/Br_Bphi_vs_time.png', bbox_inches='tight')
 plt.close()
 
 # Plot magnetic field strength versus time at z midpoint
+import matplotlib.pyplot as plt
+
 plt.figure(figsize=(10, 5))  # Set figure size to rectangular
 B_strength_avg = np.mean(B_strengths, axis=2)
+line_styles = ['-', '--', '-.', ':']  # Define different line styles
+colors = ['#f39237', '#9c3848', '#06a77d', '#3f8efc']  # Darker color scheme
+
 for i in range(len(trial_numbers)):
-    plt.plot(times[i], B_strength_avg[i], label=f'{labels[i]}')
+    lab = labels[i]
+    plt.plot(times[i], B_strength_avg[i], label=f'{lab}', linestyle='-', linewidth=2, color=colors[i % len(colors)])  # Increase line thickness
 
 plt.xlim(0, 7)
 plt.yscale('log')
-plt.ylim(0.005, 2)
-plt.xlabel(r'$t$')
-plt.ylabel(r'$\mathrm{B}_{\mathrm{strength}}$')  # Replacing \text with \mathrm
-plt.title(r'$\mathrm{B}_{\mathrm{strength}} \ \mathrm{vs} \ t \ \mathrm{at} \ z=(' +
-          ', '.join([f'trial{trial_numbers[i]}:{int(z_lists[i][space_indices[i]])}' for i in range(len(trial_numbers))]) + r')$')
-# plt.grid(True)
-plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
-plt.savefig(f'{fig_path}/B_strength_vs_time.png', bbox_inches='tight')
+plt.ylim(10**-2, 2)
+plt.xlabel('time(in Gyr)')
+plt.ylabel(r'${B}(0) / B_0$')
+plt.title(f"Dynamical quenching")
+plt.text(0.90, 1.05, r'$B_0=0.82\mu G$', transform=plt.gca().transAxes, verticalalignment='top')
+plt.legend(loc='lower right', labels=[f'${label}$' for label in labels])
+plt.savefig(f'{fig_path}/B_strength_vs_time.png')
 plt.close()
 
 plt.figure(figsize=(10, 5))  # Set figure size to rectangular

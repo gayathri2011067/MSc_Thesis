@@ -40,9 +40,10 @@ contains
         ! B_0       = 4.*pi*rho*small_u_0**2
 
   
-        Bseed     = 100.
+        Bseed     = 10.
 
         small_u   = small_u_0*exp(x**2/2.)
+        ! small_u   = small_u_0*(abs(x))**(0.5)
         l = tau*small_u
         ! tau = l/small_u
 

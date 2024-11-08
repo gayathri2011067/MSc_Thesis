@@ -98,12 +98,12 @@ module parameters
       ! double precision, parameter :: c_tau = 1.
 !********************************************************************************************************************************
 !TRIAL:3____1C
-      double precision, parameter :: R_alpha = 0.  
-      double precision, parameter :: R_omega = -30.
-      double precision, parameter :: R_k = 0.
-      double precision, parameter :: R_U = 0.45
-      double precision, parameter :: f_para = 1.
-      double precision, parameter :: c_tau = 1.
+      ! double precision, parameter :: R_alpha = 0.  
+      ! double precision, parameter :: R_omega = -30.
+      ! double precision, parameter :: R_k = 0.
+      ! double precision, parameter :: R_U = 0.45
+      ! double precision, parameter :: f_para = 1.
+      ! double precision, parameter :: c_tau = 1.
 !********************************************************************************************************************************
 !TRIAL:4____1D
       ! double precision, parameter :: R_alpha = 4.  
@@ -148,7 +148,13 @@ module parameters
 
 !python3 codes/compare_plots.py 1 "1A" 2 "1B" 3 "1C" 4 "1D" 5 "1E" 6 "1F" 7 "1G" 8 "1H" 
 
-
+! TRIAL:11____positive flux with alpha
+      double precision, parameter :: R_alpha = 0.0  
+      double precision, parameter :: R_omega = -20.
+      double precision, parameter :: R_k = 0.
+      double precision, parameter :: R_U = 0.45
+      double precision, parameter :: f_para = -1.
+      double precision, parameter :: c_tau = 1.
 
 
 

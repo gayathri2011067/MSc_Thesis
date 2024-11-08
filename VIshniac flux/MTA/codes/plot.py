@@ -4,7 +4,6 @@ import argparse
 from pathlib import Path
 import os
 import subprocess
-from plotly.subplots import make_subplots
 
 data_path = "/home/gayathri/MSc_thesis/VIshniac flux/MTA/run_files"
 fig_path = "/home/gayathri/MSc_thesis/VIshniac flux/MTA/figures"
@@ -274,10 +273,10 @@ except:
     print('alpha_m.txt file not found')
     #i have br_final in (t,z) array. want to plot a 2d heat map with z as y axis and time as x axis.
     # Plot 2D heatmap of Br_final with time on x-axis and z on y-axis
-import plotly.io as pio
-pio.kaleido.scope.plotlyjs = "https://cdn.plot.ly/plotly-latest.min.js"
+# import plotly.io as pio
+# pio.kaleido.scope.plotlyjs = "https://cdn.plot.ly/plotly-latest.min.js"
 
-import plotly.graph_objects as go
+# import plotly.graph_objects as go
 
 
 

@@ -162,7 +162,7 @@ program run_all
     ! print*, 'B_r=', B_r
     write (22, *) B_r
     write (23, *) B_phi
-    write (24, *) t*(h_dim**2./eta_dim)
+    write (24, *) t*(t_d_dim)
     write (25, *) alpha_m
   end do
   ! ************************************************************************

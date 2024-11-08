@@ -4,8 +4,8 @@ gfortran -o run ../codes/parameters_constants.f90 ../codes/grid.f90 ../codes/spa
 ./run
 end=`date +%s`
 echo Execution time was `expr $end - $start` seconds.
-python3 ../codes/plot.py --trial 3
+python3 ../codes/plot.py --trial 13
 cd ..
 # python3 codes/compare_plots.py 1 "label1" 2 "label2"
 #3 "label3" 4 "label4" 5 "label 5" 6 "label 6"
-1 "Model A" 2 "Model B" 3 "Model C" 4 "Model D" 5 "Model E" 6 "Model F" 7 "Model G" 8 "Model H"
+#1 "Model A" 2 "Model B" 3 "Model C" 4 "Model D" 5 "Model E" 6 "Model F" 7 "Model G" 8 "Model H"

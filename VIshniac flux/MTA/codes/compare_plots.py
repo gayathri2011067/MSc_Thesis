@@ -117,7 +117,8 @@ for i in range(len(trial_numbers)):
     plt.plot(times[i], B_strengths[i][:, space_indices[i]], label=f'{labels[i]}')
 
 plt.xlim(0, 14)
-plt.ylim(0, 0.6)
+# plt.yscale('log')
+# plt.ylim(0, 0.6)
 plt.xlabel(r'$t$')
 plt.ylabel(r'$\mathrm{B}_{\mathrm{strength}}$')  # Replacing \text with \mathrm
 plt.title(r'$\mathrm{B}_{\mathrm{strength}} \ \mathrm{vs} \ t \ \mathrm{at} \ z=(' +
