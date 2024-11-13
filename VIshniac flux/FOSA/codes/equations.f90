@@ -240,14 +240,14 @@ module equations
       call spatial_derivative(U_z, 6, der_u, d_sq_u)
 
 !NOTE: vishniac term for 2017 new notes with old u stratification
-        ! vishniac_term = (8./9.)*l**2 * f_para * R_omega * x*exp(x**2)!(((2.*l)/(3.))**2) * f_para * R_omega * x!(-2d0/3d0*tau_c)*((2d0*l)/(3d0*h))**2*
+        vishniac_term = (8./9.)*l**2 * f_para * R_omega * x*exp(x**2)!(((2.*l)/(3.))**2) * f_para * R_omega * x!(-2d0/3d0*tau_c)*((2d0*l)/(3d0*h))**2*
 !NOTE: vishniac term for 2017 new notes with new u stratification
       !a)tau = not constant
         ! vishniac_term = (4./27.)*l**2 * f_para * R_omega * small_u_0**2
       !b)tau = constant
         ! vishniac_term = (8./81.)*tau**2 * f_para*x * R_omega * small_u_0**4!l=tau*u
 !NOTE: vishniac term derived from GS+23
-      vishniac_term = ((7.*f_para*tau**2 * R_omega * x * small_u_0**4)/5400.)-((f_para*tau* R_omega *  small_u_0**2)/(324.*pi*rho))
+      ! vishniac_term = ((7.*f_para*tau**2 * R_omega * x * small_u_0**4)/5400.)-((f_para*tau* R_omega *  small_u_0**2)/(324.*pi*rho))
 
         dBrdt = -d_alpha_Bphi +eta*d2Br - d_Uz_Br
 

@@ -487,3 +487,10 @@ except Exception as e:
 #      - averaging over z
 #      - alpha_m vs z at a specific time
 #      - dimensions
+
+plt.plot( -alpha_m[-1],B_strength[-1]**2)
+plt.ylabel('B_strength_avg')
+plt.xlabel('-alpha_m')
+plt.title('B_strength_avg vs -alpha_m')
+plt.savefig(f'{fig_path}/B_strength_avg_vs_alpha_m.png')
+plt.close()
