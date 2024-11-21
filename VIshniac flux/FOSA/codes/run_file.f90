@@ -19,7 +19,7 @@ program run_all
     integer :: kk, j
     character(len=30) :: data_path, filename, xfile, omegafile, alphafile, Br_ini_file,&
     B_r_final_file, B_phi_ini_file, B_phi_final_file, time_file, alpham_final_file,turb_vel_file,&
-    vishniac_term_file
+    vishniac_term_file,alp_tot_file, alp_k_file
 
     ! Call subroutine to construct the physical grid
     call construct_grid
@@ -45,6 +45,8 @@ program run_all
     alpham_final_file=  'alpham_final.txt'
     turb_vel_file=  'turb_vel.txt'
     vishniac_term_file=  'vishniac_term.txt'
+    alp_tot_file = 'alp_tot.txt'
+    alp_k_file = 'alp_k.txt'
     ! print *, "Computational time in Gyr = ", total_t
 
     ! Open the file for writing
@@ -59,6 +61,9 @@ program run_all
     open(unit=25, file=trim(data_path) // alpham_final_file)
     open(unit=26, file=trim(data_path) // turb_vel_file)
     open(unit=27, file=trim(data_path) // vishniac_term_file)
+    open(unit=28, file=trim(data_path) // alp_tot_file)
+    open(unit=29, file=trim(data_path) // alp_k_file)
+
     ! open(unit=10, file=filename)
     ! open(unit=17, file=xfile)
     ! open(unit=19, file=alphafile)
@@ -172,6 +177,8 @@ program run_all
     write (23, *) B_phi/B_0
     write (24, *) t*t_d_dim
     write (25, *) alpha_m
+    write (28, *) alpha
+    write (29, *) alpha_k
     ! write (27, *) vishniac_term
 
 
@@ -184,6 +191,8 @@ program run_all
     close(23)
     close(24)
     close(25)
+    close(28)
+    close(29)
     ! close(27)
   ! print*, 'n2=', n2
   ! print*, 'dt=', dt

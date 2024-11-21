@@ -16,10 +16,12 @@ program run_all
   
     implicit none
 
-    integer :: kk, j
+    integer :: kk, j,oo
     character(len=30) :: data_path, filename, xfile, omegafile, alphafile, Br_ini_file,&
     B_r_final_file, B_phi_ini_file, B_phi_final_file, time_file, alpham_final_file,turb_vel_file,&
-    vishniac_term_file
+    vishniac_term_file, small_f_file, xi_file
+    double precision  :: xi,q,small_f
+
 
     ! Call subroutine to construct the physical grid
     call construct_grid
@@ -45,6 +47,8 @@ program run_all
     alpham_final_file=  'alpham_final.txt'
     turb_vel_file=  'turb_vel.txt'
     vishniac_term_file=  'vishniac_term.txt'
+    small_f_file = 'small_f.txt'
+    xi_file = 'xi.txt'
     ! print *, "Computational time in Gyr = ", total_t
 
     ! Open the file for writing
@@ -59,6 +63,8 @@ program run_all
     open(unit=25, file=trim(data_path) // alpham_final_file)
     open(unit=26, file=trim(data_path) // turb_vel_file)
     open(unit=27, file=trim(data_path) // vishniac_term_file)
+    open(unit=28, file=trim(data_path) // small_f_file)
+    open(unit=29, file=trim(data_path) // xi_file)
     ! open(unit=10, file=filename)
     ! open(unit=17, file=xfile)
     ! open(unit=19, file=alphafile)
@@ -75,6 +81,18 @@ program run_all
         write(20, '(F12.8)') B_r(i)
         write(21, '(F12.8)') B_phi(i)
         write(26, '(F12.8)') small_u(i)
+        ! write(29, '(F12.8)') xi(i)
+        ! write(28, '(F12.8)') small_f(i
+        DO oo = 1, 10
+          q =1.0
+          xi = 0.1 * oo
+          small_f = (xi / 4.0) * (1103.0 / 300.0 - 1103.0 * q / 600.0 - 7.0 * xi / 5.0 + 7.0 * q * xi / 10.0)
+          ! PRINT *, 'xi =', xi, 'small_f =', small_f
+          write(28, '(F12.8)') small_f
+          write(29, '(F12.8)') xi
+
+        END DO
+
 
     end do
 
@@ -85,6 +103,8 @@ program run_all
     close(20)
     close(21)
     close(26)
+    close(29)
+    close(28)
 
     ! print *, 'z values have been saved to ', xfile
     ! print *, 'omega values have been saved to ', omegafile

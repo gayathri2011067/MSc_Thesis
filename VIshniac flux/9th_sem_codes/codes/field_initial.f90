@@ -36,13 +36,15 @@ contains
         !also, uncomment rho in parameters_constants.f90, and uncomment line 21 here.
         ! rho_0     = 1.
         ! rho       = rho_0*exp(-x**2/2.)
-        ! B_eq      = 4.*pi*rho*small_u**2
-        ! B_0       = 4.*pi*rho*small_u_0**2
+        ! B_eq      = 4.*pi*rho_0*small_u_0**2
+        ! B_0       = 4.*pi*rho_0*small_u_0**2
 
   
-        Bseed     = 100.
+        Bseed     = 100
 
         small_u   = small_u_0*exp(x**2/2.)
+        ! small_u   = small_u_0
+        ! small_u  = small_u_0*(x)
         l = tau*small_u
         ! tau = l/small_u
 

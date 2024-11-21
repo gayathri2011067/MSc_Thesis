@@ -125,10 +125,10 @@ for i in range(len(trial_numbers)):
 
 plt.xlim(0, 7)
 plt.yscale('log')
-plt.ylim(10**-2, 2)
+plt.ylim(10**-2, 11)
 plt.xlabel('time(in Gyr)')
 plt.ylabel(r'${B}(0) / B_0$')
-plt.title(f"Dynamical quenching")
+plt.title(f"Different models of stratification")
 plt.text(0.90, 1.05, r'$B_0=0.82\mu G$', transform=plt.gca().transAxes, verticalalignment='top')
 plt.legend(loc='lower right', labels=[f'${label}$' for label in labels])
 plt.savefig(f'{fig_path}/B_strength_vs_time.png')

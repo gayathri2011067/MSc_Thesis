@@ -56,7 +56,6 @@ module parameters
       double precision, parameter :: omega = omega_dim*h_dim/(h_dim**2/t_d_dim)
       double precision, parameter :: G = G_dim*(h_dim**2/(h_dim**2/t_d_dim))
       double precision, parameter :: alpha_0 = alpha_0_dim*h_dim/(h_dim**2/t_d_dim)
-      double precision, parameter :: rho = 1. !NOTE:!comment for rho stratified
       double precision, parameter :: k = k_dim/(h_dim**2/t_d_dim) 
       double precision, parameter :: R = R_dim/h_dim
       double precision, parameter :: z_i = z_i_dim/h_dim
@@ -129,11 +128,12 @@ module parameters
 !NOTE: The following trials are for recreating 2014 toolbox paper results
 ! ********************************************************************************************************************************
 !TRIAL:21 
-double precision, parameter :: R_alpha = 1.71  !alpha_0
-double precision, parameter :: R_omega = -19.8     !-G
+double precision, parameter :: R_alpha = 1.  !alpha_0
+double precision, parameter :: R_omega = -20.     !-G
 double precision, parameter :: R_k = 0.0
 double precision, parameter :: R_U = 1.0
-double precision, parameter :: f_para = 0.
+double precision, parameter :: xi = 1.0
+double precision, parameter :: f_para = 0.285
 ! ********************************************************************************************************************************
 !TRIAL:22
 ! double precision, parameter :: R_alpha = 1.71  !alpha_0

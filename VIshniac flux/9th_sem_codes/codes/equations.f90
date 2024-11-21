@@ -207,11 +207,12 @@ module equations
       double precision,  dimension(nx) :: alpha_Bphi, alpha_Br
       double precision, dimension(nx) :: d_alpha_m, d2_alpha_m
       double precision, dimension(nx) :: alpha_total
-      double precision, dimension(nx) :: vishniac_term
-      double precision, dimension(nx) :: der_u, d_sq_u
+      double precision, dimension(nx) :: vishniac_term,small_f
+      double precision, dimension(nx) :: der_u, d_sq_u, dif_flux
       double precision, dimension(nx) :: d2_alpha_Br, d2_alpha_Bphi
       double precision, dimension(nx) :: d2_Uz_Br, d2_Uz_Bphi
       double precision :: R_alpha_inv = 0.
+      double precision  :: xi,q
       character(len=30) :: ghost_zone_type = 'anti-symmetric'
       character(len=30) :: ghost_zone_type2 = 'relative anti-symmetric'
 
@@ -230,6 +231,9 @@ module equations
       Uz_Bphi = B_phi_dummy *U_z
 
 
+      dif_flux=
+
+
       call spatial_derivative(B_r_dummy, 6, dBr, d2Br)
       call spatial_derivative(B_phi_dummy, 6, dBphi, d2Bphi)
       call spatial_derivative(alpha_Br, 6, d_alpha_Br, d2_alpha_Br)
@@ -239,8 +243,21 @@ module equations
       call spatial_derivative(alpha_m_dummy, 6, d_alpha_m, d2_alpha_m)
       call spatial_derivative(U_z, 6, der_u, d_sq_u)
 
-!NOTE: vishniac term for 2017 new notes with old u stratification
-        vishniac_term = (8./9.)*l**2 * f_para * R_omega * x*exp(x**2)!(((2.*l)/(3.))**2) * f_para * R_omega * x!(-2d0/3d0*tau_c)*((2d0*l)/(3d0*h))**2*
+      
+
+
+
+!NOTE: vishniac term with old u stratification, no rho
+      vishniac_term = (2.0/9.0)**2 * tau**2 * small_u_0**2 * f_para * R_omega * 4.0 * x * exp(x**2)
+!NOTE: vishniac term with only rho stratification, no u
+      ! vishniac_term = -(2.0/3.0)**2 * l**2 * small_u_0**2 * f_para * R_omega *  x 
+!NOTE: vishniac term with both u and rho stratification
+      ! vishniac_term = (2.0/9.0)**2 * tau**2 * small_u_0**4 * f_para * R_omega * 2.0 * x * exp(2*x**2)
+
+
+        ! vishniac_term= (2.0/9.0)**2 * tau**2 * small_u_0**4 * f_para * R_omega * 2.0 * x * exp(2*x**2)
+        ! vishniac_term=(2./9.)**2 * tau**2 * small_u_0**4 * f_para * R_omega * 2.0 * x 
+        !(((2.*l)/(3.))**2) * f_para * R_omega * x!(-2d0/3d0*tau_c)*((2d0*l)/(3d0*h))**2*
 !NOTE: vishniac term for 2017 new notes with new u stratification
       !a)tau = not constant
         ! vishniac_term = (4./27.)*l**2 * f_para * R_omega * small_u_0**2

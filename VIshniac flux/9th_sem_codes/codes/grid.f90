@@ -5,7 +5,7 @@ module time_grid
   
   integer, parameter :: Nt= 50000.  !points per diffusion time
   integer, parameter :: n1= 5000.  !Number of snapshots
-  double precision, parameter :: total_t= 10. !unit diffusion time
+  double precision, parameter :: total_t= 60. !unit diffusion time
   integer :: n2 = total_t*Nt/n1!Number of timesteps between snapshots
   double precision, parameter :: dt= 1./Nt !time step
   double precision :: t=0.

@@ -5,8 +5,8 @@ import os, sys
 import subprocess
 
 # Paths to data and figures
-data_path = "/home/gayathri/MSc_thesis/VIshniac flux/FOSA/data_files"
-fig_path = "/home/gayathri/MSc_thesis/VIshniac flux/FOSA/figures"
+data_path = "/home/gayathri/MSc_thesis/VIshniac flux/9th_sem_codes/data_files"
+fig_path = "/home/gayathri/MSc_thesis/VIshniac flux/9th_sem_codes/figures"
 
 trial_numbers = []
 labels = []
@@ -125,10 +125,10 @@ for i in range(len(trial_numbers)):
 
 plt.xlim(0, 7)
 plt.yscale('log')
-plt.ylim(10**-2, 2)
+plt.ylim(10**-2, 1)
 plt.xlabel('time(in Gyr)')
 plt.ylabel(r'${B}(0) / B_0$')
-plt.title(f"Dynamical quenching")
+plt.title(f"Different stratification profiles")
 plt.text(0.90, 1.05, r'$B_0=0.82\mu G$', transform=plt.gca().transAxes, verticalalignment='top')
 plt.legend(loc='lower right', labels=[f'${label}$' for label in labels])
 plt.savefig(f'{fig_path}/B_strength_vs_time.png')

@@ -348,6 +348,7 @@ module timestepping
             ! B_r=Br_f       !----> !NOTE: added this step because I wanted f to be carried to next step
             ! B_phi=Bphi_f  ! 
             t = t +  dt
+            alpha = alpha_m + alpha_k
 
 
         end subroutine RK3_implicit

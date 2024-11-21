@@ -6,9 +6,9 @@ import os
 import subprocess
 
 
-data_path = "/home/gayathri/MSc_thesis/VIshniac flux/FOSA/run_files"
-fig_path = "/home/gayathri/MSc_thesis/VIshniac flux/FOSA/figures"
-data_save_path = "/home/gayathri/MSc_thesis/VIshniac flux/FOSA/data_files"
+data_path = "/home/gayathri/MSc_thesis/VIshniac flux/9th_sem_codes/run_files"
+fig_path = "/home/gayathri/MSc_thesis/VIshniac flux/9th_sem_codes/figures"
+data_save_path = "/home/gayathri/MSc_thesis/VIshniac flux/9th_sem_codes/data_files"
 
 passed_args = argparse.ArgumentParser()
 
@@ -506,3 +506,33 @@ plt.close()
 
 
 
+
+
+filename = 'small_f.txt'
+file_path = f"{data_path}/{filename}"
+
+with open(file_path,'r') as f:
+    lines=f.readlines()
+# print(lines)
+
+f_val=np.array(lines,dtype=float)
+np.savetxt(f'{data_save_path}/f_val.txt', f_val)
+
+
+filename = 'xi.txt'
+file_path = f"{data_path}/{filename}"
+
+with open(file_path,'r') as f:
+    lines=f.readlines()
+# print(lines)
+
+xi=np.array(lines,dtype=float)
+np.savetxt(f'{data_save_path}/xi.txt', xi)
+print(type(xi), type(f))  # This will help identify if they are generators
+print(xi, f_val)  # Optional, to inspect the values
+
+plt.plot(xi,f_val)
+plt.xlabel('xi')
+plt.ylabel('f')
+plt.title('f vs xi')
+plt.savefig(f'{fig_path}/f_vs_xi.png')

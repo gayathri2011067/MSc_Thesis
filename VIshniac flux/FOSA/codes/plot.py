@@ -311,186 +311,6 @@ except:
 
 
 
-# Function to create contour plots
-# def create_contour_plot(z_data, time_list, z, title, file_name):
-#     fig = go.Figure()
-
-#     # Add contour lines
-#     fig.add_trace(go.Contour(
-#         z=z_data.T,
-#         x=time_list,
-#         y=z,
-#         colorscale='inferno',
-#         showscale=True,
-#         contours=dict(
-#             start=z_data.min(),
-#             end=z_data.max(),
-#             size=(z_data.max() - z_data.min()) / 50,
-#             # Uncomment the next line for only contour lines without fills
-#             coloring='lines',
-#             line=dict(color='black')  # Uncomment this to set contour lines to black
-#         )
-#     ))
-
-#     # Update layout
-#     fig.update_layout(
-#         title=f'<b>{title}</b>',
-#         title_font=dict(size=20),
-#         xaxis_title='<b>Time</b>',
-#         yaxis_title='<b>z</b>',
-#         xaxis=dict(range=[9, 10]),
-#         yaxis=dict(range=[-0.5, 0.5]),
-#         width=800,  # Adjust width as needed
-#         height=400,  # Adjust height to maintain rectangular aspect ratio
-#         margin=dict(l=50, r=50, t=50, b=50),
-#         font=dict(size=14),
-#         template='plotly_white'  # Choose a clean template
-#     )
-
-#     # Save the figure
-#     fig.write_image(f'{fig_path}/{file_name}')
-
-# # Create contour plot for Br
-# create_contour_plot(Br_list, time_list, z, '2D Heatmap of $B_r$ with Contour Lines', 'Br_final_heatmap_with_contours.png')
-
-# # Create contour plot for Bphi
-# create_contour_plot(Bphi_list, time_list, z, '2D Heatmap of $B_\\phi$ with Contour Lines', 'Bphi_final_heatmap_with_contours.png')
-
-# # Create contour plot for B strength
-# create_contour_plot(B_strength, time_list, z, '2D Heatmap of $B$ with Contour Lines', 'B_heatmap_with_contours.png')
-# Function to create heatmap plots
-# def create_heatmap_plot(z_data, time_list, z, title, file_name):
-#     fig = go.Figure()
-
-#     # Add heatmap
-#     fig.add_trace(go.Heatmap(
-#         z=z_data.T,
-#         x=time_list,
-#         y=z,
-#         colorscale='inferno',
-#         showscale=True
-#     ))
-
-#     # Add contour lines
-#     fig.add_trace(go.Contour(
-#         z=z_data.T,
-#         x=time_list,
-#         y=z,
-#         showscale=False,
-#         contours=dict(
-#             coloring='lines',
-#             # showlabels=True,  # Show labels on contour lines
-#             start=z_data.min(),
-#             end=z_data.max(),
-#             size=(z_data.max() - z_data.min()) / 100  # More contours
-#         ),
-#         line=dict(color='black')
-#     ))
-
-#     # Update layout
-#     fig.update_layout(
-#         title=f'<b>{title}</b>',
-#         title_font=dict(size=20),
-#         xaxis_title='<b>Time</b>',
-#         yaxis_title='<b>z</b>',
-#         xaxis=dict(range=[9, 10]),
-#         yaxis=dict(range=[-0.5, 0.5]),
-#         width=800,  # Adjust width as needed
-#         height=400,  # Adjust height to maintain rectangular aspect ratio
-#         margin=dict(l=50, r=50, t=50, b=50),
-#         font=dict(size=14),
-#         template='plotly_white'  # Choose a clean template
-#     )
-
-#     # Save the figure
-#     fig.write_image(f'{fig_path}/{file_name}')
-
-# # Create heatmap plot for Br
-# create_heatmap_plot(Br_list, time_list, z, '2D Heatmap of $B_r$', 'Br_final_heatmap.png')
-
-# # Create heatmap plot for Bphi
-# create_heatmap_plot(Bphi_list, time_list, z, '2D Heatmap of $B_\\phi$', 'Bphi_final_heatmap.png')
-
-# # Create heatmap plot for B strength
-# create_heatmap_plot(B_strength, time_list, z, '2D Heatmap of $B$', 'B_heatmap.png')
-
-# # Create a combined plot with Br, Bphi, and B strength
-# fig_combined = make_subplots(rows=3, cols=1, shared_xaxes=True, vertical_spacing=0.1,
-#                              subplot_titles=('2D Heatmap of $B_r$', '2D Heatmap of $B_\\phi$', '2D Heatmap of $B$'))
-
-# # Add Br heatmap
-# fig_combined.add_trace(go.Heatmap(
-#     z=Br_list.T,
-#     x=time_list,
-#     y=z,
-#     colorscale='electric',
-#     showscale=False
-# ), row=1, col=1)
-
-# # Add Bphi heatmap
-# fig_combined.add_trace(go.Heatmap(
-#     z=Bphi_list.T,
-#     x=time_list,
-#     y=z,
-#     colorscale='electric',
-#     showscale=False
-# ), row=2, col=1)
-
-# # Add B strength heatmap
-# fig_combined.add_trace(go.Heatmap(
-#     z=B_strength.T,
-#     x=time_list,
-#     y=z,
-#     colorscale='electric',
-#     showscale=True
-# ), row=3, col=1)
-
-# # Update layout
-# fig_combined.update_layout(
-#     height=1200,  # Adjust height as needed
-#     width=800,  # Adjust width as needed
-#     title_text='<b>Combined 2D Heatmaps of $B_r$, $B_\\phi$, and $B$</b>',
-#     title_font=dict(size=20),
-#     xaxis3_title='<b>Time</b>',
-#     yaxis1_title='<b>z</b>',
-#     yaxis2_title='<b>z</b>',
-#     yaxis3_title='<b>z</b>',
-#     font=dict(size=14),
-#     template='plotly_white',  # Choose a clean template
-#     xaxis=dict(range=[9, 10]),  # Set x-axis limit
-#     yaxis=dict(range=[-0.5, 0.5]),  # Set y-axis limit for the first subplot
-#     yaxis2=dict(range=[-0.5, 0.5]),  # Set y-axis limit for the second subplot
-#     yaxis3=dict(range=[-0.5, 0.5])  # Set y-axis limit for the third subplot
-# )
-
-# # Add contour lines with sharp contrast
-# for i, z_data in enumerate([Br_list, Bphi_list, B_strength], start=1):
-#     fig_combined.add_trace(go.Contour(
-#         z=z_data.T,
-#         x=time_list,
-#         y=z,
-#         showscale=False,
-#         contours=dict(
-#             coloring='lines',
-#             start=z_data.min(),
-#             end=z_data.max(),
-#             size=(z_data.max() - z_data.min()) / 20  # Fewer contours for sharper contrast
-#         ),
-#         line=dict(color='black')
-#     ), row=i, col=1)
-
-# # Save the combined figure
-# fig_combined.write_image(f'{fig_path}/combined_heatmap.png')
-#check if alpha_m is nan anywhere,print the index
-
-#NOTE: - Rk finite case
-#      - 2D heatmaps of Br, Bphi, and B strength with contour lines
-#      - Peak discrepancies in Br, Bphi, and B strength
-#      - averaging over z
-#      - alpha_m vs z at a specific time
-#      - dimensions
-
-
 
 #plot bstrength squared on y and -alpha m on x
 # print(np.shape(B_strength))
@@ -501,6 +321,89 @@ plt.xlabel('-alpha_m')
 plt.title('B_strength_avg vs -alpha_m')
 plt.savefig(f'{fig_path}/B_strength_avg_vs_alpha_m.png')
 plt.close()
+
+
+
+
+
+
+filename = 'alpham_final.txt'
+file_path = f"{data_path}/{filename}"
+try:
+    with open(file_path,'r') as f:
+        lines=f.readlines()
+
+    alpha_mm_list = []
+    for line in lines:
+        line = line.strip()
+        line = line.split()  
+        curr = np.array(line, dtype=float)
+        alpha_mm_list.append(curr)
+    alpha_mm=np.array(alpha_mm_list,dtype=float)
+    np.savetxt(f'{data_save_path}/aallppmm.txt', alpha_mm)
+    # print(alpha_tot)
+    plt.plot(z, alpha_mm[-1])
+    plt.xlabel('z')
+    plt.ylabel('aallppmm')
+    plt.title('aallppmm vs z')
+    plt.savefig(f'{fig_path}/aallppmm_vs_z.png')
+    plt.close()
+except:
+    print('alpham_final.txt file not found')
+
+#read and save alpha_tot similarly
+filename = 'alp_tot.txt'
+file_path = f"{data_path}/{filename}"
+
+try:
+    with open(file_path,'r') as f:
+        lines=f.readlines()
+
+    alpha_tot_list = []
+    for line in lines:
+        line = line.strip()
+        line = line.split()  
+        curr = np.array(line, dtype=float)
+        alpha_tot_list.append(curr)
+    alpha_tot=np.array(alpha_tot_list,dtype=float)
+    np.savetxt(f'{data_save_path}/alpha_tot.txt', alpha_tot)
+    # print(alpha_tot)
+    plt.plot(z, alpha_tot[-1])
+    plt.xlabel('z')
+    plt.ylabel('alpha_tot')
+    plt.title('alpha_tot vs z')
+    plt.savefig(f'{fig_path}/alpha_tot_vs_z.png')
+    plt.close()
+except:
+    print('alpha_tot.txt file not found')
+    
+
+  
+# #  plot alpha and alpha total in same plot against time
+plt.plot(time_list,alpha_mm[:,51],label='alpha_m')
+plt.plot(time_list,alpha_tot[:,51],label='alpha_total')
+plt.xlabel('time')
+plt.ylabel('alpha, alpha_tot')
+plt.title('alpha, alpha_tot vs time')
+plt.legend()
+plt.savefig(f'{fig_path}/alpha_alpha_tot_vs_time.png')
+plt.close()
+   
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

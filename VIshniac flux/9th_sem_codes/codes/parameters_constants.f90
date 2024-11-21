@@ -129,11 +129,11 @@ module parameters
 !NOTE: The following trials are for recreating 2014 toolbox paper results
 ! ********************************************************************************************************************************
 !TRIAL:21 
-double precision, parameter :: R_alpha = 1.71  !alpha_0
-double precision, parameter :: R_omega = -19.8     !-G
-double precision, parameter :: R_k = 0.0
-double precision, parameter :: R_U = 1.0
-double precision, parameter :: f_para = 0.
+! double precision, parameter :: R_alpha = 1.71  !alpha_0
+! double precision, parameter :: R_omega = -19.8     !-G
+! double precision, parameter :: R_k = 0.0
+! double precision, parameter :: R_U = 1.0
+! double precision, parameter :: f_para = 0.
 ! ********************************************************************************************************************************
 !TRIAL:22
 ! double precision, parameter :: R_alpha = 1.71  !alpha_0
@@ -160,10 +160,26 @@ double precision, parameter :: f_para = 0.
 !python3 codes/compare_plots.py 1 "model A" 2 "model B" 3 "model C" 4 "model D" 
 
 
+!5
+      ! double precision, parameter :: R_alpha = 0.  
+      ! double precision, parameter :: R_omega = -20.
+      ! double precision, parameter :: R_k = 0.
+      ! double precision, parameter :: R_U = 0.45
+      ! double precision, parameter :: f_para = 0.285
 
 
-
-
+!6
+      ! double precision, parameter :: R_alpha = 0.  
+      ! double precision, parameter :: R_omega = -20.
+      ! double precision, parameter :: R_k = 0.
+      ! double precision, parameter :: R_U = 0.45
+      ! double precision, parameter :: f_para = 0.04
+!7
+      double precision, parameter :: R_alpha = 0.  
+      double precision, parameter :: R_omega = -20.
+      double precision, parameter :: R_k = 0.
+      double precision, parameter :: R_U = 1.
+      double precision, parameter :: f_para = 0.285
 
 
 
