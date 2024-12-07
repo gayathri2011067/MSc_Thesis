@@ -186,7 +186,10 @@ try:
     # print(Br_list.shape)
     plt.plot(z, Br_list[-1], label='Br')
     plt.plot(z, Bphi_list[-1], label='Bphi')
-    # print(Br_list[1])
+
+    # plt.plot(z, Br_list[-4], label='Br')
+    # plt.plot(z, Bphi_list[-4], label='Bphi')
+    print(Br_list.shape)
     # print(Bphi_list[1])
     # plt.plot(z, Br_list[1], label='Br')
     # plt.plot(z, Bphi_list[1], label='Bphi')
@@ -207,9 +210,9 @@ except:
 
 
 #plot of Br and Bphi at against time
-plt.plot(time_list, Br_list[:,25], label='Br')
+plt.plot(time_list, Br_list[:,-1], label='Br')
 # print(time_list)
-plt.plot(time_list, Bphi_list[:,25], label='Bphi')
+plt.plot(time_list, Bphi_list[:,-1], label='Bphi')
 plt.xlabel('time')
 plt.ylabel('Br, Bphi')
 plt.title('Br, Bphi vs time')
@@ -230,13 +233,13 @@ np.savetxt(f'{data_save_path}/B_strength.txt', B_strength)
 # Plot B_strength at a specific z index
 plt.plot(time_list, B_strength[:,51])
 plt.xlabel('time')
-plt.xlim(0,10)
+# plt.xlim(0,10)
 
 # plt.yscale('log')
 plt.ylabel('B_strength/B0')
 plt.title('B_strength vs time')
 plt.yscale('log')
-plt.xlim(0,7)
+
 
 # plt.axhline(y=0.001, color='g', linestyle='--')
 # plt.axvline(x=2.5, color='r', linestyle='--')
@@ -246,13 +249,14 @@ plt.close()
 # Plot field strength averaged over z as a function of time
 B_strength_avg = np.sqrt(np.mean(B_strength**2, axis=1))
 np.savetxt(f'{data_save_path}/B_strength_avg.txt', B_strength_avg)
-plt.plot(time_list, B_strength_avg, color='red')
-plt.xlabel('time')
+plt.plot(time_list, B_strength_avg, color='red',linewidth=3)
+plt.xlabel('time(Gyr)',fontsize=17)
 plt.yscale('log')
 # plt.xlim(4,5)
 # plt.ylim(1,10)
-plt.ylabel('Average B_strength/B0')
-plt.title('Average B_strength vs time')
+plt.ylim(10**-2,1)
+plt.ylabel(r'$B_{strength}/B_0$',fontsize=17)
+# plt.title(r'$B_{strength}$ vs time')
 plt.tick_params(axis='both', which='both', direction='in', top=True, right=True)
 plt.savefig(f'{fig_path}/B_strength_avg_vs_time.png')
 plt.close()
@@ -342,10 +346,10 @@ try:
     alpha_mm=np.array(alpha_mm_list,dtype=float)
     np.savetxt(f'{data_save_path}/aallppmm.txt', alpha_mm)
     # print(alpha_tot)
-    plt.plot(z, alpha_mm[-1])
-    plt.xlabel('z')
-    plt.ylabel('aallppmm')
-    plt.title('aallppmm vs z')
+    plt.plot(z, alpha_mm[-1],label='alpha_m',color='red',linewidth=3)
+    plt.xlabel(r'z($\times$ 0.5 kpc)',fontsize=17)
+    plt.ylabel(r'$\alpha_m$ (km s$^{-1}$)',fontsize=17)
+    # plt.title('aallppmm vs z')
     plt.savefig(f'{fig_path}/aallppmm_vs_z.png')
     plt.close()
 except:
@@ -390,6 +394,20 @@ plt.savefig(f'{fig_path}/alpha_alpha_tot_vs_time.png')
 plt.close()
    
     
+
+#write a code to find and plot pitch angles |p| = arctan |Br/Bphi|
+
+# Calculate the pitch angle and limit the result to the range [-pi/2, pi/2]
+p = np.degrees(np.arctan((Br_list / Bphi_list)))  # Convert the angle to degrees
+np.savetxt(f'{data_save_path}/pitch_angle.txt', p)
+
+# Plot the pitch angle vs z
+plt.plot(z, p[-1])
+plt.xlabel('z')
+plt.ylabel('Pitch Angle (degrees)')
+plt.title('Pitch Angle vs z')
+plt.savefig(f'{fig_path}/pitch_angle_vs_z.png')
+plt.close()
 
 
 

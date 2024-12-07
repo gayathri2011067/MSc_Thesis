@@ -309,46 +309,126 @@ module timestepping
             ! ! B_phi=Bphi_f  !
             ! t = t +  dt
 
-            call FOSA(B_r, B_phi, alpha_m)
+            ! call FOSA(B_r, B_phi, alpha_m)
+            ! !STEP 1 !NOTE: have to call spatial derivatives with this new f and g
+            ! k1r = dt * dBrdt
+            ! k1phi = dt * dBphidt
+            ! k1alpha = dt * dalpdt
+            ! B_r = B_r + g_1 * k1r
+            ! B_phi = B_phi + g_1 * k1phi
+            ! alpha_m = alpha_m + g_1 * k1alpha
+            ! Br_g = B_r + z_1 * k1r
+            ! Bphi_g = B_phi + z_1 * k1phi
+            ! alpha_m_g = alpha_m + z_1 * k1alpha
+            ! ! B_r=Br_f       !----> !NOTE: added this step because I wanted f to be carried to next step
+            ! ! B_phi=Bphi_f  ! 
+            
+            ! call FOSA(B_r, B_phi, alpha_m)
+            ! k2r = dt * dBrdt
+            ! k2phi = dt * dBphidt
+            ! k2alpha = dt * dalpdt
+            ! B_r = Br_g + g_2 * k2r
+            ! B_phi = Bphi_g + g_2 * k2phi
+            ! alpha_m = alpha_m_g + g_2 * k2alpha
+            ! Br_g = B_r + z_2 * k2r
+            ! Bphi_g = B_phi + z_2 * k2phi
+            ! alpha_m_g = alpha_m + z_2 * k2alpha
+            ! ! B_r=Br_f       !----> !NOTE: added this step because I wanted f to be carried to next step
+            ! ! B_phi=Bphi_f  ! 
+
+            ! ! 3rd step
+            ! call FOSA(B_r, B_phi, alpha_m)
+            ! k3r = dt * dBrdt
+            ! k3phi = dt * dBphidt
+            ! k3alpha = dt * dalpdt
+            ! B_r = Br_g + g_3 * k3r
+            ! B_phi = Bphi_g + g_3 * k3phi
+            ! alpha_m = alpha_m_g + g_3 * k3alpha
+        
+            ! ! B_r=Br_f       !----> !NOTE: added this step because I wanted f to be carried to next step
+            ! ! B_phi=Bphi_f  ! 
+            ! t = t +  dt
+            ! alpha = alpha_m + alpha_k
+
+
+
+            call MTA_nvf(B_r, B_phi, Fr, Fphi, Er, Ephi, alpha_m)
             !STEP 1 !NOTE: have to call spatial derivatives with this new f and g
             k1r = dt * dBrdt
             k1phi = dt * dBphidt
+            k1Fr = dt * dFrdt
+            k1Fphi = dt * dFphidt
+            k1Er = dt * dErdt
+            k1Ephi = dt * dEphidt
             k1alpha = dt * dalpdt
+
             B_r = B_r + g_1 * k1r
             B_phi = B_phi + g_1 * k1phi
+            Fr = Fr + g_1 * k1Fr
+            Fphi = Fphi + g_1 * k1Fphi
+            Er = Er + g_1 * k1Er
+            Ephi = Ephi + g_1 * k1Ephi
             alpha_m = alpha_m + g_1 * k1alpha
+
             Br_g = B_r + z_1 * k1r
             Bphi_g = B_phi + z_1 * k1phi
+            Fr_g = Fr + z_1 * k1Fr
+            Fphi_g = Fphi + z_1 * k1Fphi
+            Er_g = Er + z_1 * k1Er
+            Ephi_g = Ephi + z_1 * k1Ephi
             alpha_m_g = alpha_m + z_1 * k1alpha
+
             ! B_r=Br_f       !----> !NOTE: added this step because I wanted f to be carried to next step
             ! B_phi=Bphi_f  ! 
             
-            call FOSA(B_r, B_phi, alpha_m)
+            call MTA_nvf(B_r, B_phi, Fr, Fphi,Er, Ephi, alpha_m)
+
             k2r = dt * dBrdt
             k2phi = dt * dBphidt
+            k2Fr = dt * dFrdt
+            k2Fphi = dt * dFphidt
+            k2Er = dt * dErdt
+            k2Ephi = dt * dEphidt
             k2alpha = dt * dalpdt
+
             B_r = Br_g + g_2 * k2r
             B_phi = Bphi_g + g_2 * k2phi
+            Fr = Fr_g + g_2 * k2Fr
+            Fphi = Fphi_g + g_2 * k2Fphi
+            Er = Er_g + g_2 * k2Er
+            Ephi = Ephi_g + g_2 * k2Ephi
             alpha_m = alpha_m_g + g_2 * k2alpha
+
             Br_g = B_r + z_2 * k2r
             Bphi_g = B_phi + z_2 * k2phi
+            Fr_g = Fr + z_2 * k2Fr
+            Fphi_g = Fphi + z_2 * k2Fphi
+            Er_g = Er + z_2 * k2Er
+            Ephi_g = Ephi + z_2 * k2Ephi
             alpha_m_g = alpha_m + z_2 * k2alpha
             ! B_r=Br_f       !----> !NOTE: added this step because I wanted f to be carried to next step
-            ! B_phi=Bphi_f  ! 
+            ! B_phi=Bphi_f  !
 
             ! 3rd step
-            call FOSA(B_r, B_phi, alpha_m)
+            call MTA_nvf(B_r, B_phi, Fr, Fphi,Er, Ephi, alpha_m)
             k3r = dt * dBrdt
             k3phi = dt * dBphidt
+            k3Fr = dt * dFrdt
+            k3Fphi = dt * dFphidt
+            k3Er = dt * dErdt
+            k3Ephi = dt * dEphidt
             k3alpha = dt * dalpdt
+
             B_r = Br_g + g_3 * k3r
             B_phi = Bphi_g + g_3 * k3phi
+            Fr = Fr_g + g_3 * k3Fr
+            Fphi = Fphi_g + g_3 * k3Fphi
+            Er = Er_g + g_3 * k3Er
+            Ephi = Ephi_g + g_3 * k3Ephi
             alpha_m = alpha_m_g + g_3 * k3alpha
-        
             ! B_r=Br_f       !----> !NOTE: added this step because I wanted f to be carried to next step
-            ! B_phi=Bphi_f  ! 
+            ! B_phi=Bphi_f  !
             t = t +  dt
-            alpha = alpha_m + alpha_k
 
 
         end subroutine RK3_implicit

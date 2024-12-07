@@ -178,7 +178,7 @@ module parameters
       double precision, parameter :: R_alpha = 0.  
       double precision, parameter :: R_omega = -20.
       double precision, parameter :: R_k = 0.
-      double precision, parameter :: R_U = 1.
+      double precision, parameter :: R_U = 5.
       double precision, parameter :: f_para = 0.285
 
 

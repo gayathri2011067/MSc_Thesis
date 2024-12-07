@@ -231,7 +231,7 @@ module equations
       Uz_Bphi = B_phi_dummy *U_z
 
 
-      dif_flux=
+      ! dif_flux=
 
 
       call spatial_derivative(B_r_dummy, 6, dBr, d2Br)
@@ -248,8 +248,8 @@ module equations
 
 
 !NOTE: vishniac term with old u stratification, no rho
-      vishniac_term = (2.0/9.0)**2 * tau**2 * small_u_0**2 * f_para * R_omega * 4.0 * x * exp(x**2)
-!NOTE: vishniac term with only rho stratification, no u
+      vishniac_term = (2./9.)**2 * f_para * R_omega * tau**2 * small_u_0**4 * 4*x * exp(2*x**2)
+      !NOTE: vishniac term with only rho stratification, no u
       ! vishniac_term = -(2.0/3.0)**2 * l**2 * small_u_0**2 * f_para * R_omega *  x 
 !NOTE: vishniac term with both u and rho stratification
       ! vishniac_term = (2.0/9.0)**2 * tau**2 * small_u_0**4 * f_para * R_omega * 2.0 * x * exp(2*x**2)
